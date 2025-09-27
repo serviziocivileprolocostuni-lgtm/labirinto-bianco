@@ -3,116 +3,94 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<h1>Il Labirinto Bianco: l'anima nascosta di Ostuni</h1>
-
-<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Montserrat:wght@700&family=Lora&display=swap" rel="stylesheet" />
+<title>Il Labirinto Bianco: l'anima nascosta di Ostuni</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Zen+Tokyo+Zoo&display=swap" rel="stylesheet" />
 <style>
   html, body {
-    background: linear-gradient(120deg, #f8ecd4 0%, #eae7ce 100%);
-    color: #3c2c13;
-    margin: 0;
-    padding: 0;
-    font-family: 'Lora', serif;
+    margin: 0; padding: 0; height: 100%;
+    background: #1b1b2f url('https://i.imgur.com/tSrDYLx.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Orbitron', sans-serif;
+    color: #eee;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
-  .overlay {
-    background: rgba(255, 255, 240, 0.96);
-    max-width: 750px;
-    margin: 60px auto 30px auto;
-    padding: 3em 3em 2.4em 3em;
-    border-radius: 18px;
-    box-shadow: 0 0 38px #bfa13b40;
-    border: 2px solid #bfa13b;
+  .container {
+    background: rgba(27,27,47,0.85);
+    padding: 3rem 4rem;
+    max-width: 700px;
+    border-radius: 24px;
+    box-shadow: 0 0 40px #00ffc3;
     text-align: center;
-    animation: fadeIn 1.2s cubic-bezier(.32,.74,.38,.86) forwards;
-    opacity: 0;
+    font-family: 'Zen Tokyo Zoo', cursive;
+    letter-spacing: 3px;
   }
-  @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
   h1 {
-    font-family: 'IM Fell English', serif;
-    font-weight: 700;
-    font-size: 2.9rem;
-    color: #bfa13b;
-    margin-bottom: 0.8em;
-    letter-spacing: 0.02em;
-    text-shadow: 0 2px 13px #e9dcc2, 0 8px 24px #bfa13b22;
-  }
-  .subtitle {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    font-size: 1.65rem;
-    margin-bottom: 1.2em;
-    color: #176b87;
-    letter-spacing: 0.07em;
-    text-shadow: 0 1px 12px #e4e9f2;
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: #00ecba;
+    text-shadow: 0 0 12px #00ecba;
   }
   p {
-    font-size: 1.19rem;
-    max-width: 600px;
-    margin: 0 auto 2em auto;
-    line-height: 1.8;
-    color: #372605;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 300;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    letter-spacing: 1.2px;
+    color: #aad5dc;
   }
   ul {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 2em;
-    font-size: 1.13rem;
-    color: #382300;
     text-align: left;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: #9fe8f7;
+    margin-bottom: 2rem;
+    padding-left: 1.6rem;
   }
   ul li {
-    margin-bottom: 1.2em;
+    margin-bottom: 0.8rem;
     position: relative;
-    padding-left: 2em;
   }
   ul li::before {
-    content: "★";
+    content: "•";
+    color: #00cec9;
+    font-weight: 900;
     position: absolute;
-    left: 0;
-    color: #bfa13b;
-    font-size: 1.18em;
-    top: 3px;
+    left: -1rem;
   }
   button {
-    margin-top: 2em;
-    padding: 16px 47px;
-    font-size: 1.25rem;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    color: #fff4d1;
-    background: linear-gradient(98deg,#bfa13b 60%,#ebcd64 140%);
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 1.4rem;
+    padding: 16px 44px;
+    border-radius: 48px;
     border: none;
-    border-radius: 28px;
-    box-shadow: 0 0 21px #bfa13b60;
+    background: linear-gradient(45deg, #00ecba, #00a896);
+    color: #091c1c;
     cursor: pointer;
-    letter-spacing: 0.07em;
-    transition: box-shadow 0.2s, background 0.2s;
+    box-shadow: 0 0 30px #00ecbaaa;
+    transition: box-shadow 0.3s ease-in-out, background 0.3s ease-in-out;
   }
   button:hover {
-    background: linear-gradient(92deg,#ffd700 80%,#bfa13b 180%);
-    box-shadow: 0 0 32px #bfa13bcc;
+    box-shadow: 0 0 50px #00f9d1;
+    background: linear-gradient(45deg, #00ffce, #00b6a8);
   }
 </style>
 </head>
 <body>
-<div class="overlay">
-  <h1>Il Labirinto Bianco</h1>
-  <div class="subtitle">L'anima nascosta di Ostuni</div>
-  <p>
-    Un’esperienza tra i vicoli affascinanti e misteriosi della città bianca.<br>
-    Vivi una notte magica e risolvi enigmi nascosti!
-  </p>
+<div class="container">
+  <h1>Il Labirinto Bianco: l'anima nascosta di Ostuni</h1>
+  <p>Un’avventura notturna tra i vicoli incantati e misteriosi della città bianca.</p>
   <ul>
     <li>Risolvere gli indovinelli per scoprire i segreti di Ostuni.</li>
-    <li>Percorrere il labirinto e lasciarsi guidare dalle luci.</li>
-    <li>Scansionare i QR code per proseguire nel gioco.</li>
+    <li>Percorrere il labirinto con la sua luce colorata.</li>
+    <li>Scansionare i QR code per proseguire.</li>
     <li>Divertirsi e vivere una esperienza unica.</li>
   </ul>
   <button onclick="window.location.href='tappa1.html'">INIZIA L’AVVENTURA</button>
 </div>
 </body>
 </html>
-
