@@ -1,33 +1,57 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tappa 1 - Il Labirinto Bianco</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 2em; }
+  #feedback { margin-top: 10px; font-weight: bold; }
+  #submitBtn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+</style>
+</head>
+<body>
+
+<h2>Indovinello Tappa 1</h2>
+<p>Qual è la città bianca?<p>
 
 <input type="text" id="answerInput" placeholder="Inserisci la risposta" />
-<button id="submitBtn">Invia</button>
+<button id="submitBtn">Invia risposta</button>
+
 <div id="feedback"></div>
 
+<!-- Video o altro contenuto pertinente -->
+
 <script>
-  const correctAnswer = "risposta corretta";  // Sostituisci con la risposta reale
+  const correctAnswer = "ostuni";
   const answerInput = document.getElementById('answerInput');
   const submitBtn = document.getElementById('submitBtn');
   const feedback = document.getElementById('feedback');
 
   submitBtn.addEventListener('click', () => {
-    let userAnswer = answerInput.value.trim().toLowerCase();
-    if(userAnswer === correctAnswer.toLowerCase()){
+    const userAnswer = answerInput.value.trim().toLowerCase();
+    if(userAnswer === correctAnswer.toLowerCase()) {
       feedback.style.color = 'green';
-      feedback.textContent = "Risposta corretta! Prosegui.";
-      // Azioni per passare avanti
+      feedback.textContent = 'Risposta corretta! Prosegui alla tappa successiva.';
+      // È possibile aggiungere il redirect qui
     } else {
       feedback.style.color = 'red';
-      feedback.textContent = "Risposta errata. Riprova tra 15 secondi.";
+      feedback.textContent = 'Risposta errata. Attendi 15 secondi per riprovare.';
       submitBtn.disabled = true;
       answerInput.disabled = true;
-
       setTimeout(() => {
-        feedback.textContent = "";
+        feedback.textContent = '';
         submitBtn.disabled = false;
         answerInput.disabled = false;
-        answerInput.value = "";
+        answerInput.value = '';
         answerInput.focus();
       }, 15000);
     }
   });
 </script>
+
+</body>
+</html>
