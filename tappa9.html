@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Labirinto Bianco - Tappa 9</title>
 <style>
-  body { background-color: #111; color: #d4af37; font-family: Georgia, serif; max-width: 600px; margin: auto; padding: 40px; text-align: center; }
+  body { background-color: #111; color: #d4af37; font-family: Georgia, serif; max-width: 700px; margin: auto; padding: 40px; text-align: center; }
   input, button { margin-top: 10px; padding: 10px; font-size: 16px; border-radius: 8px; border: none; }
   .hidden { display: none; }
+  iframe { width: 100%; height: 811px; border: none; border-radius: 15px; margin-top: 30px; }
   a { color: #d4af37; text-decoration: none; font-size: 18px; }
 </style>
 </head>
@@ -23,10 +24,10 @@
 </div>
 
 <div id="enigma2" class="hidden">
-  <p>Enigma 2: Ora inserisci la seconda risposta.</p>
-  <input id="ans2" type="text" autocomplete="off" />
-  <button onclick="check2()">Verifica</button>
-  <p id="msg2"></p>
+  <p>Enigma 2: Completa il modulo sottostante.</p>
+  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe4FB8atlzg_UZcC0mLePW8oXhancnOqcBgn85UqUhsTJNXGg/viewform?embedded=true" marginheight="0" marginwidth="0" frameborder="0">Caricamento…</iframe>
+  <p>Quando hai completato il modulo, clicca qui sotto per sbloccare il codice bonus.</p>
+  <button onclick="showBonus()">Modulo completato</button>
 </div>
 
 <div id="bonus" class="hidden">
@@ -38,7 +39,6 @@
 <script>
 function check1() {
   const answer = document.getElementById('ans1').value.trim().toLowerCase();
-  alert('Hai inserito: ' + answer);
   if (answer === 'tappa8zevallos') {
     document.getElementById('msg1').textContent = 'Risposta corretta! Passa al prossimo enigma.';
     document.getElementById('enigma2').classList.remove('hidden');
@@ -47,16 +47,11 @@ function check1() {
   }
 }
 
-function check2() {
-  const answer = document.getElementById('ans2').value.trim().toLowerCase();
-  if (answer === 'risposta2') {  // Sostituisci con la vera risposta
-    document.getElementById('msg2').textContent = 'Risposta corretta! Ecco il codice bonus.';
-    document.getElementById('bonus').classList.remove('hidden');
-  } else {
-    document.getElementById('msg2').textContent = 'Risposta errata, riprova.';
-  }
+function showBonus() {
+  document.getElementById('bonus').classList.remove('hidden');
 }
 </script>
 
 </body>
 </html>
+
