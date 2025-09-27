@@ -16,37 +16,39 @@
 <body>
 
 <h2>Indovinello Tappa 1</h2>
-<p>Qual è la città bianca?<p>
+<p>Qual è la città bianca?</p>
 
-<input type="text" id="answerInput" placeholder="Inserisci la risposta" />
-<button id="submitBtn">Invia risposta</button>
+<form id="answerForm" action="complimenti.html" method="post">
+  <input type="text" id="answerInput" name="answer" placeholder="Inserisci la risposta" required />
+  <button type="submit" id="submitBtn">Invia risposta</button>
+</form>
 
 <div id="feedback"></div>
 
-<!-- Video o altro contenuto pertinente -->
-
 <script>
   const correctAnswer = "ostuni";
+  const form = document.getElementById('answerForm');
   const answerInput = document.getElementById('answerInput');
-  const submitBtn = document.getElementById('submitBtn');
   const feedback = document.getElementById('feedback');
-
-  submitBtn.addEventListener('click', () => {
+  const submitBtn = document.getElementById('submitBtn');
+  
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
     const userAnswer = answerInput.value.trim().toLowerCase();
     if(userAnswer === correctAnswer.toLowerCase()) {
       feedback.style.color = 'green';
-      feedback.textContent = 'Risposta corretta! Prosegui alla tappa successiva.';
-      // È possibile aggiungere il redirect qui
+      feedback.textContent = "Risposta corretta! Procedo alla pagina successiva.";
+      form.submit();
     } else {
       feedback.style.color = 'red';
-      feedback.textContent = 'Risposta errata. Attendi 15 secondi per riprovare.';
+      feedback.textContent = "Risposta errata. Riprova tra 15 secondi.";
       submitBtn.disabled = true;
       answerInput.disabled = true;
       setTimeout(() => {
-        feedback.textContent = '';
+        feedback.textContent = "";
         submitBtn.disabled = false;
         answerInput.disabled = false;
-        answerInput.value = '';
+        answerInput.value = "";
         answerInput.focus();
       }, 15000);
     }
