@@ -2,17 +2,283 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Labirinto Bianco - Tappa 1</title>
+<title>Indovinello Porta Nova – Il labirinto bianco</title>
 <style>
-  body { background-color: #111; color: #d4af37; font-family: 'Georgia', serif; padding: 40px; max-width: 700px; margin: auto; }
-  h1, p { text-align: center; }
-  iframe { width: 100%; height: 900px; border: none; border-radius: 15px; margin-top: 40px; }
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Quicksand:wght@500&display=swap');
+  body {
+    margin:0; padding:0;
+    background: linear-gradient(120deg, #f3ead7 60%, #f2dc96 100%);
+    font-family: 'Quicksand', Arial, sans-serif;
+    color: #7c6000;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 700px;
+    margin: 40px auto 0;
+    padding: 40px 32px 36px 32px;
+    background: #fffbea;
+    box-shadow: 0 0 40px #e9d6a4;
+    border-radius: 28px;
+    text-align: center;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.7rem;
+    color: #c59e18;
+    text-shadow: 0 2px 12px #ecd04a;
+    margin: 0 0 6px 0;
+  }
+  p {
+    font-family: 'Quicksand', Arial, sans-serif;
+    font-size: 1.15rem;
+    margin: 0 0 14px;
+    letter-spacing: 0.5px;
+  }
+  .choices {
+    margin: 32px 0 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+    align-items: center;
+  }
+  .choice-btn {
+    width: 170px;
+    padding: 15px 0;
+    border-radius: 17px;
+    background: linear-gradient(90deg,#ffed92 20%, #edbc3b 80%);
+    border: none;
+    color: #6c4d06;
+    font-weight: 700;
+    font-family: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+    letter-spacing: 1.4px;
+    box-shadow: 0 4px 18px #efd67b90;
+    transition: background 0.2s;
+  }
+  .choice-btn.selected { box-shadow: 0 0 0 4px #c7a00877; }
+  .choice-btn:hover:enabled { background: linear-gradient(90deg, #ffe06a 0%, #f7cc55 100%); }
+  label {
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #9a8107;
+    margin-top: 12px;
+    margin-bottom: 8px;
+    letter-spacing: 1.2px;
+    display: block;
+  }
+  input[type=text] {
+    width: 220px;
+    padding: 13px;
+    border-radius: 14px;
+    border: 2px solid #c59e18;
+    font-family: 'Quicksand', Arial, sans-serif;
+    font-size: 1.11rem;
+    background: #feefd3;
+    color: #603600;
+    margin-top: 10px;
+  }
+  input[type=text]:focus {
+    border-color: #ecd04a;
+    box-shadow: 0 0 10px #ecd04aaa;
+    outline: none;
+  }
+  button[type=submit] {
+    width: 170px;
+    padding: 13px 0;
+    margin-top: 15px;
+    border-radius: 15px;
+    border: none;
+    background-color: #d1b13b;
+    color: #fffbea;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    letter-spacing: 1.1px;
+    transition: background 0.18s;
+  }
+  button[type=submit]:hover:not(:disabled) {
+    background-color: #e6c852;
+    color: #4f3a00;
+  }
+  button:disabled {
+    background-color: #c7b88d;
+    cursor: not-allowed;
+  }
+  #penalty {
+    color: #b81414;
+    font-weight: 600;
+    margin-top: 18px;
+    display: none;
+  }
+  #status {
+    min-height: 1.2em;
+    margin-top: 25px;
+    font-weight: 600;
+    color: #a18311;
+  }
+  #codiceSegretoSection {
+    display: none;
+    margin-top: 22px;
+    padding: 16px 0 10px;
+    background: #fff3bb;
+    color: #b88d00;
+    border-radius: 18px;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 1.36rem;
+    letter-spacing: 7px;
+    box-shadow: 0 3px 25px #dec680a2;
+  }
+  #videoSection {
+    display: none;
+    margin-top: 35px;
+  }
+  iframe {
+    max-width: 410px;
+    width: 100%;
+    height: 215px;
+    display: block;
+    margin: auto;
+    border-radius: 16px;
+    box-shadow: 0 0 15px #ffe066a6;
+    border: none;
+  }
 </style>
 </head>
 <body>
-<h1>Labirinto Bianco - Tappa 1</h1>
-<p>Un vento leggero sussurra tra le pietre antiche della Porta Nova. Quale simbolo è scolpito sull’arco?</p>
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc4PiMnALrVvTKtMiNIQh10e8jcC6ArwTSYTgk60EZtXPCb1Q/viewform?embedded=true"></iframe>
+<div class="container">
+  <h1>Indovinello Porta Nova – Il labirinto bianco</h1>
+  <p>
+    Situata su tre colli a pochi chilometri dal mare Adriatico,<br />
+    Ostuni è una perla della Puglia, con architettura unica e vie labirintiche.<br />
+    Le mura aragonesi, rafforzate da torrioni circolari, ancora cingono la città.<br />
+    A est si apre la Porta di San Demetrio (XV sec.), a ovest Porta Nova (XV sec.).
+  </p>
+  <p style="margin-top: 30px; font-size:1.16rem;">
+    Quale simbolo è scolpito sull’arco di Porta Nova?
+  </p>
+  <form id="tappa1Form" autocomplete="off">
+    <div class="choices">
+      <button type="button" class="choice-btn" value="leone">Leone</button>
+      <button type="button" class="choice-btn" value="aquila">Aquila</button>
+      <button type="button" class="choice-btn" value="drago">Drago</button>
+    </div>
+    <label for="nomeSquadraInput">Nome squadra o giocatore singolo:</label>
+    <input type="text" id="nomeSquadraInput" name="nomeSquadra" placeholder="Inserisci qui il nome" required />
+    <input type="hidden" id="rispostaInput" name="risposta" />
+    <button type="submit" id="submitBtn" disabled>Invia</button>
+    <p id="penalty">Risposta sbagliata! Riprova tra <span id="countdown">15</span> secondi.</p>
+    <p id="status"></p>
+  </form>
+  <div id="codiceSegretoSection">
+    Codice Segreto: <span id="codiceSegreto">LEONE</span>
+  </div>
+  <div id="videoSection">
+    <h2>Video di approfondimento</h2>
+    <iframe src="https://www.youtube.com/embed/FNEx80qU0GA" allowfullscreen title="Video approfondimento"></iframe>
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById('tappa1Form');
+  const status = document.getElementById('status');
+  const penalty = document.getElementById('penalty');
+  const countdownSpan = document.getElementById('countdown');
+  const submitButton = document.getElementById('submitBtn');
+  const choices = document.querySelectorAll('.choice-btn');
+  const rispostaInput = document.getElementById('rispostaInput');
+  const codiceSection = document.getElementById('codiceSegretoSection');
+  const videoSection = document.getElementById('videoSection');
+  let penaltyTimer;
+
+  choices.forEach(btn => {
+    btn.addEventListener('click', function() {
+      choices.forEach(b => b.classList.remove('selected'));
+      this.classList.add('selected');
+      rispostaInput.value = this.value;
+      submitButton.disabled = false;
+      status.textContent = "";
+    });
+  });
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const risposta = rispostaInput.value;
+    const nomeSquadra = form.nomeSquadra.value.trim();
+    const codiceTappa = 'tappa1';
+    const codiceSegreto = 'leone';
+
+    if (!risposta) {
+      status.textContent = 'Seleziona una risposta.';
+      status.style.color = '#b81414';
+      return;
+    }
+    if (!nomeSquadra) {
+      status.textContent = 'Inserisci il nome della squadra o il tuo nome.';
+      status.style.color = '#b81414';
+      return;
+    }
+
+    if (risposta.toLowerCase() !== codiceSegreto) {
+      status.textContent = '';
+      penalty.style.display = 'block';
+      submitButton.disabled = true;
+      choices.forEach(b => b.disabled = true);
+
+      let sec = 15;
+      countdownSpan.textContent = sec;
+      penaltyTimer = setInterval(() => {
+        sec--;
+        countdownSpan.textContent = sec;
+        if (sec <= 0) {
+          clearInterval(penaltyTimer);
+          penalty.style.display = 'none';
+          submitButton.disabled = true;
+          choices.forEach(b => b.disabled = false);
+          rispostaInput.value = '';
+          choices.forEach(b => b.classList.remove('selected'));
+          status.textContent = '';
+        }
+      }, 1000);
+      return;
+    }
+
+    submitButton.disabled = true;
+    penalty.style.display = 'none';
+    status.textContent = 'Invio risposta...';
+    status.style.color = '#a18311';
+
+    fetch('https://script.google.com/macros/s/AKfycby3OOpO-KbNUIyR4mIW0vSiJ6PFYfcIKrQNjLIy3jB9PonGK6Kwhp7r3LJaHA-1yDEe_A/exec', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nomeSquadra, codiceTappa, codiceSegreto, risposta })
+    })
+    .then(res => {
+      if (!res.ok) throw new Error('Network error');
+      return res.json();
+    })
+    .then(data => {
+      if (data.status === 'success') {
+        status.textContent = 'Risposta inviata con successo! Complimenti.';
+        codiceSection.style.display = 'block';
+        videoSection.style.display = 'block';
+      } else {
+        status.textContent = 'Errore nell\'invio, riprova.';
+        status.style.color = '#b81414';
+        submitButton.disabled = false;
+      }
+    })
+    .catch(() => {
+      status.textContent = 'Errore di rete, riprova più tardi.';
+      status.style.color = '#b81414';
+      submitButton.disabled = false;
+    });
+  });
+</script>
 </body>
 </html>
