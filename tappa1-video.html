@@ -1,29 +1,8 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Tappa 1 - Il Labirinto Bianco</title>
-<style>
-  body { font-family: Arial, sans-serif; margin: 2em; }
-  #feedback { margin-top: 10px; font-weight: bold; }
-  #submitBtn:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-  }
-</style>
-</head>
-<body>
-
-<h2>Indovinello Tappa 1</h2>
-<p>Qual è la città bianca?</p>
-
 <form id="answerForm" action="complimenti.html" method="post">
   <input type="text" id="answerInput" name="answer" placeholder="Inserisci la risposta" required />
   <button type="submit" id="submitBtn">Invia risposta</button>
 </form>
-
-<div id="feedback"></div>
+<div id="feedback" style="margin-top:10px; font-weight:bold;"></div>
 
 <script>
   const correctAnswer = "ostuni";
@@ -31,14 +10,15 @@
   const answerInput = document.getElementById('answerInput');
   const feedback = document.getElementById('feedback');
   const submitBtn = document.getElementById('submitBtn');
-  
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault(); // blocca submit automatico
+
     const userAnswer = answerInput.value.trim().toLowerCase();
     if(userAnswer === correctAnswer.toLowerCase()) {
       feedback.style.color = 'green';
       feedback.textContent = "Risposta corretta! Procedo alla pagina successiva.";
-      form.submit();
+      form.submit(); // invio vero e proprio
     } else {
       feedback.style.color = 'red';
       feedback.textContent = "Risposta errata. Riprova tra 15 secondi.";
@@ -54,6 +34,3 @@
     }
   });
 </script>
-
-</body>
-</html>
