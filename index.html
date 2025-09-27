@@ -3,97 +3,102 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Benvenuto al Labirinto Bianco</title>
-<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=UnifrakturMaguntia&display=swap" rel="stylesheet" />
+<title>Il Labirinto Bianco: l'anima nascosta di Ostuni</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Zen+Tokyo+Zoo&display=swap" rel="stylesheet" />
+
 <style>
   html, body {
     margin: 0; padding: 0; height: 100%;
-    font-family: 'IM Fell English', serif;
-    background: linear-gradient(120deg, #f8ecd4 0%, #eae7ce 100%);
-    color: #4B3B1D;
+    background: #1b1b2f url('https://i.imgur.com/tSrDYLx.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Orbitron', sans-serif;
+    color: #eee;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
-  .overlay {
-    background: rgba(245, 238, 219, 0.95);
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 3em 3.5em;
-    box-shadow: 0 0 40px rgba(75,59,29,0.8);
-    border: 10px double #8b6e1b;
-    border-radius: 18px;
-    text-align: justify;
-    position: relative;
+  .container {
+    background: rgba(27,27,47,0.85);
+    padding: 3rem 4rem;
+    max-width: 700px;
+    border-radius: 24px;
+    box-shadow: 0 0 40px #00ffc3;
+    text-align: center;
+    font-family: 'Zen Tokyo Zoo', cursive;
+    letter-spacing: 3px;
   }
   h1 {
-    font-family: 'UnifrakturMaguntia', cursive;
-    font-size: 3.8rem;
-    text-align: center;
-    margin-bottom: 0.5em;
-    color: #a67c00;
-    text-shadow: 2px 2px 10px #d9c37a;
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: #00ecba;
+    text-shadow: 0 0 12px #00ecba;
   }
   p {
-    font-size: 1.25rem;
-    line-height: 1.9;
-    margin-bottom: 1.8em;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 300;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    letter-spacing: 1.2px;
+    color: #aad5dc;
   }
   ul {
-    font-size: 1.22rem;
-    line-height: 1.7;
-    margin-left: 1em;
-    padding-left: 0;
+    text-align: left;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: #9fe8f7;
+    margin-bottom: 2rem;
+    padding-left: 1.6rem;
   }
   ul li {
-    margin-bottom: 1.3em;
+    margin-bottom: 0.8rem;
     position: relative;
-    padding-left: 30px;
   }
   ul li::before {
-    content: "★";
+    content: "•";
+    color: #00cec9;
+    font-weight: 900;
     position: absolute;
-    left: 0; top: 3px;
-    width: 22px; height: 22px;
-    color: #a67c00;
-    text-shadow: 0 0 2px #bfa13b;
+    left: -1rem;
   }
   button {
-    display: block;
-    width: 220px;
-    margin: 3em auto 0 auto;
-    padding: 15px;
-    font-size: 1.4rem;
-    background: linear-gradient(45deg,#bfa13b,#d4af37);
-    color: #4B3B1D;
+    font-family: 'Orbitron', sans-serif;
     font-weight: 900;
-    border-radius: 36px;
+    font-size: 1.4rem;
+    padding: 16px 44px;
+    border-radius: 48px;
     border: none;
-    box-shadow: 0 0 18px #bfa13bcc;
+    background: linear-gradient(45deg, #00ecba, #00a896);
+    color: #091c1c;
     cursor: pointer;
-    letter-spacing: 0.06em;
-    transition: background 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 30px #00ecbaaa;
+    transition: box-shadow 0.3s ease-in-out, background 0.3s ease-in-out;
   }
   button:hover {
-    background: linear-gradient(65deg, #ffd700,#bfa532);
-    box-shadow: 0 0 28px #d4af37;
+    box-shadow: 0 0 50px #00f9d1;
+    background: linear-gradient(45deg, #00ffce, #00b6a8);
   }
 </style>
+
 </head>
 <body>
 
-<div class="overlay">
-  <h1>Benvenuto al Labirinto Bianco</h1>
-  <p>Preparati a vivere un’esperienza unica nella città bianca di Ostuni.<br>
-  Leggi attentamente le regole prima di iniziare il percorso con gli enigmi.</p>
+<div class="container">
+  <h1>Il Labirinto Bianco<br>l'anima nascosta di Ostuni</h1>
+
+  <p>Un’avventura notturna tra i vicoli incantati e misteriosi della città bianca.</p>
+  
   <ul>
-    <li>Ogni tappa nasconde un indovinello: risolvilo per andare avanti.</li>
-    <li>Alcune tappe prevedono la compilazione di moduli.</li>
-    <li>Rispondi con attenzione e precisione.</li>
-    <li>Per proseguire, scansiona i QR code distribuiti nel centro storico di Ostuni.</li>
-    <li>Divertiti e scopri i segreti di Ostuni.</li>
+    <li>Risolvere gli indovinelli per scoprire i segreti di Ostuni.</li>
+    <li>Percorrere il labirinto con la sua luce colorata.</li>
+    <li>Scansionare i QR code per proseguire.</li>
+    <li>Divertirsi e vivere una esperienza unica.</li>
   </ul>
+
   <button onclick="window.location.href='tappa1.html'">INIZIA L’AVVENTURA</button>
 </div>
 
 </body>
 </html>
-
-
