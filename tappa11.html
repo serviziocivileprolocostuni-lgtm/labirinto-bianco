@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Labirinto Bianco - Tappa 11</title>
+<style>
+  body { background-color: #111; color: #d4af37; font-family: Georgia, serif; max-width: 700px; margin: auto; padding: 40px; text-align: center; }
+  input, button { margin-top: 10px; padding: 10px; font-size: 16px; border-radius: 8px; border: none; }
+  .hidden { display: none; }
+  iframe { width: 100%; height: 894px; border: none; border-radius: 15px; margin-top: 30px; }
+  a { color: #d4af37; text-decoration: none; font-size: 18px; }
+</style>
+</head>
+<body>
+
+<h1>Labirinto Bianco - Tappa 11</h1>
+
+<div id="enigma1">
+  <p>Enigma 1: Leggi la descrizione e inserisci la risposta corretta.</p>
+  <p>La Chiesa del Carmine è uno degli edifici religiosi più caratteristici di Ostuni, risalente al XVI secolo. Dedicata alla Madonna del Carmine, rappresenta un importante centro di devozione cittadina e possiede una facciata barocca con dettagli architettonici molto eleganti. All’interno si trovano opere d’arte di rilevanza locale, mentre la festa della Madonna del Carmine viene celebrata ogni anno con grande partecipazione popolare.</p>
+  <input id="ans1" type="text" autocomplete="off" placeholder="Risposta" />
+  <button onclick="check1()">Verifica</button>
+  <p id="msg1"></p>
+</div>
+
+<div id="enigma2" class="hidden">
+  <p>Enigma 2: Completa il modulo sottostante.</p>
+  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe6TZpDiXvZOj1LSUX8zQavkbig9Hzxt7YrxABF3E_gqOq77w/viewform?embedded=true" marginheight="0" marginwidth="0" frameborder="0">Caricamento…</iframe>
+  <p>Quando hai completato il modulo, clicca qui sotto per sbloccare il codice bonus.</p>
+  <button onclick="showBonus()">Modulo completato</button>
+</div>
+
+<div id="bonus" class="hidden">
+  <p>Complimenti! Ecco il codice bonus per andare avanti:</p>
+  <strong>CODICEBONUS11</strong>
+  <p><a href="tappa12.html">Vai alla Tappa 12</a></p>
+</div>
+
+<script>
+function check1() {
+  const answer = document.getElementById('ans1').value.trim().toLowerCase();
+  // Sostituisci 'rispostaesatta' con la risposta corretta
+  if (answer === 'rispostaesatta') {
+    document.getElementById('msg1').textContent = 'Risposta corretta! Passa al prossimo enigma.';
+    document.getElementById('enigma2').classList.remove('hidden');
+  } else {
+    document.getElementById('msg1').textContent = 'Risposta errata, riprova.';
+  }
+}
+
+function showBonus() {
+  document.getElementById('bonus').classList.remove('hidden');
+}
+</script>
+
+</body>
+</html>
+
