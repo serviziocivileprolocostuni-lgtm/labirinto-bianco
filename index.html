@@ -4,135 +4,59 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Benvenuto al Labirinto Bianco</title>
-<link href="https://fonts.googleapis.com/css2?family=Lora&family=Montserrat&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Montserrat:wght@600&display=swap" rel="stylesheet" />
 <style>
   body {
-    background: linear-gradient(135deg, #292E49, #536976);
-    color: #fff;
-    font-family: 'Lora', serif;
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 3em 2em;
-    text-align: center;
-  }
-  h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 3rem;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    margin-bottom: 0.5rem;
-    opacity: 0;
-    animation: fadeSlideDown 1s ease forwards;
-  }
-  p, ul {
-    font-size: 1.2rem;
-    line-height: 1.8;
-    max-width: 520px;
-    margin: 1em auto;
-    opacity: 0;
-    animation: fadeUp 1s ease forwards;
-  }
-  ul {
-    text-align: left;
-    list-style-type: none;
+    min-height: 100vh;
+    margin: 0;
     padding: 0;
+    background: linear-gradient(120deg, #f8ecd4 0%, #d0e6f6 100%);
+    color: #2d2a26;
+    font-family: 'Lora', serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
+  .container {
+    background: rgba(240,240,220,0.95);
+    border-radius: 28px;
+    box-shadow: 0 0 32px #bfa13b80;
+    padding: 3em 2em 2.5em 2em;
+    max-width: 600px;
+    width: 94vw;
+    text-align: center;
+    animation: fadeIn 1.2s cubic-bezier(0.42,0,0.58,1) forwards;
+    opacity: 0;
+  }
+  @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+  h1 {
+    font-family: 'IM Fell English', serif;
+    font-size: 2.7rem;
+    color: #bfa13b;
+    text-shadow: 0 2px 8px #ddd, 0 8px 24px #bfa13b44;
+    margin-bottom: 0.7em;
+    border-bottom: 2px solid #bfa13b;
+    padding-bottom: 0.22em;
+    letter-spacing: 0.03em;
+    animation: fadeTitle 1.2s cubic-bezier(.33,.74,.48,.86) forwards;
+    opacity: 0;
+  }
+  @keyframes fadeTitle { from {opacity:0; transform:scale(0.93);} to {opacity:1;transform:scale(1);} }
+  ul { margin: 1.4em 0 2em 0; text-align:left; padding-left:0;}
   ul li {
-    margin-bottom: 1em;
-    position: relative;
-    padding-left: 24px;
+    margin-bottom: 0.7em;
+    font-size: 1.13em;
+    position:relative;
+    padding-left:2em;
+    animation: fadeText 1.3s;
   }
-  ul li::before {
-    content: '✓';
+  ul li:before {
+    content: "★";
     position: absolute;
     left: 0;
-    color: #FFD700;
-    font-weight: bold;
+    color: #bfa13b;
+    font-size: 1.3em;
+    top: 1px;
   }
-  ul li:nth-child(1) { animation-delay: 0.5s; }
-  ul li:nth-child(2) { animation-delay: 0.7s; }
-  ul li:nth-child(3) { animation-delay: 0.9s; }
-  ul li:nth-child(4) { animation-delay: 1.1s; }
-  ul li:nth-child(5) { animation-delay: 1.3s; }
-  button {
-    margin-top: 2em;
-    padding: 16px 50px;
-    font-size: 1.25rem;
-    font-weight: 700;
-    border-radius: 40px;
-    border: none;
-    background: #FFD700;
-    color: #292E49;
-    box-shadow: 0 6px 12px rgba(255, 215, 0, 0.6);
-    cursor: pointer;
-    transition: background 0.3s ease;
-    opacity: 0;
-    animation: pulseBtn 3s infinite ease-in-out, fadeUp 1s ease forwards;
-    animation-delay: 1.6s, 1.6s;
-  }
-  button:hover {
-    background: #FFC107;
-  }
-  @keyframes fadeSlideDown {
-    from {opacity: 0; transform: translateY(-50px);}
-    to {opacity: 1; transform: translateY(0);}
-  }
-  @keyframes fadeUp {
-    from {opacity: 0; transform: translateY(30px);}
-    to {opacity: 1; transform: translateY(0);}
-  }
-  @keyframes pulseBtn {
-    0%, 100% { box-shadow: 0 6px 12px rgba(255, 215, 0, 0.6); }
-    50% { box-shadow: 0 8px 20px rgba(255, 215, 0, 1); }
-  }
-  #toggleSound {
-    margin-top: 1em;
-    font-size: 1rem;
-    background: transparent;
-    border: none;
-    color: #FFD700;
-    cursor: pointer;
-    text-decoration: underline;
-  }
-</style>
-</head>
-<body>
-
-<h1>Benvenuto al Labirinto Bianco</h1>
-
-<p>Preparati a vivere un’avventura unica nella città bianca di Ostuni.</p>
-<p>Leggi attentamente le regole prima di iniziare il percorso con gli enigmi.</p>
-
-<ul>
-  <li>Ogni tappa nasconde un indovinello: risolvilo per andare avanti.</li>
-  <li>Alcune tappe prevedono la compilazione di moduli.</li>
-  <li>Rispondi con attenzione e precisione.</li>
-  <li>Per proseguire, scansiona i QR code distribuiti nel centro storico di Ostuni.</li>
-  <li>Divertiti e scopri i segreti di Ostuni.</li>
-</ul>
-
-<button onclick="window.location.href='tappa1.html'">INIZIA L’AVVENTURA</button>
-
-<audio id="bgm" autoplay loop>
-  <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/Creative_Commons/Kevin_MacLeod/Kevin_MacLeod_SFX/Knights_on_Parade.mp3" type="audio/mpeg">
-  Il tuo browser non supporta l'elemento audio.
-</audio>
-
-<button id="toggleSound">Disattiva musica</button>
-
-<script>
-  const bgm = document.getElementById('bgm');
-  const toggleBtn = document.getElementById('toggleSound');
-  toggleBtn.addEventListener('click', () => {
-    if (bgm.paused) {
-      bgm.play();
-      toggleBtn.textContent = 'Disattiva musica';
-    } else {
-      bgm.pause();
-      toggleBtn.textContent = 'Attiva musica';
-    }
-  });
-</script>
-
-</body>
-</html>
+  @keyframes fadeText { from {
