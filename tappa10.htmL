@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Labirinto Bianco - Tappa 10</title>
+<style>
+  body { background-color: #111; color: #d4af37; font-family: Georgia, serif; max-width: 700px; margin: auto; padding: 40px; text-align: center; }
+  input, button { margin-top: 10px; padding: 10px; font-size: 16px; border-radius: 8px; border: none; }
+  .hidden { display: none; }
+  iframe { width: 100%; height: 987px; border: none; border-radius: 15px; margin-top: 30px; }
+  a { color: #d4af37; text-decoration: none; font-size: 18px; }
+</style>
+</head>
+<body>
+
+<h1>Labirinto Bianco - Tappa 10</h1>
+
+<div id="enigma1">
+  <p>Enigma 1: Leggi la descrizione e inserisci la risposta corretta.</p>
+  <p>La Colonna di Sant’Oronzo è un importante monumento situato nella Piazza dedicata al santo patrono di Ostuni, venerato fin dall'antichità come protettore della città da calamità e disgrazie. Questo monumento fu eretto nel corso del XVIII secolo come segno tangibile della devozione popolare e della gratitudine verso Sant’Oronzo, che secondo la tradizione avrebbe salvato Ostuni da pestilenze e calamità naturali. La colonna è costituita da una base solida, spesso decorata con simboli sacri e stemmi religiosi, sorregge una statua o un simbolo che richiama alla figura del santo, punto di riferimento per i fedeli locali. Intorno alla colonna si svolgono festività e processioni che rafforzano l’identità religiosa e culturale della comunità ostunese.</p>
+  <input id="ans1" type="text" autocomplete="off" placeholder="Risposta" />
+  <button onclick="check1()">Verifica</button>
+  <p id="msg1"></p>
+</div>
+
+<div id="bonus" class="hidden">
+  <p>Complimenti! Ecco il codice bonus per andare avanti:</p>
+  <strong>CODICEBONUS10</strong>
+  <p><a href="tappa11.html">Vai alla Tappa 11</a></p>
+</div>
+
+<script>
+function check1() {
+  const answer = document.getElementById('ans1').value.trim().toLowerCase();
+  // Supponiamo la risposta giusta sia 'sant’oronzo'
+  if (answer === 'sant’oronzo' || answer === 'sant oronzo') {
+    document.getElementById('msg1').textContent = 'Risposta corretta!';
+    document.getElementById('bonus').classList.remove('hidden');
+  } else {
+    document.getElementById('msg1').textContent = 'Risposta errata, riprova.';
+  }
+}
+</script>
+
+</body>
+</html>
