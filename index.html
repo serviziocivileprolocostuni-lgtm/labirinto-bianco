@@ -5,11 +5,100 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Benvenuto al Labirinto Bianco</title>
 <style>
-  body { background-color: #111; color: #d4af37; font-family: Georgia, serif; max-width: 700px; margin: auto; padding: 40px; text-align: center; }
-  button { font-size: 20px; padding: 15px 30px; margin-top: 40px; border-radius: 10px; border: none; background-color: #d4af37; color: #111; cursor: pointer; }
-  button:hover { background-color: #b3922a; }
-  h1 { margin-bottom: 20px; }
-  p { font-size: 18px; line-height: 1.5; }
+  body {
+    background-color: #111;
+    color: #d4af37;
+    font-family: Georgia, serif;
+    max-width: 700px;
+    margin: auto;
+    padding: 40px;
+    text-align: center;
+    overflow-x: hidden;
+  }
+  h1 {
+    margin-bottom: 20px;
+    font-size: 2.8rem;
+    animation: fadeInDown 1s ease forwards;
+    opacity: 0;
+  }
+  p, ul {
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 520px;
+    margin: 20px auto;
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards;
+  }
+  ul {
+    text-align: left;
+  }
+  ul li {
+    margin-bottom: 12px;
+    position: relative;
+    padding-left: 22px;
+  }
+  ul li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #bfa13b;
+    font-size: 22px;
+    line-height: 1;
+  }
+  ul li:nth-child(1) { animation-delay: 0.5s; }
+  ul li:nth-child(2) { animation-delay: 0.7s; }
+  ul li:nth-child(3) { animation-delay: 0.9s; }
+  ul li:nth-child(4) { animation-delay: 1.1s; }
+  ul li:nth-child(5) { animation-delay: 1.3s; }
+
+  button {
+    font-size: 20px;
+    padding: 15px 30px;
+    margin-top: 40px;
+    border-radius: 10px;
+    border: none;
+    background-color: #d4af37;
+    color: #111;
+    cursor: pointer;
+    animation: pulse 2s infinite;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-delay: 1.5s;
+  }
+  button:hover {
+    background-color: #b3922a;
+  }
+
+  @keyframes fadeInDown {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    from {
+      opacity: 0;
+      transform: translateY(-40px);
+    }
+  }
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+  }
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 0 10px #d4af37;
+    }
+    50% {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #d4af37;
+    }
+  }
 </style>
 </head>
 <body>
@@ -20,15 +109,15 @@
 <p>Leggi attentamente le regole prima di iniziare il percorso con gli enigmi.</p>
 
 <p><strong>Regole:</strong></p>
-<ul style="max-width: 500px; text-align: left; margin: auto;">
+<ul>
   <li>Ogni tappa nasconde un indovinello: risolvilo per andare avanti.</li>
   <li>Alcune tappe prevedono la compilazione di moduli.</li>
   <li>Rispondi con attenzione e precisione.</li>
+  <li>Per proseguire, scansiona i QR code distribuiti nel centro storico di Ostuni.</li>
   <li>Divertiti e scopri i segreti di Ostuni.</li>
 </ul>
 
-<button onclick="window.location.href='tappa9.html'">INIZIA L’AVVENTURA</button>
+<button onclick="window.location.href='tappa1.html'">INIZIA L’AVVENTURA</button>
 
 </body>
 </html>
-
