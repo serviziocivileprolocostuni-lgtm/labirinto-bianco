@@ -62,4 +62,42 @@
     width: 220px;
     margin: 3em auto 0 auto;
     padding: 15px;
-    font
+    font-size: 1.4rem;
+    background: linear-gradient(45deg,#bfa13b,#d4af37);
+    color: #4B3B1D;
+    font-weight: 900;
+    border-radius: 36px;
+    border: none;
+    box-shadow: 0 0 18px #bfa13bcc;
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+  button:hover {
+    background: linear-gradient(65deg, #ffd700,#bfa532);
+    box-shadow: 0 0 28px #d4af37;
+  }
+  @keyframes fadeIn {
+    from {opacity: 0; transform: translateY(40px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+</style>
+</head>
+<body>
+
+<div class="overlay">
+  <h1>Benvenuto al Labirinto Bianco</h1>
+  <p>Preparati a vivere un’esperienza unica nella città bianca di Ostuni.<br>
+  Leggi attentamente le regole prima di iniziare il percorso con gli enigmi.</p>
+  <ul>
+    <li>Ogni tappa nasconde un indovinello: risolvilo per andare avanti.</li>
+    <li>Alcune tappe prevedono la compilazione di moduli.</li>
+    <li>Rispondi con attenzione e precisione.</li>
+    <li>Per proseguire, scansiona i QR code distribuiti nel centro storico di Ostuni.</li>
+    <li>Divertiti e scopri i segreti di Ostuni.</li>
+  </ul>
+  <button onclick="window.location.href='tappa1.html'">INIZIA L’AVVENTURA</button>
+</div>
+
+</body>
+</html>
