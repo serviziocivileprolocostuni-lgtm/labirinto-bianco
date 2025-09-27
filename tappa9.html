@@ -38,6 +38,7 @@
 <script>
 function check1() {
   const answer = document.getElementById('ans1').value.trim().toLowerCase();
+  alert('Hai inserito: ' + answer);
   if (answer === 'tappa8zevallos') {
     document.getElementById('msg1').textContent = 'Risposta corretta! Passa al prossimo enigma.';
     document.getElementById('enigma2').classList.remove('hidden');
@@ -56,26 +57,6 @@ function check2() {
   }
 }
 </script>
-<!-- Altri contenuti HTML sopra -->
-
-<script>
-function check1() {
-  const answer = document.getElementById('ans1').value.trim().toLowerCase();
-  alert('Hai inserito: ' + answer);  // questa riga è per testare input
-  if (answer === 'tappa8zevallos') {
-    document.getElementById('msg1').textContent = 'Risposta corretta! Passa al prossimo enigma.';
-    document.getElementById('enigma2').classList.remove('hidden');
-  } else {
-    document.getElementById('msg1').textContent = 'Risposta errata, riprova.';
-  }
-}
-
-// ...funzione check2() ecc.
-
-</script>
-
-</body>
-</html>
 
 </body>
 </html>
