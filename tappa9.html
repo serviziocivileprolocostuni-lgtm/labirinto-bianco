@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Enigma Tappa 9</title>
+<style>
+  body { background-color: #111; color: #d4af37; font-family: Georgia, serif; max-width: 600px; margin: auto; padding: 40px; text-align: center; }
+  input, button { margin-top: 10px; padding: 10px; font-size: 16px; border-radius: 8px; border: none; }
+  .hidden { display: none; }
+  a { color: #d4af37; text-decoration: none; font-size: 18px; }
+</style>
+</head>
+<body>
+
+<h1>Labirinto Bianco - Tappa 9</h1>
+
+<div id="enigma1">
+  <p>Enigma 1: Inserisci qui la risposta corretta.</p>
+  <input id="ans1" type="text" autocomplete="off" />
+  <button onclick="check1()">Verifica</button>
+  <p id="msg1"></p>
+</div>
+
+<div id="enigma2" class="hidden">
+  <p>Enigma 2: Ora inserisci la seconda risposta.</p>
+  <input id="ans2" type="text" autocomplete="off" />
+  <button onclick="check2()">Verifica</button>
+  <p id="msg2"></p>
+</div>
+
+<div id="bonus" class="hidden">
+  <p>Complimenti! Ecco il codice bonus per andare avanti:</p>
+  <strong>CODICEBONUS9</strong>
+  <p><a href="tappa10.html">Vai alla Tappa 10</a></p>
+</div>
+
+<script>
+function check1() {
+  const answer = document.getElementById('ans1').value.trim().toLowerCase();
+  if (answer === 'risposta1') {
+    document.getElementById('msg1').textContent = 'Risposta corretta! Passa al prossimo enigma.';
+    document.getElementById('enigma2').classList.remove('hidden');
+  } else {
+    document.getElementById('msg1').textContent = 'Risposta errata, riprova.';
+  }
+}
+
+function check2() {
+  const answer = document.getElementById('ans2').value.trim().toLowerCase();
+  if (answer === 'risposta2') {
+    document.getElementById('msg2').textContent = 'Risposta corretta! Ecco il codice bonus.';
+    document.getElementById('bonus').classList.remove('hidden');
+  } else {
+    document.getElementById('msg2').textContent = 'Risposta errata, riprova.';
+  }
+}
+</script>
+
+</body>
+</html>
