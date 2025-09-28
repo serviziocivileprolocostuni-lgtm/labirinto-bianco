@@ -1,188 +1,255 @@
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
 <meta charset="UTF-8" />
-<title>Indovinello Porta Nova – Il labirinto bianco</title>
+<title>Tappa 1: Indovinello Porta Nova</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Quicksand:wght@500&display=swap');
+  :root {
+      --color-primary: #0C4B40;
+      --color-accent: #C8AA6A;
+      --color-frame: #bca44b;
+      --color-bg: #f8f5e9;
+      --color-bgbox: #fffded;
+      --color-text: #44422c;
+  }
   body {
-    margin:0; padding:0;
-    background: linear-gradient(120deg, #f3ead7 60%, #f2dc96 100%);
+    margin: 0;
     font-family: 'Quicksand', Arial, sans-serif;
-    color: #7c6000;
+    color: var(--color-text);
+    background: var(--color-frame);
     min-height: 100vh;
+    background-image: url('https://i.imgur.com/8QdY3lS.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 25px 0;
   }
   .container {
+    background: var(--color-bgbox);
     max-width: 700px;
-    margin: 40px auto 0;
-    padding: 40px 32px 36px 32px;
-    background: #fffbea;
-    box-shadow: 0 0 40px #e9d6a4;
-    border-radius: 28px;
+    width: 100%;
+    margin: 24px 8px;
+    border-radius: 22px;
+    box-shadow: 0 8px 40px #bca44b70;
+    border: 6px solid var(--color-frame);
+    padding: 38px 30px 40px 30px;
     text-align: center;
+    position: relative;
   }
   h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 2.7rem;
-    color: #c59e18;
-    text-shadow: 0 2px 12px #ecd04a;
-    margin: 0 0 6px 0;
+    font-size: 2.6rem;
+    color: var(--color-primary);
+    border-bottom: 2.5px solid var(--color-accent);
+    padding-bottom: 7px;
+    margin-bottom: 18px;
   }
   p {
-    font-family: 'Quicksand', Arial, sans-serif;
-    font-size: 1.15rem;
-    margin: 0 0 14px;
-    letter-spacing: 0.5px;
+    font-size: 1.17rem;
+    line-height: 1.5;
+    margin: 10px 0 18px 0;
+  }
+  .indovinello {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 1.27rem;
+    color: var(--color-primary);
+    background: #faecd8;
+    border: 1.5px dashed var(--color-accent);
+    border-radius: 8px;
+    padding: 16px 9px;
+    margin-bottom: 26px;
   }
   .choices {
-    margin: 32px 0 22px;
-    display: flex;
-    flex-direction: column;
-    gap: 17px;
-    align-items: center;
+    margin-bottom: 32px;
   }
   .choice-btn {
-    width: 170px;
-    padding: 15px 0;
-    border-radius: 17px;
-    background: linear-gradient(90deg,#ffed92 20%, #edbc3b 80%);
-    border: none;
-    color: #6c4d06;
+    width: 160px;
+    margin: 10px 10px 6px 0;
+    padding: 13px 0;
+    background: #f8f5e9;
+    border: 2px solid var(--color-accent);
+    color: var(--color-primary);
     font-weight: 700;
-    font-family: inherit;
-    font-size: 1rem;
+    font-size: 1.07rem;
+    border-radius: 8px;
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
     cursor: pointer;
-    letter-spacing: 1.4px;
-    box-shadow: 0 4px 18px #efd67b90;
-    transition: background 0.2s;
+    box-shadow: 0 1px 5px #bca44b18;
   }
-  .choice-btn.selected { box-shadow: 0 0 0 4px #c7a00877; }
-  .choice-btn:hover:enabled { background: linear-gradient(90deg, #ffe06a 0%, #f7cc55 100%); }
-  label {
-    font-family: inherit;
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: #9a8107;
-    margin-top: 12px;
-    margin-bottom: 8px;
-    letter-spacing: 1.2px;
-    display: block;
-  }
-  input[type=text] {
-    width: 220px;
-    padding: 13px;
-    border-radius: 14px;
-    border: 2px solid #c59e18;
-    font-family: 'Quicksand', Arial, sans-serif;
-    font-size: 1.11rem;
-    background: #feefd3;
-    color: #603600;
-    margin-top: 10px;
-  }
-  input[type=text]:focus {
-    border-color: #ecd04a;
-    box-shadow: 0 0 10px #ecd04aaa;
+  .choice-btn.selected, .choice-btn:focus {
+    background: var(--color-primary);
+    color: #fff;
+    box-shadow: 0 0 12px var(--color-accent);
     outline: none;
   }
-  button[type=submit] {
-    width: 170px;
-    padding: 13px 0;
-    margin-top: 15px;
-    border-radius: 15px;
-    border: none;
-    background-color: #d1b13b;
-    color: #fffbea;
+  form label {
+    font-family: 'Playfair Display', serif;
+    color: var(--color-accent);
+    font-size: 1.09rem;
+    font-weight: 650;
+    margin: 15px 0 6px 3px;
+    display: block;
+    text-align: left;
+  }
+  input[type="text"] {
+    width: 100%;
+    background: #fffde7;
+    font-size: 1.08rem;
+    color: var(--color-primary);
+    padding: 13px 15px;
+    border: 2px solid var(--color-accent);
+    border-radius: 12px;
     font-family: inherit;
+    margin-bottom: 22px;
+    box-sizing: border-box;
+    letter-spacing: 0.5px;
+  }
+  input[type="text"]:focus {
+    border-color: var(--color-primary);
+    background: #fdf6cd;
+    outline: none;
+  }
+  button[type="submit"] {
+    width: 100%;
+    padding: 15px 0;
+    font-size: 1.19rem;
+    font-family: 'Playfair Display', serif;
     font-weight: 700;
-    font-size: 1rem;
-    cursor: pointer;
-    letter-spacing: 1.1px;
-    transition: background 0.18s;
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 10px #bca44b58;
+    transition: background 0.3s;
+    margin-top: 9px;
+    margin-bottom: 9px;
   }
-  button[type=submit]:hover:not(:disabled) {
-    background-color: #e6c852;
-    color: #4f3a00;
-  }
-  button:disabled {
-    background-color: #c7b88d;
-    cursor: not-allowed;
+  button[type="submit"]:hover {
+    background: #185d46;
   }
   #penalty {
-    color: #b81414;
-    font-weight: 600;
-    margin-top: 18px;
-    display: none;
+    color: #d32f2f;
+    font-weight: 700;
+    margin-bottom: 18px;
   }
   #status {
-    min-height: 1.2em;
-    margin-top: 25px;
-    font-weight: 600;
-    color: #a18311;
+    font-weight: 700;
+    min-height: 1.5em;
+    margin-bottom: 14px;
+    color: var(--color-primary);
   }
   #codiceSegretoSection {
     display: none;
-    margin-top: 22px;
-    padding: 16px 0 10px;
-    background: #fff3bb;
-    color: #b88d00;
-    border-radius: 18px;
-    text-align: center;
+    margin-top: 28px;
+    background: #fffbea;
+    border-radius: 14px;
+    border: 2px solid var(--color-primary);
+    box-shadow: 0 0 12px #bca44b22 inset;
+    padding: 28px 15px;
+  }
+  #codiceSegretoSection h2 {
     font-family: 'Playfair Display', serif;
-    font-weight: 800;
-    font-size: 1.36rem;
-    letter-spacing: 7px;
-    box-shadow: 0 3px 25px #dec680a2;
+    color: var(--color-primary);
+    font-size: 1.44rem;
+    font-weight: 900;
+    margin-bottom: 16px;
   }
-  #videoSection {
-    display: none;
-    margin-top: 35px;
+  #codiceSegreto {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 2rem;
+    letter-spacing: 12px;
+    color: var(--color-primary);
+    text-shadow: 1px 1px 0 var(--color-accent);
+    user-select: all;
   }
-  iframe {
-    max-width: 410px;
+  #videoContent iframe {
     width: 100%;
-    height: 215px;
-    display: block;
-    margin: auto;
-    border-radius: 16px;
-    box-shadow: 0 0 15px #ffe066a6;
-    border: none;
+    max-width: 100%;
+    border: 4px solid var(--color-primary);
+    border-radius: 12px;
+    box-shadow: 0 0 12px #bca44b99;
+    height: 260px;
   }
+  .toggle-btn {
+    margin-top: 14px;
+    padding: 13px 26px;
+    font-weight: 700;
+    font-family: 'Playfair Display', serif;
+    color: var(--color-primary);
+    background-color: var(--color-accent);
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background 0.22s;
+  }
+  .toggle-btn:hover { background-color: #e3c776; }
+  .hidden-content { display: none; margin-top: 18px; }
+  .visible { display: block; }
 </style>
 </head>
 <body>
+
 <div class="container">
-  <h1>Indovinello Porta Nova – Il labirinto bianco</h1>
+  <h1>Tappa 1: Indovinello Porta Nova</h1>
   <p>
-    Situata su tre colli a pochi chilometri dal mare Adriatico,<br />
-    Ostuni è una perla della Puglia, con architettura unica e vie labirintiche.<br />
-    Le mura aragonesi, rafforzate da torrioni circolari, ancora cingono la città.<br />
-    A est si apre la Porta di San Demetrio (XV sec.), a ovest Porta Nova (XV sec.).
+    Situata su tre colli a pochi chilometri dal mare Adriatico, Ostuni è una perla della Puglia.
+    Le mura aragonesi, rafforzate da torrioni circolari, ancora cingono la città.
   </p>
-  <p style="margin-top: 30px; font-size:1.16rem;">
+  <p class="indovinello">
     Quale simbolo è scolpito sull’arco di Porta Nova?
   </p>
   <form id="tappa1Form" autocomplete="off">
     <div class="choices">
-      <button type="button" class="choice-btn" value="leone">Leone</button>
-      <button type="button" class="choice-btn" value="aquila">Aquila</button>
-      <button type="button" class="choice-btn" value="drago">Drago</button>
+      <button type="button" class="choice-btn" value="leone">Leone 🦁</button>
+      <button type="button" class="choice-btn" value="aquila">Aquila 🦅</button>
+      <button type="button" class="choice-btn" value="drago">Drago 🐉</button>
     </div>
     <label for="nomeSquadraInput">Nome squadra o giocatore singolo:</label>
     <input type="text" id="nomeSquadraInput" name="nomeSquadra" placeholder="Inserisci qui il nome" required />
     <input type="hidden" id="rispostaInput" name="risposta" />
-    <button type="submit" id="submitBtn" disabled>Invia</button>
-    <p id="penalty">Risposta sbagliata! Riprova tra <span id="countdown">15</span> secondi.</p>
+    <button type="submit" id="submitBtn" disabled>Verifica & Sblocca</button>
+    <p id="penalty" style="display: none;">Risposta sbagliata! Riprova tra <span id="countdown">15</span> secondi.</p>
     <p id="status"></p>
   </form>
-  <div id="codiceSegretoSection">
-    Codice Segreto: <span id="codiceSegreto">LEONE</span>
-  </div>
-  <div id="videoSection">
-    <h2>Video di approfondimento</h2>
-    <iframe src="https://www.youtube.com/embed/FNEx80qU0GA" allowfullscreen title="Video approfondimento"></iframe>
+  <div id="codiceSegretoSection" class="reveal-section">
+    <h2>Enigma Risolto!</h2>
+    <p>Dati inviati con successo. Questi sono gli elementi necessari per passare alla Tappa 2.</p>
+
+    <button type="button" class="toggle-btn" data-target="videoContent">
+        🎥 Guarda l'Indizio Video (Dove andare)
+    </button>
+    <div id="videoContent" class="hidden-content">
+        <p>Il video ti darà l'indizio sulla <strong>posizione</strong> del prossimo QR Code.</p>
+        <iframe src="https://www.youtube.com/embed/FNEx80qU0GA" allowfullscreen title="Video approfondimento"></iframe>
+    </div>
+
+    <button type="button" class="toggle-btn" data-target="codiceContent">
+        🔑 Mostra il Codice Chiave (Cosa inserire)
+    </button>
+    <div id="codiceContent" class="hidden-content">
+        <p>Una volta trovato il QR Code, dovrai usare questo codice chiave per sbloccare la Tappa 2:</p>
+        <span id="codiceSegreto">LEONE</span>
+        <p style="margin-top: 15px; font-weight: 600;">(Ricorda: il codice è la chiave di accesso per la Tappa 2, sbloccata tramite QR Code).</p>
+    </div>
   </div>
 </div>
+
+<form id="hiddenDataForm" target="hiddenIframe" method="POST" 
+      action="https://docs.google.com/forms/d/e/1FAIpQLSdqmJ0uvE7CfLGfcz04DCkCwkm8gSy8O2RrTwysSxbRkgTsuQ/formResponse" 
+      style="display: none;">
+  <input type="text" name="entry.2030348205" id="hiddenNomeSquadra"> 
+  <input type="text" name="entry.2106200479" id="hiddenCodiceTappa"> 
+  <input type="text" name="entry.1130952224" id="hiddenCodiceSegreto"> 
+</form>
+<iframe name="hiddenIframe" style="display: none;"></iframe>
 
 <script>
   const form = document.getElementById('tappa1Form');
@@ -193,7 +260,12 @@
   const choices = document.querySelectorAll('.choice-btn');
   const rispostaInput = document.getElementById('rispostaInput');
   const codiceSection = document.getElementById('codiceSegretoSection');
-  const videoSection = document.getElementById('videoSection');
+  const hiddenForm = document.getElementById('hiddenDataForm');
+  const hiddenNomeSquadra = document.getElementById('hiddenNomeSquadra');
+  const hiddenCodiceTappa = document.getElementById('hiddenCodiceTappa');
+  const hiddenCodiceSegreto = document.getElementById('hiddenCodiceSegreto');
+  const toggleButtons = document.querySelectorAll('.toggle-btn');
+  
   let penaltyTimer;
 
   choices.forEach(btn => {
@@ -205,32 +277,43 @@
       status.textContent = "";
     });
   });
-
+  toggleButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const targetId = this.getAttribute('data-target');
+      const content = document.getElementById(targetId);
+      content.classList.toggle('visible');
+      this.textContent = content.classList.contains('visible')
+        ? (targetId === 'videoContent' ? 'Nascondi Video' : 'Nascondi Codice')
+        : (targetId === 'videoContent'
+              ? '🎥 Guarda l\'Indizio Video (Dove andare)'
+              : '🔑 Mostra il Codice Chiave (Cosa inserire)');
+    });
+  });
+  window.addEventListener('DOMContentLoaded', () => {
+    const nomeSquadraInput = document.getElementById('nomeSquadraInput');
+    let squadra = new URLSearchParams(window.location.search).get('squadra');
+    if (!squadra) squadra = localStorage.getItem('nomeSquadra');
+    if (squadra) {
+      nomeSquadraInput.value = decodeURIComponent(squadra);
+      localStorage.setItem('nomeSquadra', decodeURIComponent(squadra));
+    }
+  });
   form.addEventListener('submit', function(e) {
     e.preventDefault();
-
     const risposta = rispostaInput.value;
     const nomeSquadra = form.nomeSquadra.value.trim();
-    const codiceTappa = 'tappa1';
+    const codiceTappa = 'Tappa_1';
     const codiceSegreto = 'leone';
-
-    if (!risposta) {
-      status.textContent = 'Seleziona una risposta.';
-      status.style.color = '#b81414';
+    if (!nomeSquadra || !risposta) {
+      status.textContent = 'ERRORE: Inserisci il nome e seleziona una risposta.';
+      status.style.color = '#d32f2f';
       return;
     }
-    if (!nomeSquadra) {
-      status.textContent = 'Inserisci il nome della squadra o il tuo nome.';
-      status.style.color = '#b81414';
-      return;
-    }
-
     if (risposta.toLowerCase() !== codiceSegreto) {
       status.textContent = '';
       penalty.style.display = 'block';
       submitButton.disabled = true;
       choices.forEach(b => b.disabled = true);
-
       let sec = 15;
       countdownSpan.textContent = sec;
       penaltyTimer = setInterval(() => {
@@ -248,37 +331,15 @@
       }, 1000);
       return;
     }
-
+    hiddenNomeSquadra.value = nomeSquadra;
+    hiddenCodiceTappa.value = codiceTappa;
+    hiddenCodiceSegreto.value = risposta;
+    hiddenForm.submit();
+    status.textContent = 'Risposta corretta! Dati di completamento inviati.';
+    status.style.color = 'var(--color-primary)';
+    codiceSection.style.display = 'block';
     submitButton.disabled = true;
-    penalty.style.display = 'none';
-    status.textContent = 'Invio risposta...';
-    status.style.color = '#a18311';
-
-    fetch('https://script.google.com/macros/s/AKfycby3OOpO-KbNUIyR4mIW0vSiJ6PFYfcIKrQNjLIy3jB9PonGK6Kwhp7r3LJaHA-1yDEe_A/exec', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nomeSquadra, codiceTappa, codiceSegreto, risposta })
-    })
-    .then(res => {
-      if (!res.ok) throw new Error('Network error');
-      return res.json();
-    })
-    .then(data => {
-      if (data.status === 'success') {
-        status.textContent = 'Risposta inviata con successo! Complimenti.';
-        codiceSection.style.display = 'block';
-        videoSection.style.display = 'block';
-      } else {
-        status.textContent = 'Errore nell\'invio, riprova.';
-        status.style.color = '#b81414';
-        submitButton.disabled = false;
-      }
-    })
-    .catch(() => {
-      status.textContent = 'Errore di rete, riprova più tardi.';
-      status.style.color = '#b81414';
-      submitButton.disabled = false;
-    });
+    choices.forEach(b => b.disabled = true);
   });
 </script>
 </body>
