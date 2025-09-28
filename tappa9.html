@@ -2,54 +2,417 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8" />
+<title>Tappa 9: Municipio (evento storico 1860)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Labirinto Bianco - Tappa 9</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
 <style>
-  body { background-color: #111; color: #d4af37; font-family: Georgia, serif; max-width: 700px; margin: auto; padding: 40px; text-align: center; }
-  input, button { margin-top: 10px; padding: 10px; font-size: 16px; border-radius: 8px; border: none; }
-  .hidden { display: none; }
-  iframe { width: 100%; height: 811px; border: none; border-radius: 15px; margin-top: 30px; }
-  a { color: #d4af37; text-decoration: none; font-size: 18px; }
+  :root {
+    --color-primary: #0C4B40;
+    --color-accent: #C8AA6A;
+    --color-frame: #bca44b;
+    --color-bgbox: #fffded;
+    --color-text: #44422c;
+  }
+  body {
+    background: var(--color-frame);
+    font-family: 'Quicksand', Arial, sans-serif;
+    color: var(--color-text);
+    min-height: 100vh;
+    background-image: url('img/your-background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 25px 0;
+    margin: 0;
+  }
+  .container {
+    background: var(--color-bgbox);
+    max-width: 700px;
+    width: 100%;
+    margin: 24px 8px;
+    border-radius: 22px;
+    box-shadow: 0 8px 40px #bca44b70;
+    border: 6px solid var(--color-frame);
+    padding: 36px 30px 40px 30px;
+    text-align: center;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.6rem;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+    border-bottom: 2.5px solid var(--color-accent);
+    padding-bottom: 7px;
+  }
+  .intro-section {
+    margin-bottom: 36px;
+    text-align: center;
+  }
+  .reference-section {
+    text-align: left;
+    font-family: 'Quicksand', Arial, sans-serif;
+    font-size: 1.1rem;
+    color: var(--color-text);
+    line-height: 1.5;
+    white-space: pre-line;
+    margin-bottom: 30px;
+  }
+  label {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--color-accent);
+    display: block;
+    margin-bottom: 10px;
+  }
+  input[type="password"], input[type="text"] {
+    width: 100%;
+    font-family: inherit;
+    font-size: 1.1rem;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 2px solid var(--color-accent);
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    background: #fffde7;
+    color: var(--color-primary);
+    letter-spacing: 0.5px;
+  }
+  input[type="password"]:focus, input[type="text"]:focus {
+    border-color: var(--color-primary);
+    background: #fdf6cd;
+    outline: none;
+  }
+  button {
+    width: 100%;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: 15px 0;
+    background: var(--color-primary);
+    border: none;
+    border-radius: 15px;
+    color: white;
+    cursor: pointer;
+    letter-spacing: 1px;
+    box-shadow: 0 3px 12px #bca44b77;
+    transition: background-color 0.3s;
+    margin-top: 4px;
+    margin-bottom: 20px;
+  }
+  button:hover:not(:disabled) {
+    background-color: #165c4f;
+  }
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  #introStatus, #penalty1, #penalty2, #status1, #status2 {
+    font-weight: 700;
+    min-height: 1.5em;
+    margin-bottom: 18px;
+    text-align: center;
+  }
+  #introStatus, #penalty1, #penalty2 {
+    color: #d32f2f;
+  }
+  #status1, #status2 {
+    color: var(--color-primary);
+  }
+  .choices {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .choice-btn {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--color-primary);
+    padding: 13px 18px;
+    border: 2px solid var(--color-accent);
+    background: #fffde7;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 2px 10px #bca44b27;
+    transition: background-color 0.3s, color 0.3s;
+    min-width: 180px;
+  }
+  .choice-btn.selected {
+    background-color: var(--color-primary);
+    color: white;
+    box-shadow: 0 0 18px var(--color-accent);
+  }
+  #penalty1, #penalty2 {
+    display: none;
+  }
+  #secondEnigmaSection {
+    display: none;
+    margin-top: 36px;
+    padding: 26px 20px;
+    background: #fffbea;
+    border: 2px solid var(--color-primary);
+    border-radius: 15px;
+    box-shadow: inset 0 0 15px #bca44b22;
+  }
+  #bonusSection {
+    display: none;
+    margin-top: 36px;
+    padding: 26px 20px;
+    background: #fffbea;
+    border: 2px solid var(--color-accent);
+    border-radius: 15px;
+    box-shadow: inset 0 0 15px #bca44b33;
+    font-family: 'Quicksand', Arial, sans-serif;
+    font-size: 1rem;
+    color: var(--color-text);
+  }
+  #codiceSegreto {
+    display: none;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 2rem;
+    letter-spacing: 8px;
+    color: var(--color-primary);
+    text-shadow: 1px 1px 0 var(--color-accent);
+    margin-top: 24px;
+    user-select: all;
+  }
+  #codiceSegreto.visible {
+    display: block;
+  }
 </style>
 </head>
 <body>
 
-<h1>Labirinto Bianco - Tappa 9</h1>
+<div class="container">
 
-<div id="enigma1">
-  <p>Enigma 1: Inserisci qui la risposta corretta.</p>
-  <input id="ans1" type="text" autocomplete="off" />
-  <button onclick="check1()">Verifica</button>
-  <p id="msg1"></p>
+  <div id="introCode" class="intro-section">
+    <h1>Tappa 9: Municipio (evento storico 1860)</h1>
+    <label for="codiceAccesso">Inserisci qui il codice segreto ottenuto alla fine della tappa precedente:</label>
+    <input type="password" id="codiceAccesso" placeholder="Inserisci codice..." autocomplete="off" />
+    <button id="unlockBtn" disabled>Sblocca</button>
+    <div id="introStatus"></div>
+  </div>
+
+  <div id="step9" class="hidden">
+    <div class="reference-section">
+      Il Palazzo del Comune di Ostuni, situato nella centrale Piazza della Libertà, è il centro amministrativo e civile della città. Originariamente edificato nel XVIII secolo, rappresenta il cuore della vita pubblica locale, dove si tengono le riunioni comunali e si prendono le decisioni politiche. La sua facciata neoclassica e gli interni decorati sono simbolo della storia istituzionale di Ostuni.
+    </div>
+
+    <form id="enigma1Form" autocomplete="off">
+      <p><strong>Enigma Il palazzo del governo 1:</strong> Quale piazza ospita il Palazzo del Comune di Ostuni?</p>
+      <div class="choices">
+        <button type="button" class="choice-btn" value="piazza della libertà">Piazza della Libertà</button>
+        <button type="button" class="choice-btn" value="piazza cattedrale">Piazza Cattedrale</button>
+        <button type="button" class="choice-btn" value="piazza mazzini">Piazza Mazzini</button>
+      </div>
+      <p id="penalty1">Risposta sbagliata! Riprova tra <span id="countdown1">15</span> secondi.</p>
+      <p id="status1"></p>
+      <button type="submit" id="submitBtn1" disabled>Verifica Risposta</button>
+    </form>
+
+    <div id="secondEnigmaSection">
+      <form id="enigma2Form" autocomplete="off">
+        <p><strong>Enigma La voce della città 2:</strong> Nel 1860 Ostuni si unì al destino dell'Italia nascente. Ma solo chi sa mettere insieme indizi storici e numerici potrà ottenere il codice corretto:</p>
+        <ul style="text-align: left;">
+          <li>L'anno in cui Ostuni proclamò l'unione al Regno d'Italia.</li>
+          <li>Il numero delle lettere che compongono la parola "MUNICIPIO".</li>
+          <li>La posizione del Municipio nella vostra caccia al tesoro.</li>
+        </ul>
+        <div class="choices">
+          <button type="button" class="choice-btn" value="1869">1869</button>
+          <button type="button" class="choice-btn" value="1878">1878</button>
+          <button type="button" class="choice-btn" value="1882">1882</button>
+        </div>
+        <p id="penalty2">Risposta sbagliata! Riprova tra <span id="countdown2">15</span> secondi.</p>
+        <p id="status2"></p>
+        <button type="submit" id="submitBtn2" disabled>Verifica Risposta</button>
+      </form>
+    </div>
+
+    <div id="bonusSection">
+      <h2>Bonus</h2>
+      <p>Ora alzate lo sguardo: poco distante il Santo Patrono vi osserva dalla sua colonna. Non vi resta che cercare il segno nascosto vicino alla base, tra gli angeli che sorreggono il monumento.</p>
+      <div id="codiceSegreto">comune</div>
+    </div>
+
+  </div>
+
 </div>
 
-<div id="enigma2" class="hidden">
-  <p>Enigma 2: Compila il modulo sottostante.</p>
-  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe4FB8atlzg_UZcC0mLePW8oXhancnOqcBgn85UqUhsTJNXGg/viewform?embedded=true" marginheight="0" marginwidth="0" frameborder="0">Caricamento…</iframe>
-  <p>Quando hai completato il modulo, clicca qui sotto per sbloccare il codice bonus.</p>
-  <button onclick="showBonus()">Modulo completato</button>
-</div>
-
-<div id="bonus" class="hidden">
-  <p>Complimenti! Ecco il codice bonus per andare avanti:</p>
-  <strong>CODICEBONUS9</strong>
-  <p><a href="tappa10.html">Vai alla Tappa 10</a></p>
-</div>
+<form id="hiddenDataForm" target="hiddenIframe" method="POST" autocomplete="off" action="https://docs.google.com/forms/d/e/your-google-form-id/formResponse" style="display:none;">
+  <input type="text" name="entry.2030348205" id="hiddenNomeSquadra" />
+  <input type="text" name="entry.2106200479" id="hiddenCodiceTappa" />
+  <input type="text" name="entry.1130952224" id="hiddenCodiceSegreto" />
+</form>
+<iframe name="hiddenIframe" style="display:none;"></iframe>
 
 <script>
-function check1() {
-  const answer = document.getElementById('ans1').value.trim().toLowerCase();
-  if (answer === 'tappa8zevallos') {
-    document.getElementById('msg1').textContent = 'Risposta corretta! Passa al prossimo enigma.';
-    document.getElementById('enigma2').classList.remove('hidden');
-  } else {
-    document.getElementById('msg1').textContent = 'Risposta errata, riprova.';
-  }
-}
+  const unlockBtn = document.getElementById('unlockBtn');
+  const codiceAccesso = document.getElementById('codiceAccesso');
+  const introStatus = document.getElementById('introStatus');
+  const introCode = document.getElementById('introCode');
+  const step9 = document.getElementById('step9');
 
-function showBonus() {
-  document.getElementById('bonus').classList.remove('hidden');
-}
+  const enigma1Form = document.getElementById('enigma1Form');
+  const enigma2Form = document.getElementById('enigma2Form');
+  const secondEnigmaSection = document.getElementById('secondEnigmaSection');
+  const bonusSection = document.getElementById('bonusSection');
+  const codiceSegretoDiv = document.getElementById('codiceSegreto');
+
+  const submitBtn1 = document.getElementById('submitBtn1');
+  const submitBtn2 = document.getElementById('submitBtn2');
+
+  const choiceBtnsEnigma1 = enigma1Form.querySelectorAll('.choice-btn');
+  const choiceBtnsEnigma2 = enigma2Form.querySelectorAll('.choice-btn');
+
+  const penalty1 = document.getElementById('penalty1');
+  const penalty2 = document.getElementById('penalty2');
+
+  const status1 = document.getElementById('status1');
+  const status2 = document.getElementById('status2');
+
+  const countdown1 = document.getElementById('countdown1');
+  const countdown2 = document.getElementById('countdown2');
+
+  const hiddenForm = document.getElementById('hiddenDataForm');
+  const hiddenNomeSquadra = document.getElementById('hiddenNomeSquadra');
+  const hiddenCodiceTappa = document.getElementById('hiddenCodiceTappa');
+  const hiddenCodiceSegreto = document.getElementById('hiddenCodiceSegreto');
+
+  unlockBtn.disabled = true;
+  codiceAccesso.addEventListener('input', () => {
+    unlockBtn.disabled = codiceAccesso.value.trim() === '';
+  });
+
+  step9.style.display = 'none';
+  submitBtn1.disabled = true;
+  submitBtn2.disabled = true;
+  penalty1.style.display = 'none';
+  penalty2.style.display = 'none';
+  secondEnigmaSection.style.display = 'none';
+  bonusSection.style.display = 'none';
+  codiceSegretoDiv.classList.remove('visible');
+
+  unlockBtn.addEventListener('click', e => {
+    e.preventDefault();
+    const codice = codiceAccesso.value.trim().toLowerCase();
+    if (codice === 'zevallos') {
+      introCode.style.display = 'none';
+      step9.style.display = 'block';
+
+      choiceBtnsEnigma1.forEach(b => b.disabled = false);
+      choiceBtnsEnigma2.forEach(b => b.disabled = true);
+    } else {
+      introStatus.textContent = 'Codice non valido! Riprova.';
+      codiceAccesso.value = '';
+      unlockBtn.disabled = true;
+      setTimeout(() => introStatus.textContent = '', 3000);
+    }
+  });
+
+  choiceBtnsEnigma1.forEach(btn => {
+    btn.addEventListener('click', () => {
+      choiceBtnsEnigma1.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      submitBtn1.disabled = false;
+      status1.textContent = '';
+    });
+  });
+
+  choiceBtnsEnigma2.forEach(btn => {
+    btn.addEventListener('click', () => {
+      choiceBtnsEnigma2.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      submitBtn2.disabled = false;
+      status2.textContent = '';
+    });
+  });
+
+  function startPenalty(penaltyElem, submitBtn, choiceBtns, countdownElem) {
+    let sec = 15;
+    penaltyElem.style.display = 'block';
+    submitBtn.disabled = true;
+    choiceBtns.forEach(b => b.disabled = true);
+    countdownElem.textContent = sec;
+    const interval = setInterval(() => {
+      sec--;
+      countdownElem.textContent = sec;
+      if (sec <= 0) {
+        clearInterval(interval);
+        penaltyElem.style.display = 'none';
+        submitBtn.disabled = false;
+        choiceBtns.forEach(b => b.disabled = false);
+        choiceBtns.forEach(b => b.classList.remove('selected'));
+      }
+    }, 1000);
+  }
+
+  enigma1Form.addEventListener('submit', e => {
+    e.preventDefault();
+    const correctAnswer1 = 'piazza della libertà';
+    const selected = enigma1Form.querySelector('.choice-btn.selected');
+    if (!selected) {
+      status1.textContent = 'ERRORE: seleziona una risposta.';
+      status1.style.color = '#d32f2f';
+      return;
+    }
+    if (selected.value.toLowerCase() !== correctAnswer1) {
+      startPenalty(penalty1, submitBtn1, choiceBtnsEnigma1, countdown1);
+      status1.textContent = '';
+      return;
+    }
+    status1.textContent = 'Risposta corretta! Puoi procedere al secondo enigma.';
+    status1.style.color = 'var(--color-primary)';
+    secondEnigmaSection.style.display = 'block';
+
+    submitBtn1.disabled = true;
+    choiceBtnsEnigma1.forEach(b => b.disabled = true);
+
+    choiceBtnsEnigma2.forEach(b => b.disabled = false);
+  });
+
+  enigma2Form.addEventListener('submit', e => {
+    e.preventDefault();
+    const correctAnswer2 = '1878';
+    const selected = enigma2Form.querySelector('.choice-btn.selected');
+    if (!selected) {
+      status2.textContent = 'ERRORE: seleziona una risposta.';
+      status2.style.color = '#d32f2f';
+      return;
+    }
+    if (selected.value !== correctAnswer2) {
+      startPenalty(penalty2, submitBtn2, choiceBtnsEnigma2, countdown2);
+      status2.textContent = '';
+      return;
+    }
+    status2.textContent = 'Risposta corretta! Complimenti, hai sbloccato il bonus!';
+    status2.style.color = 'var(--color-primary)';
+    submitBtn2.disabled = true;
+    choiceBtnsEnigma2.forEach(b => b.disabled = true);
+    bonusSection.style.display = 'block';
+    codiceSegretoDiv.classList.add('visible');
+
+    hiddenNomeSquadra.value = document.getElementById('nomeSquadraInput').value.trim();
+    hiddenCodiceTappa.value = 'Tappa_9';
+    hiddenCodiceSegreto.value = 'comune';
+    hiddenForm.submit();
+  });
+
+  window.addEventListener('DOMContentLoaded', () => {
+    let squadra = new URLSearchParams(window.location.search).get('squadra');
+    if (!squadra) squadra = localStorage.getItem('nomeSquadra');
+    if (squadra) {
+      document.getElementById('nomeSquadraInput').value = decodeURIComponent(squadra);
+      localStorage.setItem('nomeSquadra', decodeURIComponent(squadra));
+    }
+  });
 </script>
 
 </body>
