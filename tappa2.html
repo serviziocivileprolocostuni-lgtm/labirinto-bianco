@@ -286,19 +286,19 @@
   const choiceBtns = document.querySelectorAll('.choice-btn');
   const rispostaInput = document.getElementById('rispostaInput');
 
-  // Il pulsante "Sblocca" disabilitato fino a input valido
+  // Il pulsante "Sblocca" disabilitato fino a input
   unlockBtn.disabled = true;
   codiceAccesso.addEventListener('input', () => {
     unlockBtn.disabled = codiceAccesso.value.trim() === '';
   });
 
-  // Inizio: tappa 2 nascosta e risposte disabilitate
+  // All'avvio nascondiamo Tappa 2 e disabilitiamo risposte
   step2.style.display = 'none';
   submitBtn.disabled = true;
   nomeSquadraInput.disabled = true;
   choiceBtns.forEach(btn => btn.disabled = true);
 
-  // Controllo codice segreto e sblocco tappa
+  // Validazione codice segreto iniziale
   unlockBtn.addEventListener('click', e => {
     e.preventDefault();
     const codice = codiceAccesso.value.trim().toLowerCase();
@@ -316,7 +316,7 @@
     }
   });
 
-  // Gestione selezione risposta
+  // Selezione scelta risposta
   choiceBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       choiceBtns.forEach(b => b.classList.remove('selected'));
@@ -327,7 +327,7 @@
     });
   });
 
-  // Toggle per mostrare/nascondere video e codice
+  // Toggle nascondi/mostra video e codice
   const toggleButtons = document.querySelectorAll('.toggle-btn');
   toggleButtons.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -349,7 +349,7 @@
     }
   });
 
-  // Gestione submit con penalità
+  // Gestione submit e penalità
   const form = document.getElementById('tappa2Form');
   const penalty = document.getElementById('penalty');
   const status = document.getElementById('status');
@@ -357,7 +357,6 @@
   const hiddenNomeSquadra = document.getElementById('hiddenNomeSquadra');
   const hiddenCodiceTappa = document.getElementById('hiddenCodiceTappa');
   const hiddenCodiceSegreto = document.getElementById('hiddenCodiceSegreto');
-  const countdownSpan = document.getElementById('countdown');
   let penaltyTimer;
 
   form.addEventListener('submit', e => {
