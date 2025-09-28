@@ -358,14 +358,14 @@
 
   // Gestione submit con penalità
   let penaltyTimer;
-  const form = document.getElementById('tappa3Form');
 
+  const form = document.getElementById('tappa3Form');
   form.addEventListener('submit', e => {
     e.preventDefault();
     const risposta = rispostaInput.value;
     const nomeSquadra = form.nomeSquadra.value.trim();
     const codiceTappa = 'Tappa_3';
-    const codiceSegreto = 'porta';
+    const codiceSegreto = 'blu';
 
     if (!nomeSquadra || !risposta) {
       status.textContent = 'ERRORE: Inserisci il nome e seleziona una risposta.';
@@ -386,7 +386,7 @@
         if (sec <= 0) {
           clearInterval(penaltyTimer);
           penalty.style.display = 'none';
-          submitBtn.disabled = true;
+          submitBtn.disabled = false;
           choiceBtns.forEach(b => b.disabled = false);
           rispostaInput.value = '';
           choiceBtns.forEach(b => b.classList.remove('selected'));
@@ -410,3 +410,4 @@
 </script>
 </body>
 </html>
+
