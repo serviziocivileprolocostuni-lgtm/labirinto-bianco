@@ -2,107 +2,259 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8" />
+<title>Il Labirinto Bianco: l’anima nascosta di Ostuni</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Il Labirinto Bianco: l'anima nascosta di Ostuni</title>
-<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Lora&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet" />
 <style>
-  body {
-    background: linear-gradient(120deg,#f7e5be, #efe7ce 100%);
-    margin: 0;
-    padding: 0;
-    font-family: 'Lora', serif;
+  :root {
+    --color-primary: #bca44b;
+    --color-bgframe: #f0e3c7;
+    --color-bgbox: #fffbed;
+    --color-text: #7a6522;
+    --color-accent: #336689;
   }
-  .pergamena {
-    background: url('https://www.transparenttextures.com/patterns/cream-paper.png'), #f9f5e3;
-    max-width: 770px;
-    margin: 70px auto 35px auto;
-    padding: 3em 2em 2em 2em;
-    border-radius: 36px;
-    box-shadow: 0 0 38px #bfab7a40, 0 0 0 14px #d1b47a38;
-    border: 10px ridge #bfa13b;
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Quicksand', Arial, sans-serif;
+    background: var(--color-primary);
+    color: var(--color-text);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .container {
+    max-width: 520px;
+    width: 100%;
+    background: var(--color-bgbox);
+    border-radius: 20px;
+    box-shadow: 0 8px 50px rgba(135,114,31,0.15);
+    margin: 38px 12px;
+    border: 6px solid var(--color-primary);
+    padding: 36px 22px 28px 22px;
     text-align: center;
     position: relative;
   }
   h1 {
-    font-family: 'IM Fell English', serif;
-    font-size: 2.55rem;
-    color: #bfa13b;
-    margin-bottom: 0.68em;
-    letter-spacing: 0.01em;
-    text-shadow: 0px 2px 12px #eedfb4;
+    font-family: 'Playfair Display', serif;
+    color: var(--color-primary);
+    font-size: 1.9rem;
+    margin: 0 0 13px 0;
+    font-weight: 900;
+    line-height: 1.13;
   }
   .subtitle {
-    font-size: 1.4rem;
-    color: #41769c;
-    font-family: 'Lora', serif;
-    font-weight: bold;
-    margin-bottom: 0.9em;
+    font-family: 'Quicksand', Arial, sans-serif;
+    color: var(--color-accent);
+    font-size: 1.14rem;
+    font-weight: 700;
+    margin-bottom: 8px;
   }
-  p {
-    font-size: 1.13rem;
-    max-width: 540px;
-    margin: 0 auto 1.7em auto;
-    color: #514013;
-    text-align: center;
-    line-height: 1.7;
-  }
-  ul {
-    font-size: 1.09rem;
-    color: #3b2c11;
+  #introMessage {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    margin-bottom: 20px;
+    color: var(--color-text);
+    line-height: 1.4;
     text-align: left;
-    list-style: none;
+  }
+  #introMessage p {
+    margin: 0 0 12px 0;
+  }
+  #introMessage p.italic {
+    font-style: italic;
+    color: #a57f2b;
+    margin-top: 6px;
+    font-size: 0.95rem;
+  }
+  #regolamentoSection {
+    text-align:left;
+    background: #f7edd2;
+    border: 1.6px solid var(--color-primary);
+    border-radius: 12px;
+    margin: 0 0 26px 0;
+    padding: 14px 15px 14px 19px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.07rem;
+    color: var(--color-text);
+    box-shadow: 0 1.5px 7px rgba(182,155,72,0.07) inset;
+  }
+  #regolamentoSection ul {
+    list-style: none; 
     padding-left: 0;
-    max-width: 520px;
-    margin: 0 auto 1.6em auto;
-    display: inline-block;
+    margin: 3px 0 7px 0;
   }
-  ul li {
-    margin-bottom: 1em;
-    position: relative;
-    padding-left: 1.5em;
+  #regolamentoSection li {
+    margin-bottom: 8px;
+    font-size: 1.01rem;
+    line-height: 1.45;
+    display: flex;
+    align-items: flex-start;
+  }
+  #regolamentoSection .star {
+    color: var(--color-primary);
+    font-size: 1.09em;
+    font-weight: bold;
+    margin-right: 8px;
+    line-height: 1.6;
+  }
+  form label {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    color: var(--color-accent);
+    font-size: 1.07rem;
+    font-weight: 600;
+    margin-left: 3px;
+    margin-bottom: 7px;
     text-align: left;
   }
-  ul li::before {
-    content: "★";
-    position: absolute;
-    left: 0;
-    color: #bfa13b;
-    font-size: 1.13em;
-    top: 2px;
+  input[type="text"], input[type="tel"] {
+    width: 100%;
+    padding: 11px 15px;
+    font-size: 1.09rem;
+    border-radius: 13px;
+    border: 2px solid var(--color-primary);
+    box-sizing: border-box;
+    font-family: inherit;
+    background: #f7f2dc;
+    margin-bottom: 16px;
+    color: #665623;
   }
-  button {
-    margin-top: 2em;
-    padding: 13px 41px;
-    font-size: 1.13rem;
-    font-family: 'Lora', serif;
-    color: #fffbe0;
-    background: linear-gradient(98deg,#bfa13b,#ebcd64);
-    border: none;
-    border-radius: 24px;
-    box-shadow: 0 0 17px #bfa13b50;
-    cursor: pointer;
+  input[type="text"]:focus, input[type="tel"]:focus {
+    border-color: var(--color-accent);
+    outline: none;
+    background: #fffbea;
+  }
+  button[type="submit"] {
+    width: 100%;
+    padding: 13px 0;
     font-weight: bold;
-    letter-spacing: 0.06em;
-    transition: background 0.16s, box-shadow 0.16s;
+    border-radius: 13px;
+    font-size: 1.13rem;
+    background: linear-gradient(90deg, #f3e1b1 0%, #bfab4d 90%);
+    color: #5a4b18;
+    border: none;
+    letter-spacing: 1px;
+    margin-top: 6px;
+    margin-bottom: 4px;
+    filter: drop-shadow(0 2.5px 7px #bca44b50);
+    transition: background 0.23s;
+    cursor: pointer;
   }
-  button:hover {
-    background: linear-gradient(90deg,#ffd700,#bfa13b);
-    box-shadow: 0 0 27px #bfa13bcc;
+  button[type="submit"]:hover {
+    background: linear-gradient(90deg,#bfab4d 5%, #f3e1b1 100%);
+  }
+  #statusMessage {
+    font-weight: 700;
+    font-size: 1.02rem;
+    color: var(--color-accent);
+    margin: 10px 0;
+    min-height: 1.4em;
+    text-align: center;
+    display: block;
+  }
+  iframe {
+    margin-top: 2.1em;
+    width: 100%;
+    max-width: 440px;
+    height: 220px;
+    border: 3.5px solid var(--color-primary);
+    border-radius: 14px;
+    box-shadow: 0 0 14px #bca44b47;
   }
 </style>
 </head>
 <body>
-  <div class="pergamena">
-    <h1>Il Labirinto Bianco: l'anima nascosta di Ostuni</h1>
-    <div class="subtitle">Un’esperienza tra i vicoli affascinanti e misteriosi della città bianca</div>
-    <p>Vivi una notte magica e risolvi enigmi nascosti!</p>
-    <ul>
-      <li>Risolvere indovinelli per scoprire i segreti di Ostuni.</li>
-      <li>Percorrere il labirinto e lasciarsi guidare dalle luci.</li>
-      <li>Scansionare i QR code per proseguire nel gioco.</li>
-      <li>Divertirsi e vivere una esperienza unica.</li>
-    </ul>
-    <button onclick="window.location.href='tappa1.html'">INIZIA L’AVVENTURA</button>
+
+<div class="container">
+  <h1>Il Labirinto Bianco: l’anima nascosta di Ostuni</h1>
+  <div class="subtitle">
+    Un’esperienza tra i vicoli affascinanti e misteriosi della città bianca
   </div>
+
+  <div id="introMessage">
+    <p>Salve valorosi e ardenti spiriti che in questo purgatorio tempo vi accingete a varcar le soglie del tempo passato.
+       Ascoltate la mia voce che dal Rinascimento vi chiama.</p>
+    <p>Ogni squadra dovrà seguire con onore le regole che preservano lo spirito del gioco, rispettare i luoghi e gli altri partecipanti.
+       Il cammino si snoda tra enigmi e prove, la mente e il cuore saranno le vostre guide.</p>
+    <p class="italic">“Che ogni porta e piazza sia osservata con occhio attento, che il passo sia sicuro ma non precipitoso, che il gioco sia trattato con onore e letizia.”</p>
+  </div>
+
+  <section id="regolamentoSection">
+    <ul>
+      <li><span class="star">★</span> Risolvere indovinelli per scoprire i segreti di Ostuni.</li>
+      <li><span class="star">★</span> Percorrere il labirinto e lasciarsi guidare dalle luci.</li>
+      <li><span class="star">★</span> Scansionare i QR code per proseguire nel gioco.</li>
+      <li><span class="star">★</span> Divertirsi e vivere una esperienza unica.</li>
+    </ul>
+  </section>
+
+  <form id="registrationForm">
+    <label for="nomeSquadraInput">Nome Squadra (o Giocatore singolo):</label>
+    <input type="text" id="nomeSquadraInput" name="nomeSquadra" required placeholder="Inserisci il nome della tua squadra" autocomplete="off" />
+
+    <label for="numPartecipantiInput">Numero di partecipanti:</label>
+    <input type="text" id="numPartecipantiInput" name="numPartecipanti" required placeholder="Es. 2" />
+
+    <label for="telefonoInput">Contatto Telefonico (solo per emergenze):</label>
+    <input type="tel" id="telefonoInput" name="telefono" required placeholder="Es. 3331234567" />
+
+    <label for="regolamentoInput">Accettazione Regolamento (Digita "Sì" per accettare):</label>
+    <input type="text" id="regolamentoInput" name="regolamento" required placeholder="Digita Sì" />
+
+    <button type="submit">Iscriviti e Inizia</button>
+
+    <span id="statusMessage"></span>
+  </form>
+
+  <iframe src="https://www.youtube.com/embed/kZlM3u2_jo4" title="Video introduttivo Caccia al Tesoro" allowfullscreen></iframe>
+</div>
+
+<form id="hiddenIscrizioneForm" target="hiddenIframe" method="POST"
+      action="https://docs.google.com/forms/d/e/1FAIpQLSde-zbcZ1IE1UmBXeU6Epu1ye7SGoD6pX2i5rWjQjlyweo1og/formResponse"
+      style="display: none;">
+  <input type="text" name="entry.2030348205" id="hiddenNomeSquadraI" />
+  <input type="text" name="entry.467340771" id="hiddenNumPartecipantiI" />
+  <input type="text" name="entry.1130952224" id="hiddenTelefonoI" />
+  <input type="text" name="entry.1283987470" id="hiddenRegolamentoI" />
+</form>
+<iframe name="hiddenIframe" style="display: none;"></iframe>
+
+<script>
+  const registrationForm = document.getElementById('registrationForm');
+  const statusMessage = document.getElementById('statusMessage');
+  const hiddenFormI = document.getElementById('hiddenIscrizioneForm');
+  const hiddenNomeSquadraI = document.getElementById('hiddenNomeSquadraI');
+  const hiddenNumPartecipantiI = document.getElementById('hiddenNumPartecipantiI');
+  const hiddenTelefonoI = document.getElementById('hiddenTelefonoI');
+  const hiddenRegolamentoI = document.getElementById('hiddenRegolamentoI');
+
+  registrationForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const nomeSquadra = document.getElementById('nomeSquadraInput').value.trim();
+    const numPartecipanti = document.getElementById('numPartecipantiInput').value.trim();
+    const telefono = document.getElementById('telefonoInput').value.trim();
+    const regolamento = document.getElementById('regolamentoInput').value.trim().toLowerCase();
+
+    if (regolamento !== 'sì' && regolamento !== 'si') {
+      statusMessage.textContent = 'ERRORE: Devi accettare il regolamento digitando "Sì" (o "si").';
+      statusMessage.style.color = '#d32f2f';
+      return;
+    }
+
+    hiddenNomeSquadraI.value = nomeSquadra;
+    hiddenNumPartecipantiI.value = numPartecipanti;
+    hiddenTelefonoI.value = telefono;
+    hiddenRegolamentoI.value = "Sì (accettato)";
+
+    hiddenFormI.submit();
+
+    statusMessage.textContent = 'Iscrizione completata! I tuoi dati sono stati registrati.';
+    statusMessage.style.color = 'var(--color-accent)';
+    registrationForm.style.display = 'none';
+  });
+</script>
+
 </body>
 </html>
