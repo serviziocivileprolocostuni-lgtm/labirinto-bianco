@@ -2,17 +2,406 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8" />
+<title>Tappa 6: Museo Civiltà Preclassiche</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Labirinto Bianco - Tappa 6</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
 <style>
-  body { background-color: #111; color: #d4af37; font-family: 'Georgia', serif; padding: 40px; max-width: 700px; margin: auto; }
-  h1, p { text-align: center; }
-  iframe { width: 100%; height: 961px; border: none; border-radius: 15px; margin-top: 40px; }
+  :root {
+    --color-primary: #0C4B40;
+    --color-accent: #C8AA6A;
+    --color-frame: #bca44b;
+    --color-bgbox: #fffded;
+    --color-text: #44422c;
+  }
+  body {
+    background: var(--color-frame);
+    font-family: 'Quicksand', Arial, sans-serif;
+    color: var(--color-text);
+    min-height: 100vh;
+    background-image: url('img/your-background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 25px 0;
+    margin: 0;
+  }
+  .container {
+    background: var(--color-bgbox);
+    max-width: 700px;
+    width: 100%;
+    margin: 24px 8px;
+    border-radius: 22px;
+    box-shadow: 0 8px 40px #bca44b70;
+    border: 6px solid var(--color-frame);
+    padding: 36px 30px 40px 30px;
+    text-align: center;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.6rem;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+    border-bottom: 2.5px solid var(--color-accent);
+    padding-bottom: 7px;
+  }
+  .intro-section {
+    margin-bottom: 36px;
+    text-align: center;
+  }
+  .reference-section {
+    text-align: left;
+    font-family: 'Quicksand', Arial, sans-serif;
+    font-size: 1.1rem;
+    color: var(--color-text);
+    line-height: 1.5;
+    white-space: pre-line;
+    margin-bottom: 30px;
+  }
+  label {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--color-accent);
+    display: block;
+    margin-bottom: 10px;
+  }
+  input[type="password"], input[type="text"] {
+    width: 100%;
+    font-family: inherit;
+    font-size: 1.1rem;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 2px solid var(--color-accent);
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    background: #fffde7;
+    color: var(--color-primary);
+    letter-spacing: 0.5px;
+  }
+  input[type="password"]:focus, input[type="text"]:focus {
+    border-color: var(--color-primary);
+    background: #fdf6cd;
+    outline: none;
+  }
+  button {
+    width: 100%;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: 15px 0;
+    background: var(--color-primary);
+    border: none;
+    border-radius: 15px;
+    color: white;
+    cursor: pointer;
+    letter-spacing: 1px;
+    box-shadow: 0 3px 12px #bca44b77;
+    transition: background-color 0.3s;
+    margin-top: 4px;
+    margin-bottom: 20px;
+  }
+  button:hover:not(:disabled) {
+    background-color: #165c4f;
+  }
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  #introStatus, #penalty, #status {
+    font-weight: 700;
+    min-height: 1.5em;
+    margin-bottom: 18px;
+  }
+  #introStatus, #penalty {
+    color: #d32f2f;
+  }
+  #status {
+    color: var(--color-primary);
+  }
+  .choices {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .choice-btn {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--color-primary);
+    padding: 13px 18px;
+    border: 2px solid var(--color-accent);
+    background: #fffde7;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 2px 10px #bca44b27;
+    transition: background-color 0.3s, color 0.3s;
+    min-width: 170px;
+  }
+  .choice-btn.selected {
+    background-color: var(--color-primary);
+    color: white;
+    box-shadow: 0 0 18px var(--color-accent);
+  }
+  #penalty {
+    display: none;
+  }
+  #codiceSegretoSection {
+    display: none;
+    margin-top: 36px;
+    padding: 26px 20px;
+    background: #fffbea;
+    border: 2px solid var(--color-primary);
+    border-radius: 15px;
+    box-shadow: inset 0 0 15px #bca44b22;
+    text-align: center;
+  }
+  #codiceSegretoSection h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--color-primary);
+    font-size: 1.6rem;
+    font-weight: 900;
+    margin-bottom: 18px;
+  }
+  #codiceSegreto {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 2.3rem;
+    letter-spacing: 10px;
+    color: var(--color-primary);
+    text-shadow: 1px 1px 0 var(--color-accent);
+    user-select: all;
+  }
+  #videoContent {
+    margin-top: 28px;
+  }
+  #videoContent iframe {
+    width: 100%;
+    height: 280px;
+    border-radius: 14px;
+    border: 4px solid var(--color-primary);
+    box-shadow: 0 0 15px #bca44b99;
+  }
+  .toggle-btn {
+    margin-top: 14px;
+    padding: 13px 26px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+    border-radius: 18px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.22s;
+  }
+  .toggle-btn:hover {
+    background-color: #e3c776;
+  }
+  .hidden-content {
+    display: none;
+    margin-top: 20px;
+  }
+  .visible {
+    display: block;
+  }
 </style>
 </head>
 <body>
-<h1>Labirinto Bianco - Tappa 6</h1>
-<p>Enigma - Il luogo delle radici antiche</p>
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd2T8O8wW4Pn4BP9LGtSFaF5T9CJQ2ZDI14NMgjyqBLL7mvrQ/viewform?embedded=true"></iframe>
+
+<div class="container">
+
+  <div id="introCode" class="intro-section">
+    <h1>Tappa 6: Museo Civiltà Preclassiche</h1>
+    <label for="codiceAccesso">Inserisci qui il codice segreto ottenuto alla fine della tappa precedente:</label>
+    <input type="password" id="codiceAccesso" placeholder="Inserisci codice..." autocomplete="off" />
+    <button id="unlockBtn" disabled>Sblocca</button>
+    <div id="introStatus"></div>
+  </div>
+
+  <div id="step6" class="hidden">
+    <div class="reference-section">
+      Nel cuore antico della città sorge il Museo di Civiltà Preclassiche della Murgia Meridionale, ospitato nell’ex monastero carmelitano di Santa Maria Maddalena dei Pazzi, con l’annessa chiesa di San Vito Martire.
+      Questo scrigno conserva un patrimonio archeologico che narra la storia delle prime comunità umane di queste terre, dal Paleolitico superiore fino all’età dei metalli. Tra i reperti più preziosi, la celebre "Donna di Ostuni", una giovane gestante di circa 28.000 anni fa, testimonianza unica della vita e della morte di quel lontano passato.
+      Le sale del museo accolgono inoltre reperti messapici e neolitici, utensili in selce, ceramiche e testimonianze di culti antichi, rivelando una dimensione sacra e quotidiana che attraversa millenni.
+    </div>
+
+    <p>Quale popolo antico è tra i più remoti testimoni della vita in queste terre?</p>
+
+    <form id="tappa6Form" autocomplete="off">
+      <div class="choices">
+        <button type="button" class="choice-btn" value="i messapi" disabled>I Messapi</button>
+        <button type="button" class="choice-btn" value="i romani" disabled>I Romani</button>
+        <button type="button" class="choice-btn" value="i greci" disabled>I Greci</button>
+      </div>
+
+      <label for="nomeSquadraInput">Nome squadra o giocatore singolo:</label>
+      <input type="text" id="nomeSquadraInput" name="nomeSquadra" placeholder="Inserisci qui il nome" disabled required />
+      <input type="hidden" id="rispostaInput" name="risposta" />
+
+      <button type="submit" id="submitBtn" disabled>Verifica & Sblocca</button>
+
+      <p id="penalty">Risposta sbagliata! Riprova tra <span id="countdown">15</span> secondi.</p>
+      <p id="status"></p>
+    </form>
+
+    <div id="codiceSegretoSection" class="reveal-section">
+      <h2>Enigma Risolto!</h2>
+      <p>Dati inviati con successo. Questi sono gli elementi necessari per passare alla Tappa 7.</p>
+      <button type="button" class="toggle-btn" data-target="videoContent">🎥 Guarda l'Indizio Video (Dove andare)</button>
+      <div id="videoContent" class="hidden-content">
+        <iframe src="https://www.youtube.com/embed/tWALF0tZSYk" allowfullscreen title="Video approfondimento"></iframe>
+        <p><a href="https://youtu.be/tWALF0tZSYk?feature=shared" target="_blank" style="color:#165c4f; font-weight:700;">▶ Se il video non appare clicca qui!</a></p>
+      </div>
+      <button type="button" class="toggle-btn" data-target="codiceContent">🔑 Mostra il Codice Chiave (Cosa inserire)</button>
+      <div id="codiceContent" class="hidden-content">
+        <p>Una volta trovato il QR Code, usa questo codice chiave per sbloccare la Tappa 7:</p>
+        <span id="codiceSegreto">radici</span>
+        <p style="margin-top: 15px; font-weight: 600;">(Il codice è la chiave d’accesso per la Tappa 7, sbloccata tramite QR Code).</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<form id="hiddenDataForm" target="hiddenIframe" method="POST" autocomplete="off" action="https://docs.google.com/forms/d/e/your-google-form-id/formResponse" style="display:none;">
+  <input type="text" name="entry.2030348205" id="hiddenNomeSquadra" />
+  <input type="text" name="entry.2106200479" id="hiddenCodiceTappa" />
+  <input type="text" name="entry.1130952224" id="hiddenCodiceSegreto" />
+</form>
+
+<iframe name="hiddenIframe" style="display:none;"></iframe>
+
+<script>
+  const unlockBtn = document.getElementById('unlockBtn');
+  const codiceAccesso = document.getElementById('codiceAccesso');
+  const introStatus = document.getElementById('introStatus');
+  const introCode = document.getElementById('introCode');
+  const step6 = document.getElementById('step6');
+  const submitBtn = document.getElementById('submitBtn');
+  const nomeSquadraInput = document.getElementById('nomeSquadraInput');
+  const choiceBtns = document.querySelectorAll('.choice-btn');
+  const rispostaInput = document.getElementById('rispostaInput');
+  const penalty = document.getElementById('penalty');
+  const status = document.getElementById('status');
+  const hiddenForm = document.getElementById('hiddenDataForm');
+  const hiddenNomeSquadra = document.getElementById('hiddenNomeSquadra');
+  const hiddenCodiceTappa = document.getElementById('hiddenCodiceTappa');
+  const hiddenCodiceSegreto = document.getElementById('hiddenCodiceSegreto');
+  const countdownSpan = document.getElementById('countdown');
+
+  unlockBtn.disabled = true;
+  codiceAccesso.addEventListener('input', () => {
+    unlockBtn.disabled = codiceAccesso.value.trim() === '';
+  });
+
+  step6.style.display = 'none';
+  submitBtn.disabled = true;
+  nomeSquadraInput.disabled = true;
+  choiceBtns.forEach(btn => btn.disabled = true);
+
+  unlockBtn.addEventListener('click', e => {
+    e.preventDefault();
+    const codice = codiceAccesso.value.trim().toLowerCase();
+    if (codice === 'cerchio') {
+      introCode.style.display = 'none';
+      step6.style.display = 'block';
+      nomeSquadraInput.disabled = false;
+      choiceBtns.forEach(btn => btn.disabled = false);
+      submitBtn.disabled = true;
+    } else {
+      introStatus.textContent = 'Codice non valido! Riprova.';
+      codiceAccesso.value = '';
+      unlockBtn.disabled = true;
+      setTimeout(() => introStatus.textContent = '', 3000);
+    }
+  });
+
+  choiceBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      choiceBtns.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      rispostaInput.value = btn.value;
+      submitBtn.disabled = false;
+      status.textContent = '';
+    });
+  });
+
+  const toggleButtons = document.querySelectorAll('.toggle-btn');
+  toggleButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-target');
+      const content = document.getElementById(targetId);
+      const isVisible = content.classList.toggle('visible');
+      btn.textContent = isVisible
+        ? (targetId === 'videoContent' ? 'Nascondi Video' : 'Nascondi Codice')
+        : (targetId === 'videoContent' ? '🎥 Guarda l\'Indizio Video (Dove andare)' : '🔑 Mostra il Codice Chiave (Cosa inserire)');
+    });
+  });
+
+  window.addEventListener('DOMContentLoaded', () => {
+    let squadra = new URLSearchParams(window.location.search).get('squadra');
+    if (!squadra) squadra = localStorage.getItem('nomeSquadra');
+    if (squadra) {
+      nomeSquadraInput.value = decodeURIComponent(squadra);
+      localStorage.setItem('nomeSquadra', decodeURIComponent(squadra));
+    }
+  });
+
+  let penaltyTimer;
+
+  const form = document.getElementById('tappa6Form');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const risposta = rispostaInput.value.trim().toLowerCase();
+    const nomeSquadra = form.nomeSquadra.value.trim();
+    const codiceTappa = 'Tappa_6';
+    const codiceSegreto = 'i messapi';
+
+    if (!nomeSquadra || !risposta) {
+      status.textContent = 'ERRORE: Inserisci il nome e seleziona una risposta.';
+      status.style.color = '#d32f2f';
+      return;
+    }
+
+    if (risposta !== codiceSegreto) {
+      status.textContent = '';
+      penalty.style.display = 'block';
+      submitBtn.disabled = true;
+      choiceBtns.forEach(b => b.disabled = true);
+      let sec = 15;
+      countdownSpan.textContent = sec;
+      penaltyTimer = setInterval(() => {
+        sec--;
+        countdownSpan.textContent = sec;
+        if (sec <= 0) {
+          clearInterval(penaltyTimer);
+          penalty.style.display = 'none';
+          submitBtn.disabled = false;
+          choiceBtns.forEach(b => b.disabled = false);
+          rispostaInput.value = '';
+          choiceBtns.forEach(b => b.classList.remove('selected'));
+          status.textContent = '';
+        }
+      }, 1000);
+      return;
+    }
+
+    hiddenNomeSquadra.value = nomeSquadra;
+    hiddenCodiceTappa.value = codiceTappa;
+    hiddenCodiceSegreto.value = risposta;
+    hiddenForm.submit();
+
+    status.textContent = 'Risposta corretta! Dati di completamento inviati.';
+    status.style.color = 'var(--color-primary)';
+    document.getElementById('codiceSegretoSection').style.display = 'block';
+    submitBtn.disabled = true;
+    choiceBtns.forEach(b => b.disabled = true);
+  });
+</script>
+
 </body>
 </html>
