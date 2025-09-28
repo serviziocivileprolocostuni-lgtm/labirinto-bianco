@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -252,7 +254,11 @@
         <p>Dati inviati con successo. Questi sono gli elementi necessari per passare alla Tappa 4.</p>
         <button type="button" class="toggle-btn" data-target="videoContent">🎥 Guarda l'Indizio Video (Dove andare)</button>
         <div id="videoContent" class="hidden-content">
-          <iframe src="https://youtube.com/shorts/CTo-W4wKeTA?feature=shared" allowfullscreen title="Video approfondimento"></iframe>
+          <iframe
+            src="https://youtube.com/shorts/CTo-W4wKeTA?feature=shared"
+            allowfullscreen
+            title="Video approfondimento"
+          ></iframe>
         </div>
         <button type="button" class="toggle-btn" data-target="codiceContent">🔑 Mostra il Codice Chiave (Cosa inserire)</button>
         <div id="codiceContent" class="hidden-content">
@@ -265,8 +271,14 @@
 
   </div>
 
-  <form id="hiddenDataForm" target="hiddenIframe" method="POST" autocomplete="off"
-        action="https://docs.google.com/forms/d/e/your-google-form-id/formResponse" style="display:none;">
+  <form
+    id="hiddenDataForm"
+    target="hiddenIframe"
+    method="POST"
+    autocomplete="off"
+    action="https://docs.google.com/forms/d/e/your-google-form-id/formResponse"
+    style="display:none;"
+  >
     <input type="text" name="entry.2030348205" id="hiddenNomeSquadra" />
     <input type="text" name="entry.2106200479" id="hiddenCodiceTappa" />
     <input type="text" name="entry.1130952224" id="hiddenCodiceSegreto" />
@@ -274,140 +286,143 @@
 
   <iframe name="hiddenIframe" style="display:none;"></iframe>
 
-<script>
-  const unlockBtn = document.getElementById('unlockBtn');
-  const codiceAccesso = document.getElementById('codiceAccesso');
-  const introStatus = document.getElementById('introStatus');
-  const introCode = document.getElementById('introCode');
-  const step3 = document.getElementById('step3');
-  const submitBtn = document.getElementById('submitBtn');
-  const nomeSquadraInput = document.getElementById('nomeSquadraInput');
-  const choiceBtns = document.querySelectorAll('.choice-btn');
-  const rispostaInput = document.getElementById('rispostaInput');
-  const penalty = document.getElementById('penalty');
-  const status = document.getElementById('status');
-  const hiddenForm = document.getElementById('hiddenDataForm');
-  const hiddenNomeSquadra = document.getElementById('hiddenNomeSquadra');
-  const hiddenCodiceTappa = document.getElementById('hiddenCodiceTappa');
-  const hiddenCodiceSegreto = document.getElementById('hiddenCodiceSegreto');
-  const countdownSpan = document.getElementById('countdown');
+  <script>
+    const unlockBtn = document.getElementById('unlockBtn');
+    const codiceAccesso = document.getElementById('codiceAccesso');
+    const introStatus = document.getElementById('introStatus');
+    const introCode = document.getElementById('introCode');
+    const step3 = document.getElementById('step3');
+    const submitBtn = document.getElementById('submitBtn');
+    const nomeSquadraInput = document.getElementById('nomeSquadraInput');
+    const choiceBtns = document.querySelectorAll('.choice-btn');
+    const rispostaInput = document.getElementById('rispostaInput');
+    const penalty = document.getElementById('penalty');
+    const status = document.getElementById('status');
+    const hiddenForm = document.getElementById('hiddenDataForm');
+    const hiddenNomeSquadra = document.getElementById('hiddenNomeSquadra');
+    const hiddenCodiceTappa = document.getElementById('hiddenCodiceTappa');
+    const hiddenCodiceSegreto = document.getElementById('hiddenCodiceSegreto');
+    const countdownSpan = document.getElementById('countdown');
 
-  // Disabilita il pulsante sblocca fino a input valido
-  unlockBtn.disabled = true;
-  codiceAccesso.addEventListener('input', () => {
-    unlockBtn.disabled = codiceAccesso.value.trim() === '';
-  });
-
-  // Inizio: tappa 3 nascosta e risposte disabilitate
-  step3.style.display = 'none';
-  submitBtn.disabled = true;
-  nomeSquadraInput.disabled = true;
-  choiceBtns.forEach(btn => btn.disabled = true);
-
-  // Controllo codice segreto e sblocco tappa
-  unlockBtn.addEventListener('click', e => {
-    e.preventDefault();
-    const codice = codiceAccesso.value.trim().toLowerCase();
-    if (codice === 'stella') {
-      introCode.style.display = 'none';
-      step3.style.display = 'block';
-      submitBtn.disabled = true;
-      nomeSquadraInput.disabled = false;
-      choiceBtns.forEach(btn => btn.disabled = false);
-    } else {
-      introStatus.textContent = 'Codice non valido! Riprova.';
-      codiceAccesso.value = '';
-      unlockBtn.disabled = true;
-      setTimeout(() => introStatus.textContent = '', 3000);
-    }
-  });
-
-  // Gestione selezione risposta
-  choiceBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      choiceBtns.forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-      rispostaInput.value = btn.value;
-      submitBtn.disabled = false;
-      status.textContent = '';
+    // Disabilita il pulsante sblocca fino a input valido
+    unlockBtn.disabled = true;
+    codiceAccesso.addEventListener('input', () => {
+      unlockBtn.disabled = codiceAccesso.value.trim() === '';
     });
-  });
 
-  // Toggle per mostrare/nascondere video e codice
-  const toggleButtons = document.querySelectorAll('.toggle-btn');
-  toggleButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const targetId = btn.getAttribute('data-target');
-      const content = document.getElementById(targetId);
-      const isVisible = content.classList.toggle('visible');
-      btn.textContent = isVisible
-        ? (targetId === 'videoContent' ? 'Nascondi Video' : 'Nascondi Codice')
-        : (targetId === 'videoContent' ? '🎥 Guarda l\'Indizio Video (Dove andare)' : '🔑 Mostra il Codice Chiave (Cosa inserire)');
-    });
-  });
-
-  // Caricamento nome squadra da URL o locale
-  window.addEventListener('DOMContentLoaded', () => {
-    let squadra = new URLSearchParams(window.location.search).get('squadra');
-    if (!squadra) squadra = localStorage.getItem('nomeSquadra');
-    if (squadra) {
-      nomeSquadraInput.value = decodeURIComponent(squadra);
-      localStorage.setItem('nomeSquadra', decodeURIComponent(squadra));
-    }
-  });
-
-  // Gestione submit con penalità
-  let penaltyTimer;
-
-  const form = document.getElementById('tappa3Form');
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const risposta = rispostaInput.value;
-    const nomeSquadra = form.nomeSquadra.value.trim();
-    const codiceTappa = 'Tappa_3';
-    const codiceSegreto = 'blu';
-
-    if (!nomeSquadra || !risposta) {
-      status.textContent = 'ERRORE: Inserisci il nome e seleziona una risposta.';
-      status.style.color = '#d32f2f';
-      return;
-    }
-
-    if (risposta.toLowerCase() !== codiceSegreto.toLowerCase()) {
-      status.textContent = '';
-      penalty.style.display = 'block';
-      submitBtn.disabled = true;
-      choiceBtns.forEach(b => b.disabled = true);
-      let sec = 15;
-      countdownSpan.textContent = sec;
-      penaltyTimer = setInterval(() => {
-        sec--;
-        countdownSpan.textContent = sec;
-        if (sec <= 0) {
-          clearInterval(penaltyTimer);
-          penalty.style.display = 'none';
-          submitBtn.disabled = false;
-          choiceBtns.forEach(b => b.disabled = false);
-          rispostaInput.value = '';
-          choiceBtns.forEach(b => b.classList.remove('selected'));
-          status.textContent = '';
-        }
-      }, 1000);
-      return;
-    }
-
-    hiddenNomeSquadra.value = nomeSquadra;
-    hiddenCodiceTappa.value = codiceTappa;
-    hiddenCodiceSegreto.value = risposta;
-    hiddenForm.submit();
-
-    status.textContent = 'Risposta corretta! Dati di completamento inviati.';
-    status.style.color = 'var(--color-primary)';
-    document.getElementById('codiceSegretoSection').style.display = 'block';
+    // Inizio: tappa 3 nascosta e risposte disabilitate
+    step3.style.display = 'none';
     submitBtn.disabled = true;
-    choiceBtns.forEach(b => b.disabled = true);
-  });
-</script>
+    nomeSquadraInput.disabled = true;
+    choiceBtns.forEach((btn) => (btn.disabled = true));
+
+    // Controllo codice segreto e sblocco tappa
+    unlockBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const codice = codiceAccesso.value.trim().toLowerCase();
+      if (codice === 'stella') {
+        introCode.style.display = 'none';
+        step3.style.display = 'block';
+        submitBtn.disabled = true;
+        nomeSquadraInput.disabled = false;
+        choiceBtns.forEach((btn) => (btn.disabled = false));
+      } else {
+        introStatus.textContent = 'Codice non valido! Riprova.';
+        codiceAccesso.value = '';
+        unlockBtn.disabled = true;
+        setTimeout(() => (introStatus.textContent = ''), 3000);
+      }
+    });
+
+    // Gestione selezione risposta
+    choiceBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        choiceBtns.forEach((b) => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        rispostaInput.value = btn.value;
+        submitBtn.disabled = false;
+        status.textContent = '';
+      });
+    });
+
+    // Toggle per mostrare/nascondere video e codice
+    const toggleButtons = document.querySelectorAll('.toggle-btn');
+    toggleButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-target');
+        const content = document.getElementById(targetId);
+        const isVisible = content.classList.toggle('visible');
+        btn.textContent = isVisible
+          ? targetId === 'videoContent'
+            ? 'Nascondi Video'
+            : 'Nascondi Codice'
+          : targetId === 'videoContent'
+          ? '🎥 Guarda l\'Indizio Video (Dove andare)'
+          : '🔑 Mostra il Codice Chiave (Cosa inserire)';
+      });
+    });
+
+    // Caricamento nome squadra da URL o locale
+    window.addEventListener('DOMContentLoaded', () => {
+      let squadra = new URLSearchParams(window.location.search).get('squadra');
+      if (!squadra) squadra = localStorage.getItem('nomeSquadra');
+      if (squadra) {
+        nomeSquadraInput.value = decodeURIComponent(squadra);
+        localStorage.setItem('nomeSquadra', decodeURIComponent(squadra));
+      }
+    });
+
+    // Gestione submit con penalità
+    let penaltyTimer;
+
+    const form = document.getElementById('tappa3Form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const risposta = rispostaInput.value;
+      const nomeSquadra = form.nomeSquadra.value.trim();
+      const codiceTappa = 'Tappa_3';
+      const codiceSegreto = 'blu';
+
+      if (!nomeSquadra || !risposta) {
+        status.textContent = 'ERRORE: Inserisci il nome e seleziona una risposta.';
+        status.style.color = '#d32f2f';
+        return;
+      }
+
+      if (risposta.toLowerCase() !== codiceSegreto.toLowerCase()) {
+        status.textContent = '';
+        penalty.style.display = 'block';
+        submitBtn.disabled = true;
+        choiceBtns.forEach((b) => (b.disabled = true));
+        let sec = 15;
+        countdownSpan.textContent = sec;
+        penaltyTimer = setInterval(() => {
+          sec--;
+          countdownSpan.textContent = sec;
+          if (sec <= 0) {
+            clearInterval(penaltyTimer);
+            penalty.style.display = 'none';
+            submitBtn.disabled = false;
+            choiceBtns.forEach((b) => (b.disabled = false));
+            rispostaInput.value = '';
+            choiceBtns.forEach((b) => b.classList.remove('selected'));
+            status.textContent = '';
+          }
+        }, 1000);
+        return;
+      }
+
+      hiddenNomeSquadra.value = nomeSquadra;
+      hiddenCodiceTappa.value = codiceTappa;
+      hiddenCodiceSegreto.value = risposta;
+      hiddenForm.submit();
+
+      status.textContent = 'Risposta corretta! Dati di completamento inviati.';
+      status.style.color = 'var(--color-primary)';
+      document.getElementById('codiceSegretoSection').style.display = 'block';
+      submitBtn.disabled = true;
+      choiceBtns.forEach((b) => (b.disabled = true));
+    });
+  </script>
 </body>
 </html>
-
