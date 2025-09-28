@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
 <style>
+  /* Il tuo stile precedente rimane invariato */
   :root {
     --color-primary: #0C4B40;
     --color-accent: #C8AA6A;
@@ -171,7 +172,6 @@
 </style>
 </head>
 <body>
-
 <div class="container">
 
   <div id="introCode" class="intro-section">
@@ -221,7 +221,6 @@
     </div>
 
   </div>
-
 </div>
 
 <iframe name="hiddenIframe" style="display:none;"></iframe>
@@ -345,29 +344,30 @@
       return;
     }
 
-    finalStatus.textContent = 'Codice corretto! Complimenti, avete completato la caccia al tesoro!';
+    finalStatus.textContent = 'Codice corretto! Complimenti, verrete reindirizzati alla pagina finale...';
     finalStatus.style.color = 'green';
 
-    finalForm.submit();
+    finalForm.submit(); // invio dati Google Form
     finalForm.querySelector('button').disabled = true;
+
+    setTimeout(() => {
+      window.location.href = "finale.html"; // sostituisci con il percorso della pagina finale
+    }, 1500);
   });
 
   window.addEventListener('DOMContentLoaded', () => {
     let squadra = new URLSearchParams(window.location.search).get('squadra');
     if (!squadra) squadra = localStorage.getItem('nomeSquadra');
     if (squadra) {
-      const nameInput = document.getElementById('nomeSquadraInput');
-      if(nameInput) {
-        nameInput.value = decodeURIComponent(squadra);
-      }
       const teamName = document.getElementById('teamName');
-      if(teamName) {
-        teamName.value = decodeURIComponent(squadra);
-      }
+      const nameInput = document.getElementById('nomeSquadraInput');
+      if(teamName) teamName.value = decodeURIComponent(squadra);
+      if(nameInput) nameInput.value = decodeURIComponent(squadra);
       localStorage.setItem('nomeSquadra', decodeURIComponent(squadra));
     }
   });
 </script>
 
+<iframe name="hiddenIframe" style="display:none;"></iframe>
 </body>
 </html>
