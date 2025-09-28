@@ -10,7 +10,6 @@
       --color-primary: #0C4B40;
       --color-accent: #C8AA6A;
       --color-frame: #bca44b;
-      --color-bg: #f8f5e9;
       --color-bgbox: #fffded;
       --color-text: #44422c;
   }
@@ -20,7 +19,7 @@
     color: var(--color-text);
     background: var(--color-frame);
     min-height: 100vh;
-    background-image: url('https://i.imgur.com/8QdY3lS.jpeg');
+    background-image: url('img/8QdY3lS.jpeg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -44,10 +43,9 @@
   h1 {
     font-family: 'Playfair Display', serif;
     font-size: 2.6rem;
-    color: var(--color-primary);
+    margin: 0 0 10px 0;
     border-bottom: 2.5px solid var(--color-accent);
     padding-bottom: 7px;
-    margin-bottom: 18px;
   }
   p {
     font-size: 1.17rem;
@@ -186,9 +184,9 @@
     color: var(--color-primary);
     background-color: var(--color-accent);
     border: none;
-    border-radius: 14px;
+    border-radius: 15px;
     cursor: pointer;
-    transition: background 0.22s;
+    transition: background-color 0.22s;
   }
   .toggle-btn:hover { background-color: #e3c776; }
   .hidden-content { display: none; margin-top: 18px; }
@@ -212,13 +210,17 @@
       <button type="button" class="choice-btn" value="aquila">Aquila 🦅</button>
       <button type="button" class="choice-btn" value="drago">Drago 🐉</button>
     </div>
+
     <label for="nomeSquadraInput">Nome squadra o giocatore singolo:</label>
     <input type="text" id="nomeSquadraInput" name="nomeSquadra" placeholder="Inserisci qui il nome" required />
     <input type="hidden" id="rispostaInput" name="risposta" />
+
     <button type="submit" id="submitBtn" disabled>Verifica & Sblocca</button>
+
     <p id="penalty" style="display: none;">Risposta sbagliata! Riprova tra <span id="countdown">15</span> secondi.</p>
     <p id="status"></p>
   </form>
+
   <div id="codiceSegretoSection" class="reveal-section">
     <h2>Enigma Risolto!</h2>
     <p>Dati inviati con successo. Questi sono gli elementi necessari per passare alla Tappa 2.</p>
@@ -245,9 +247,10 @@
 <form id="hiddenDataForm" target="hiddenIframe" method="POST" 
       action="https://docs.google.com/forms/d/e/1FAIpQLSdqmJ0uvE7CfLGfcz04DCkCwkm8gSy8O2RrTwysSxbRkgTsuQ/formResponse" 
       style="display: none;">
-  <input type="text" name="entry.2030348205" id="hiddenNomeSquadra"> 
-  <input type="text" name="entry.2106200479" id="hiddenCodiceTappa"> 
-  <input type="text" name="entry.1130952224" id="hiddenCodiceSegreto"> 
+    
+    <input type="text" name="entry.2030348205" id="hiddenNomeSquadra"> 
+    <input type="text" name="entry.2106200479" id="hiddenCodiceTappa"> 
+    <input type="text" name="entry.1130952224" id="hiddenCodiceSegreto"> 
 </form>
 <iframe name="hiddenIframe" style="display: none;"></iframe>
 
@@ -344,3 +347,4 @@
 </script>
 </body>
 </html>
+
