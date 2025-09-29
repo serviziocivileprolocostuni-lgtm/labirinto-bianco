@@ -79,6 +79,27 @@
     margin-bottom: 2.4rem;
     box-shadow: 0 3px 12px rgba(80,61,9,0.05);
   }
+  .step-title {
+    margin-bottom: 1rem;
+    font-size: 1.42rem;
+  }
+  .enigma-options label {
+    display: block;
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin-bottom: 0.8rem;
+    cursor: pointer;
+    color: #215c40;
+  }
+  .feedback {
+    font-size: 1.15rem;
+    margin-top: -1rem;
+    margin-bottom: 1rem;
+    color: #a64c38;
+  }
+  .success {
+    color: green;
+  }
   .hidden {
     display: none;
   }
@@ -95,13 +116,16 @@
 <div class="container">
   <h1>Tappa 12: Porta San Demetrio</h1>
 
-  <label for="previousCode">Inserisci il codice segreto ottenuto alla fine della tappa precedente:</label>
+  <label for="previousCode">Inserisci il codice segreto ottenuto alla fine della tappa precedente (comunicato a voce):</label>
   <input type="text" id="previousCode" autocomplete="off" placeholder="Inserisci codice..." />
   <button id="confirmBtn" disabled>Sblocca</button>
   <div id="infoText" class="feedback"></div>
 
   <div id="reference" class="box hidden">
-    <strong>Riferimento storico:</strong> Le antiche mura di Ostuni, erette per proteggere la città...
+    <strong>Riferimento storico:</strong>
+    Le antiche mura di Ostuni furono erette per proteggere la città dai nemici e per controllare gli accessi.  
+    La Porta San Demetrio era un varco nascosto nelle mura cittadine, simbolo del passaggio dalla storia al presente.  
+    Solo chi ha ottenuto e inserito il codice segreto, comunicato dal narratore errante a voce, potrà accedere all'enigma successivo.
   </div>
 
   <div id="enigma1" class="box hidden">
@@ -116,15 +140,19 @@
 
   <div id="enigma2" class="box hidden">
     <strong>Enigma 2 (prova fisica):</strong>
-    <p>Il narratore errante farà il suo ingresso, vi chiederà una prova finale...</p>
+    <p>Il narratore errante farà il suo ingresso, vi chiederà una prova finale e vi consegnerà il codice della vittoria.</p>
     <button id="openForm">Vai al form vittoria</button>
   </div>
 
-  <form id="finalForm" class="box hidden" action="https://docs.google.com/forms/d/e/1FAIpQLSfa9O5waLlMVi4TehGazCEFo9_SbchUBotqV6AXbaa6x5PKXw/formResponse" method="POST" autocomplete="off">
+  <form id="finalForm" class="box hidden"
+        action="https://docs.google.com/forms/d/e/1FAIpQLSfa9O5waLlMVi4TehGazCEFo9_SbchUBotqV6AXbaa6x5PKXw/formResponse"
+        method="POST" autocomplete="off">
     <label for="teamName"><strong>Nome squadra:</strong></label>
     <input type="text" id="teamName" name="entry.2030348205" required autocomplete="off" />
+
     <label for="currentStage"><strong>Tappa corrente:</strong></label>
     <input type="text" id="currentStage" name="entry.2106200479" placeholder="Inserisci tappa" required autocomplete="off" />
+
     <label for="secretCode"><strong>Codice segreto:</strong></label>
     <input type="text" id="secretCode" name="entry.1130952224" required autocomplete="off" />
 
@@ -210,11 +238,11 @@
       origin: { y: 0.6 }
     });
 
-    // reindirizza dopo 4 secondi (dopo i coriandoli)
     setTimeout(() => {
       window.location.href = "attesa-verifica.html";
     }, 4000);
   };
 </script>
+
 </body>
 </html>
