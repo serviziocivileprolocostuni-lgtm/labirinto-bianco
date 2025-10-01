@@ -1,75 +1,57 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-<meta charset="UTF-8">
-<title>QR Code Caccia al Tesoro</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background: #fffcef;
-    color: #0C4B40;
-  }
-  h2 {
-    margin-top: 40px;
-  }
-  .qr-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-  }
-  .qr-item {
-    width: 180px;
-    text-align: center;
-  }
-</style>
-</head>
-<body>
-
-<h1>QR Code delle tappe - Il Labirinto Bianco</h1>
-
-<div class="qr-container" id="qrContainer"></div>
-
-<script>
-  const taps = [
-    {name: "Home", url: "https://prolocostuniprogetti-code.github.io/labirinto-bianco/"},
-    {name: "Tappa 1: Indovinello Porta Nova", url: "https://prolocostuniprogetti-code.github.io/labirinto-bianco/tappa1.html"},
-    {name: "Tappa 2: Fede Popolare", url: "https://prolocostuniprogetti-code.github.io/labirinto-bianco/tappa2.html"},
-    {name: "Tappa 3: Casa della Porta Blu", url: "https://prolocostuniprogetti-code.github.io/labirinto-bianco/tappa3.html"},
-    {name: "Tappa 4: Arco Scoppa", url: "https://prolocostuniprogetti-code.github.io/labirinto-bianco/tappa4.html"},
-    {name: "Tappa 5: Cattedrale", url: "https://prolocostuniprogetti-code.github.io/labirinto-bianco/tappa5.html"},
-    {name: "Tappa 6: Museo Civiltà Preclassiche", url: "https://prolocostuniprogetti-code.github.io/labirinto-bianco/tappa6.html"},
-    {name: "Tappa 7: Chiesa del Purgatorio", url: "https://prolocostuniprogetti-code.github.io/labirinto-bianco/tappa7.html"},
-    {name: "Tappa 8: Palazzo Zevallos (oggi Airoldi)", url: "https://prolocostuniprogetti-code.github.io/labirinto-bianco/tappa8.html"},
-    {name: "Tappa 9: Municipio (evento storico 1860)", url: "https://prolocostuniprogetti-code.github.io/labirinto-bianco/tappa9.html"},
-    {name: "Tappa 10: Colonna di Sant’Oronzo", url: "https://prolocostuniprogetti-code.github.io/labirinto-bianco/tappa10.html"},
-    {name: "Tappa 11: Chiesa del Carmine", url: "https://prolocostuniprogetti-code.github.io/labirinto-bianco/tappa11.html"},
-    {name: "Tappa 12: Porta San Demetrio", url: "https://prolocostuniprogetti-code.github.io/labirinto-bianco/tappa12.html"}
-  ];
-
-  const container = document.getElementById('qrContainer');
-
-  taps.forEach(tap => {
-    const item = document.createElement('div');
-    item.className = 'qr-item';
-
-    const title = document.createElement('h2');
-    title.textContent = tap.name;
-    item.appendChild(title);
-
-    const qrDiv = document.createElement('div');
-    item.appendChild(qrDiv);
-
-    container.appendChild(item);
-
-    new QRCode(qrDiv, {
-      text: tap.url,
-      width: 160,
-      height: 160
-    });
-  });
-</script>
-
-</body>
-</html>
+<div>
+  <h2>QR Codes delle Tappe con Cornice Nera</h2>
+  <ul style="list-style:none; padding:0;">
+    <li style="margin-bottom: 30px; text-align:center;">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://serviziocivileprolocostuni-lgtm.github.io/labirinto-bianco/" alt="QR Code Homepage" style="border: 5px solid black; display:block; margin: 0 auto 10px auto;" />
+      <p>Labirinto Bianco - Homepage</p>
+    </li>
+    <li style="margin-bottom: 30px; text-align:center;">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://serviziocivileprolocostuni-lgtm.github.io/labirinto-bianco/tappa1.html" alt="QR Code Tappa 1" style="border: 5px solid black; display:block; margin: 0 auto 10px auto;" />
+      <p>Labirinto Bianco - Tappa 1</p>
+    </li>
+    <li style="margin-bottom: 30px; text-align:center;">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://serviziocivileprolocostuni-lgtm.github.io/labirinto-bianco/tappa2.html" alt="QR Code Tappa 2" style="border: 5px solid black; display:block; margin: 0 auto 10px auto;" />
+      <p>Labirinto Bianco - Tappa 2</p>
+    </li>
+    <li style="margin-bottom: 30px; text-align:center;">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://serviziocivileprolocostuni-lgtm.github.io/labirinto-bianco/tappa3.html" alt="QR Code Tappa 3" style="border: 5px solid black; display:block; margin: 0 auto 10px auto;" />
+      <p>Labirinto Bianco - Tappa 3</p>
+    </li>
+    <li style="margin-bottom: 30px; text-align:center;">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://serviziocivileprolocostuni-lgtm.github.io/labirinto-bianco/tappa4.html" alt="QR Code Tappa 4" style="border: 5px solid black; display:block; margin: 0 auto 10px auto;" />
+      <p>Labirinto Bianco - Tappa 4</p>
+    </li>
+    <li style="margin-bottom: 30px; text-align:center;">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://serviziocivileprolocostuni-lgtm.github.io/labirinto-bianco/tappa5.html" alt="QR Code Tappa 5" style="border: 5px solid black; display:block; margin: 0 auto 10px auto;" />
+      <p>Labirinto Bianco - Tappa 5</p>
+    </li>
+    <li style="margin-bottom: 30px; text-align:center;">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://serviziocivileprolocostuni-lgtm.github.io/labirinto-bianco/tappa6.html" alt="QR Code Tappa 6" style="border: 5px solid black; display:block; margin: 0 auto 10px auto;" />
+      <p>Labirinto Bianco - Tappa 6</p>
+    </li>
+    <li style="margin-bottom: 30px; text-align:center;">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://serviziocivileprolocostuni-lgtm.github.io/labirinto-bianco/tappa7.html" alt="QR Code Tappa 7" style="border: 5px solid black; display:block; margin: 0 auto 10px auto;" />
+      <p>Labirinto Bianco - Tappa 7</p>
+    </li>
+    <li style="margin-bottom: 30px; text-align:center;">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://serviziocivileprolocostuni-lgtm.github.io/labirinto-bianco/tappa8.html" alt="QR Code Tappa 8" style="border: 5px solid black; display:block; margin: 0 auto 10px auto;" />
+      <p>Labirinto Bianco - Tappa 8</p>
+    </li>
+    <li style="margin-bottom: 30px; text-align:center;">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://serviziocivileprolocostuni-lgtm.github.io/labirinto-bianco/tappa9.html" alt="QR Code Tappa 9" style="border: 5px solid black; display:block; margin: 0 auto 10px auto;" />
+      <p>Labirinto Bianco - Tappa 9</p>
+    </li>
+    <li style="margin-bottom: 30px; text-align:center;">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://serviziocivileprolocostuni-lgtm.github.io/labirinto-bianco/tappa10.html" alt="QR Code Tappa 10" style="border: 5px solid black; display:block; margin: 0 auto 10px auto;" />
+      <p>Labirinto Bianco - Tappa 10</p>
+    </li>
+    <li style="margin-bottom: 30px; text-align:center;">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://serviziocivileprolocostuni-lgtm.github.io/labirinto-bianco/tappa11.html" alt="QR Code Tappa 11" style="border: 5px solid black; display:block; margin: 0 auto 10px auto;" />
+      <p>Labirinto Bianco - Tappa 11</p>
+    </li>
+    <li style="margin-bottom: 30px; text-align:center;">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://serviziocivileprolocostuni-lgtm.github.io/labirinto-bianco/tappa12.html" alt="QR Code Tappa 12" style="border: 5px solid black; display:block; margin: 0 auto 10px auto;" />
+      <p>Labirinto Bianco - Tappa 12</p>
+    </li>
+  </ul>
+</div>
