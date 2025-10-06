@@ -1,146 +1,144 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <title>Classifica</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    body {
-      min-height: 100vh;
-      margin: 0;
-      padding: 0 20px 40px;
-      background: linear-gradient(135deg, #fffcef 60%, #f7e7bf 100%);
-      font-family: 'Playfair Display', serif;
-      color: #195E40;
-      text-align: center;
-      overflow-x: hidden;
-    }
-    h1 {
-      font-size: 2.6rem;
-      margin-top: 2.3rem;
-      margin-bottom: 0.5rem;
-      color: #0C4B40;
-      letter-spacing: 2px;
-      font-weight: 800;
-      text-shadow: 0 4px 18px #bca55a55, 0 1px 0 #fffcee;
-      animation: glow 2s infinite alternate;
-    }
-    @keyframes glow {
-      0% { text-shadow: 0 4px 18px #bca55a44, 0 1px 0 #fffcee;}
-      100% { text-shadow: 0 4px 22px #bca55a, 0 1px 0 #fffcee;}
-    }
-    .effect-phrase {
-      font-size: 1.2rem;
-      margin-bottom: 2.1rem;
-      margin-top: 1.3rem;
-      color: #bca55a;
-      font-style: italic;
-      letter-spacing: 0.7px;
-      font-family: 'Playfair Display', serif;
-      text-shadow: 0 2px 8px #efe4c770;
-      animation: floating 4s ease-in-out infinite;
-    }
-    @keyframes floating {
-      0%,100% { transform: translateY(0); }
-      40% { transform: translateY(-8px); }
-      65% { transform: translateY(-2px);}
-    }
-    .iframe-container {
-      position: relative;
-      width: 95%;
-      max-width: 900px;
-      margin: 0 auto 1.7rem auto;
-      padding-bottom: 48%;
-      height: 0;
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: 0 0 0 #fff, 0 6px 40px #bca55a73;
-      transition: box-shadow 0.5s;
-      background: #faf4de;
-      border: 2.2px solid #bca55a;
-      animation: pop-shadow 1.5s infinite alternate;
-    }
-    @keyframes pop-shadow {
-      0% { box-shadow: 0 6px 40px #bca55a70;}
-      100% { box-shadow: 0 12px 80px #bca55acd;}
-    }
-    .iframe-container iframe {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      border: none; border-radius: 18px;
-    }
-    .nav-buttons {
-      margin-top: 2.7rem;
-      display: flex;
-      justify-content: center;
-      gap: 1.3rem;
-      flex-wrap: wrap;
-    }
-    a.button, a.back-link {
-      display: inline-block;
-      padding: 0.88rem 2.1rem;
-      border-radius: 11px;
-      font-size: 1.16rem;
-      font-weight: bold;
-      text-decoration: none;
-      letter-spacing: 0.6px;
-      color: #fff;
-      opacity: 0.93;
-      box-shadow: 0 2px 16px #bca55a40;
-      margin-top: 0;
-      transition: background 0.3s, color 0.3s, transform 0.19s;
-      user-select: none; cursor: pointer;
-    }
-    a.button {
-      background: linear-gradient(97deg,#07613c 70%, #bca55a 130%);
-      border: 2px solid #bca55a;
-    }
-    a.button:hover {
-      background: linear-gradient(85deg,#1a9b62 60%, #d6be7a 120%);
-      color: #07613c;
-      transform: scale(1.055);
-    }
-    a.back-link {
-      background: #bca55a;
-      color: #0C4B40;
-      border: 2px solid #0C4B40;
-    }
-    a.back-link:hover {
-      background: #f6eebd;
-      color: #195E40;
-      transform: scale(1.055);
-    }
-  </style>
+<meta charset="UTF-8" />
+<title>Classifica</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+body {
+min-height: 100vh;
+margin: 0;
+padding: 0 20px 40px;
+background: linear-gradient(135deg, #fffcef 60%, #f7e7bf 100%);
+font-family: 'Playfair Display', serif;
+color: #195E40;
+text-align: center;
+overflow-x: hidden;
+}
+h1 {
+font-size: 2.6rem;
+margin-top: 2.3rem;
+margin-bottom: 0.5rem;
+color: #0C4B40;
+letter-spacing: 2px;
+font-weight: 800;
+text-shadow: 0 4px 18px #bca55a55, 0 1px 0 #fffcee;
+animation: glow 2s infinite alternate;
+}
+@keyframes glow {
+0% { text-shadow: 0 4px 18px #bca55a44, 0 1px 0 #fffcee;}
+100% { text-shadow: 0 4px 22px #bca55a, 0 1px 0 #fffcee;}
+}
+.effect-phrase {
+font-size: 1.2rem;
+margin-bottom: 2.1rem;
+margin-top: 1.3rem;
+color: #bca55a;
+font-style: italic;
+letter-spacing: 0.7px;
+font-family: 'Playfair Display', serif;
+text-shadow: 0 2px 8px #efe4c770;
+animation: floating 4s ease-in-out infinite;
+}
+@keyframes floating {
+0%,100% { transform: translateY(0); }
+40% { transform: translateY(-8px); }
+65% { transform: translateY(-2px);}
+}
+.iframe-container {
+position: relative;
+width: 95%;
+max-width: 900px;
+margin: 0 auto 1.7rem auto;
+padding-bottom: 48%;
+height: 0;
+border-radius: 18px;
+overflow: hidden;
+box-shadow: 0 0 0 #fff, 0 6px 40px #bca55a73;
+transition: box-shadow 0.5s;
+background: #faf4de;
+border: 2.2px solid #bca55a;
+animation: pop-shadow 1.5s infinite alternate;
+}
+@keyframes pop-shadow {
+0% { box-shadow: 0 6px 40px #bca55a70;}
+100% { box-shadow: 0 12px 80px #bca55acd;}
+}
+.iframe-container iframe {
+position: absolute;
+top: 0; left: 0; width: 100%; height: 100%;
+border: none; border-radius: 18px;
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.3/dist/confetti.browser.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-
-  <h1>Classifica</h1>
-  <div class="effect-phrase">
-    “Le menti più brillanti hanno lasciato un segno: ecco la vostra scalata nella leggenda.”
-  </div>
-
-  <div class="iframe-container">
-    <iframe 
-      id="classificaFrame"
-      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSfi1Jr0wHKlblqJGz2xDyZO67H1DPOQBFNLDgXhcLBgDw4MUAP75dCpLUo1wT2C2RhfjUnB2sqts0D/pubhtml?gid=1114325577&single=true&widget=true&headers=false"
-      allowfullscreen
-      loading="lazy"
-      title="Classifica Tappa 12"></iframe>
-  </div>
-
-  <div class="nav-buttons">
-    <a href="tappa12.html" class="button" aria-label="Vai alla pagina Tappa 12">➡ Vai alla Tappa 12</a>
-    <a href="index.html" class="back-link" aria-label="Torna alla pagina principale">⬅ Torna alla pagina principale</a>
-  </div>
-
-  <script>
-    setInterval(function() {
-      var iframe = document.getElementById('classificaFrame');
-      if (iframe) {
-        iframe.src = iframe.src;
+<h1>Classifica</h1>
+<div id="winnerAnnounce" style="margin: 18px 0; font-size: 1.25rem; font-weight: 600;">
+  <span id="winnerName" style="color:#bca55a;"></span>
+  <span id="winnerIcon" style="display:none;"><i class="fa-solid fa-trophy fa-lg" style="color: gold; margin-left:10px;"></i></span>
+</div>
+<div class="effect-phrase">
+“Le menti più brillanti hanno lasciato un segno: ecco la vostra scalata nella leggenda.”
+</div>
+<div class="iframe-container">
+<iframe
+id="classificaFrame"
+src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSfi1Jr0wHKlblqJGz2xDyZO67H1DPOQBFNLDgXhcLBgDw4MUAP75dCpLUo1wT2C2RhfjUnB2sqts0D/pubhtml?gid=1114325577&single=true&widget=true&headers=false"
+allowfullscreen
+loading="lazy"
+title="Classifica Tappa 12"></iframe>
+</div>
+<script>
+const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSfi1Jr0wHKlblqJGz2xDyZO67H1DPOQBFNLDgXhcLBgDw4MUAP75dCpLUo1wT2C2RhfjUnB2sqts0D/pub?gid=1114325577&single=true&output=csv';
+function showWinner() {
+  fetch(CSV_URL)
+    .then(r => r.text())
+    .then(text => {
+      let lines = text.trim().split('\n');
+      // Trova la prima riga NON vuota e ignorare le eventuali precedenti
+      let headerLineIdx = lines.findIndex(l => l.toLowerCase().includes('squadra'));
+      if(headerLineIdx === -1) {
+        document.getElementById('winnerName').textContent = "Intestazione non trovata";
+        document.getElementById('winnerIcon').style.display = 'none';
+        return;
       }
-    }, 30000); // aggiorna ogni 30 secondi
-  </script>
+      let headers = lines[headerLineIdx].split(',');
+      // Trova la prima riga di dati dopo le intestazioni valida
+      let dataLineIdx = headerLineIdx+1;
+      while (lines[dataLineIdx] && lines[dataLineIdx].replace(/,/g,'').trim() === '') { dataLineIdx++; }
+      if (!lines[dataLineIdx]) {
+        document.getElementById('winnerName').textContent = "Nessun dato disponibile";
+        document.getElementById('winnerIcon').style.display = 'none';
+        return;
+      }
+      let first = lines[dataLineIdx].split(',');
+      let idx = headers.findIndex(h => h.trim().toLowerCase() === 'squadra');
+      let winner = (idx >= 0 && first[idx]) ? first[idx].trim() : '';
+      if (winner) {
+        document.getElementById('winnerName').textContent = `Vincitore: ${winner}`;
+        document.getElementById('winnerIcon').style.display = 'inline-block';
+        confetti({ spread: 90, origin: { y: 0.2 } });
+      } else {
+        document.getElementById('winnerName').textContent = "Classifica in aggiornamento...";
+        document.getElementById('winnerIcon').style.display = 'none';
+      }
+    })
+    .catch(() => {
+      document.getElementById('winnerName').textContent = "Errore caricamento vincitore";
+      document.getElementById('winnerIcon').style.display = 'none';
+    });
+}
+showWinner();
+setInterval(showWinner, 30000); // aggiorna ogni 30s
 
+setInterval(function() {
+  var iframe = document.getElementById('classificaFrame');
+  if (iframe) {
+    iframe.src = iframe.src;
+  }
+}, 30000); // aggiorna ogni 30 secondi l'iframe
+</script>
 </body>
 </html>
