@@ -1,212 +1,82 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8" />
-<title>Classifica</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<style>
-body {
-min-height: 100vh;
-margin: 0;
-padding: 0 20px 40px;
-background: linear-gradient(135deg, #fffcef 60%, #f7e7bf 100%);
-font-family: 'Playfair Display', serif;
-color: #195E40;
-text-align: center;
-overflow-x: hidden;
-}
-h1 {
-font-size: 2.6rem;
-margin-top: 2.3rem;
-margin-bottom: 0.5rem;
-color: #0C4B40;
-letter-spacing: 2px;
-font-weight: 800;
-text-shadow: 0 4px 18px #bca55a55, 0 1px 0 #fffcee;
-animation: glow 2s infinite alternate;
-}
-@keyframes glow {
-0% { text-shadow: 0 4px 18px #bca55a44, 0 1px 0 #fffcee;}
-100% { text-shadow: 0 4px 22px #bca55a, 0 1px 0 #fffcee;}
-}
-.effect-phrase {
-font-size: 1.2rem;
-margin-bottom: 2.1rem;
-margin-top: 1.3rem;
-color: #bca55a;
-font-style: italic;
-letter-spacing: 0.7px;
-font-family: 'Playfair Display', serif;
-text-shadow: 0 2px 8px #efe4c770;
-animation: floating 4s ease-in-out infinite;
-}
-@keyframes floating {
-0%,100% { transform: translateY(0); }
-40% { transform: translateY(-8px); }
-65% { transform: translateY(-2px);}
-}
-.iframe-container {
-position: relative;
-width: 95%;
-max-width: 900px;
-margin: 0 auto 1.7rem auto;
-padding-bottom: 48%;
-height: 0;
-border-radius: 18px;
-overflow: hidden;
-box-shadow: 0 0 0 #fff, 0 6px 40px #bca55a73;
-transition: box-shadow 0.5s;
-background: #faf4de;
-border: 2.2px solid #bca55a;
-animation: pop-shadow 1.5s infinite alternate;
-}
-@keyframes pop-shadow {
-0% { box-shadow: 0 6px 40px #bca55a70;}
-100% { box-shadow: 0 12px 80px #bca55acd;}
-}
-.iframe-container iframe {
-position: absolute;
-top: 0; left: 0; width: 100%; height: 100%;
-border: none; border-radius: 18px;
-}
-/* Nuovo banner celebrativo */
-#celebrationBanner {
-  margin-bottom: 15px;
-}
-#bannerText {
-  display: inline-block;
-  background: linear-gradient(90deg,#fffdad,#ffe37e,#ffd551,#ffb63f);
-  color: #0C4B40;
-  font-size: 2.1rem;
-  font-weight: 900;
-  border-radius: 20px;
-  padding: 15px 32px;
-  box-shadow: 0 8px 24px #e0be6255;
-  transform: scale(0.6);
-  opacity: 0;
-  transition: transform 0.7s cubic-bezier(.5,-0.7,.4,1.95), opacity 0.8s;
-}
-/* Stile testo vincitore */
-#winnerName {
-  color:#fc9803;
-  font-size:2.2rem;
-  font-weight:900;
-  text-shadow:0 4px 24px #ffd35077, 0 1px 0 #fffcee;
-  letter-spacing: 1.5px;
-  background:#fff7e1;
-  padding: 6px 20px;
-  border-radius: 15px;
-  box-shadow: 0px 4px 20px #ffe6a055;
-  display: inline-block;
-  margin-bottom: 4px;
-}
-#winnerIcon {
-  color: gold;
-  margin-left: 10px;
-  font-size: 1.3rem;
-  vertical-align: middle;
-  display: none;
-}
-</style>
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.3/dist/confetti.browser.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <title>Classifica</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      background: #fffcef;
+      font-family: 'Playfair Display', serif;
+      color: #195E40;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #0C4B40;
+    }
+    .iframe-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 70%;
+      height: 0;
+      overflow: hidden;
+      border: 2px solid #bca55a;
+      border-radius: 12px;
+    }
+    .iframe-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    a {
+      display: inline-block;
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #fff;
+      background-color: #0C4B40;
+      padding: 0.8rem 1.5rem;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    a:hover {
+      background-color: #195E40;
+    }
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      .iframe-container {
+        padding-bottom: 60%;
+      }
+    }
+    @media (min-width: 1200px) {
+      .iframe-container {
+        padding-bottom: 50%;
+      }
+    }
+  </style>
 </head>
 <body>
-<h1>Classifica</h1>
 
-<div id="celebrationBanner" style="display:none;">
-  <span id="bannerText">Congratulazioni alla squadra vincitrice!</span>
-</div>
+  <h1>Classifica</h1>
 
-<div id="winnerAnnounce">
-  <span id="winnerName"></span>
-  <span id="winnerIcon"><i class="fa-solid fa-trophy"></i></span>
-</div>
+  <div class="iframe-container">
+    <iframe 
+      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSfi1Jr0wHKlblqJGz2xDyZO67H1DPOQBFNLDgXhcLBgDw4MUAP75dCpLUo1wT2C2RhfjUnB2sqts0D/pubhtml?gid=1114325577&single=true&widget=true&headers=false">
+    </iframe>
+  </div>
 
-<div class="effect-phrase">
-“Le menti più brillanti hanno lasciato un segno: ecco la vostra scalata nella leggenda.”
-</div>
-<div class="iframe-container">
-<iframe
-id="classificaFrame"
-src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSfi1Jr0wHKlblqJGz2xDyZO67H1DPOQBFNLDgXhcLBgDw4MUAP75dCpLUo1wT2C2RhfjUnB2sqts0D/pubhtml?gid=1114325577&single=true&widget=true&headers=false"
-allowfullscreen
-loading="lazy"
-title="Classifica Tappa 12"></iframe>
-</div>
-<script>
-const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSfi1Jr0wHKlblqJGz2xDyZO67H1DPOQBFNLDgXhcLBgDw4MUAP75dCpLUo1wT2C2RhfjUnB2sqts0D/pub?gid=1114325577&single=true&output=csv';
+  <a href="index.html">⬅ Torna alla pagina principale</a>
 
-function showWinner() {
-  fetch(CSV_URL)
-    .then(r => r.text())
-    .then(text => {
-      let lines = text.trim().split('\n');
-      let headerLineIdx = lines.findIndex(l => l.toLowerCase().includes('squadra'));
-      if(headerLineIdx === -1) {
-        document.getElementById('winnerName').textContent = "Intestazione non trovata";
-        document.getElementById('winnerIcon').style.display = 'none';
-        document.getElementById('celebrationBanner').style.display = 'none';
-        return;
-      }
-      let headers = lines[headerLineIdx].split(',');
-      let dataLineIdx = headerLineIdx + 1;
-      while (lines[dataLineIdx] && lines[dataLineIdx].replace(/,/g,'').trim() === '') { dataLineIdx++; }
-      if (!lines[dataLineIdx]) {
-        document.getElementById('winnerName').textContent = "Nessun dato disponibile";
-        document.getElementById('winnerIcon').style.display = 'none';
-        document.getElementById('celebrationBanner').style.display = 'none';
-        return;
-      }
-      let first = lines[dataLineIdx].split(',');
-      let idx = headers.findIndex(h => h.trim().toLowerCase() === 'squadra');
-      let winner = (idx >= 0 && first[idx]) ? first[idx].trim() : '';
-      if (winner) {
-        document.getElementById('winnerName').textContent = `Vincitore: ${winner}`;
-        document.getElementById('winnerIcon').style.display = 'inline-block';
-        const banner = document.getElementById('celebrationBanner');
-        const bannerText = document.getElementById('bannerText');
-        if(banner && bannerText){
-          banner.style.display="block";
-          setTimeout(function(){
-            bannerText.style.transform="scale(1)";
-            bannerText.style.opacity="1";
-          },200);
-        }
-        confetti({
-          particleCount: 120,
-          spread: 160,
-          origin: { y: 0.3 },
-          colors: ['#ffe066', '#fab005', '#ff922b', '#74c69d', '#5f9ea0', '#e76f51']
-        });
-        setTimeout(function(){
-          confetti({
-            particleCount: 90, 
-            spread: 100, 
-            origin: {y: 0.2}, 
-            scalar:2 
-          }); 
-        },700);
-      } else {
-        document.getElementById('winnerName').textContent = "Classifica in aggiornamento...";
-        document.getElementById('winnerIcon').style.display = 'none';
-        document.getElementById('celebrationBanner').style.display = 'none';
-      }
-    })
-    .catch(() => {
-      document.getElementById('winnerName').textContent = "Errore caricamento vincitore";
-      document.getElementById('winnerIcon').style.display = 'none';
-      document.getElementById('celebrationBanner').style.display = 'none';
-    });
-}
-showWinner();
-setInterval(showWinner, 30000); 
-setInterval(function() {
-  var iframe = document.getElementById('classificaFrame');
-  if (iframe) {
-    iframe.src = iframe.src;
-  }
-}, 30000);
-</script>
 </body>
 </html>
