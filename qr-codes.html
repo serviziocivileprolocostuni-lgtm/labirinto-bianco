@@ -1,75 +1,14 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-<meta charset="UTF-8">
-<title>QR Code Caccia al Tesoro</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background: #fffcef;
-    color: #0C4B40;
-  }
-  h2 {
-    margin-top: 40px;
-  }
-  .qr-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-  }
-  .qr-item {
-    width: 180px;
-    text-align: center;
-  }
-</style>
-</head>
-<body>
-
-<h1>QR Code delle tappe - Il Labirinto Bianco</h1>
-
-<div class="qr-container" id="qrContainer"></div>
-
-<script>
-  const taps = [
-    {name: "Home", url: "https://prolocostuniprogetti-code.github.io/labirinto-bianco/"},
-    {name: "Tappa 1: Indovinello Porta Nova", url: "https://prolocostuniprogetti-code.github.io/labirinto-bianco/tappa1.html"},
-    {name: "Tappa 2: Fede Popolare", url: "https://prolocostuniprogetti-code.github.io/labirinto-bianco/tappa2.html"},
-    {name: "Tappa 3: Casa della Porta Blu", url: "https://prolocostuniprogetti-code.github.io/labirinto-bianco/tappa3.html"},
-    {name: "Tappa 4: Arco Scoppa", url: "https://prolocostuniprogetti-code.github.io/labirinto-bianco/tappa4.html"},
-    {name: "Tappa 5: Cattedrale", url: "https://prolocostuniprogetti-code.github.io/labirinto-bianco/tappa5.html"},
-    {name: "Tappa 6: Museo Civiltà Preclassiche", url: "https://prolocostuniprogetti-code.github.io/labirinto-bianco/tappa6.html"},
-    {name: "Tappa 7: Chiesa del Purgatorio", url: "https://prolocostuniprogetti-code.github.io/labirinto-bianco/tappa7.html"},
-    {name: "Tappa 8: Palazzo Zevallos (oggi Airoldi)", url: "https://prolocostuniprogetti-code.github.io/labirinto-bianco/tappa8.html"},
-    {name: "Tappa 9: Municipio (evento storico 1860)", url: "https://prolocostuniprogetti-code.github.io/labirinto-bianco/tappa9.html"},
-    {name: "Tappa 10: Colonna di Sant’Oronzo", url: "https://prolocostuniprogetti-code.github.io/labirinto-bianco/tappa10.html"},
-    {name: "Tappa 11: Chiesa del Carmine", url: "https://prolocostuniprogetti-code.github.io/labirinto-bianco/tappa11.html"},
-    {name: "Tappa 12: Porta San Demetrio", url: "https://prolocostuniprogetti-code.github.io/labirinto-bianco/tappa12.html"}
-  ];
-
-  const container = document.getElementById('qrContainer');
-
-  taps.forEach(tap => {
-    const item = document.createElement('div');
-    item.className = 'qr-item';
-
-    const title = document.createElement('h2');
-    title.textContent = tap.name;
-    item.appendChild(title);
-
-    const qrDiv = document.createElement('div');
-    item.appendChild(qrDiv);
-
-    container.appendChild(item);
-
-    new QRCode(qrDiv, {
-      text: tap.url,
-      width: 160,
-      height: 160
-    });
-  });
-</script>
-
-</body>
-</html>
+Nome Tappa,URL
+Tappa 1,https://serviziocivileprolocostuni-lgtm.github.io/labirinto-bianco/index
+Tappa 2,https://serviziocivileprolocostuni-lgtm.github.io/labirinto-bianco/tappa1.html
+Tappa 3,https://serviziocivileprolocostuni-lgtm.github.io/labirinto-bianco/tappa2.html
+Tappa 4,https://serviziocivileprolocostuni-lgtm.github.io/labirinto-bianco/tappa3.html
+Tappa 5,https://serviziocivileprolocostuni-lgtm.github.io/labirinto-bianco/tappa4.html
+Tappa 6,https://serviziocivileprolocostuni-lgtm.github.io/labirinto-bianco/tappa5.html
+Tappa 7,https://serviziocivileprolocostuni-lgtm.github.io/labirinto-bianco/tappa6.html
+Tappa 8,https://serviziocivileprolocostuni-lgtm.github.io/labirinto-bianco/tappa7.html
+Tappa 9,https://serviziocivileprolocostuni-lgtm.github.io/labirinto-bianco/tappa8.html
+Tappa 10,https://serviziocivileprolocostuni-lgtm.github.io/labirinto-bianco/tappa9.html
+Tappa 11,https://serviziocivileprolocostuni-lgtm.github.io/labirinto-bianco/tappa10.html
+Tappa 12,https://serviziocivileprolocostuni-lgtm.github.io/labirinto-bianco/tappa11.html
+Tappa 13,https://serviziocivileprolocostuni-lgtm.github.io/labirinto-bianco/tappa12.html
