@@ -199,43 +199,33 @@ Il cammino si snoda tra enigmi e prove, la mente e il cuore saranno le vostre gu
 </form>
 <iframe src="https://www.youtube.com/embed/kZlM3u2_jo4" title="Video introduttivo Caccia al Tesoro" allowfullscreen></iframe>
 </div>
-<!-- MODIFICA: form nascosto usa GET -->
-<form id="hiddenIscrizioneForm" target="hiddenIframe" method="GET"
-action="https://docs.google.com/forms/d/e/1FAIpQLSde-zbcZ1IE1UmBXeU6Epu1ye7SGoD6pX2i5rWjQjlyweo1og/formResponse"
-style="display: none;">
-<input type="text" name="entry.2030348205" id="hiddenNomeSquadraI" />
-<input type="text" name="entry.467340771" id="hiddenNumPartecipantiI" />
-<input type="text" name="entry.1130952224" id="hiddenTelefonoI" />
-<input type="text" name="entry.1283987470" id="hiddenRegolamentoI" />
-</form>
 <iframe name="hiddenIframe" style="display: none;"></iframe>
 <script>
 const registrationForm = document.getElementById('registrationForm');
 const statusMessage = document.getElementById('statusMessage');
-const hiddenFormI = document.getElementById('hiddenIscrizioneForm');
-const hiddenNomeSquadraI = document.getElementById('hiddenNomeSquadraI');
-const hiddenNumPartecipantiI = document.getElementById('hiddenNumPartecipantiI');
-const hiddenTelefonoI = document.getElementById('hiddenTelefonoI');
-const hiddenRegolamentoI = document.getElementById('hiddenRegolamentoI');
 registrationForm.addEventListener('submit', function(e) {
-e.preventDefault();
-const nomeSquadra = document.getElementById('nomeSquadraInput').value.trim();
-const numPartecipanti = document.getElementById('numPartecipantiInput').value.trim();
-const telefono = document.getElementById('telefonoInput').value.trim();
-const regolamento = document.getElementById('regolamentoInput').value.trim().toLowerCase();
-if (regolamento !== 'sì' && regolamento !== 'si') {
-statusMessage.textContent = 'ERRORE: Devi accettare il regolamento digitando "Sì" (o "si").';
-statusMessage.style.color = '#d32f2f';
-return;
-}
-hiddenNomeSquadraI.value = nomeSquadra;
-hiddenNumPartecipantiI.value = numPartecipanti;
-hiddenTelefonoI.value = telefono;
-hiddenRegolamentoI.value = "Sì (accettato)";
-hiddenFormI.submit();
-statusMessage.textContent = 'Iscrizione completata! I tuoi dati sono stati registrati.';
-statusMessage.style.color = 'var(--color-accent)';
-registrationForm.style.display = 'none';
+  e.preventDefault();
+  const nomeSquadra = document.getElementById('nomeSquadraInput').value.trim();
+  const numPartecipanti = document.getElementById('numPartecipantiInput').value.trim();
+  const telefono = document.getElementById('telefonoInput').value.trim();
+  const regolamento = document.getElementById('regolamentoInput').value.trim().toLowerCase();
+  if (regolamento !== 'sì' && regolamento !== 'si') {
+    statusMessage.textContent = 'ERRORE: Devi accettare il regolamento digitando "Sì" (o "si").';
+    statusMessage.style.color = '#d32f2f';
+    return;
+  }
+  // INVIO VIA GET (come fa il link diretto)
+  const baseUrl = "https://docs.google.com/forms/d/e/1FAIpQLSde-zbcZ1IE1UmBXeU6Epu1ye7SGoD6pX2i5rWjQjlyweo1og/formResponse";
+  const params = new URLSearchParams({
+    "entry.2030348205": nomeSquadra,
+    "entry.467340771": numPartecipanti,
+    "entry.1130952224": telefono,
+    "entry.1283987470": "SI"
+  });
+  document.querySelector("iframe[name='hiddenIframe']").src = baseUrl + "?" + params.toString();
+  statusMessage.textContent = 'Iscrizione completata! I tuoi dati sono stati registrati.';
+  statusMessage.style.color = 'var(--color-accent)';
+  registrationForm.style.display = 'none';
 });
 </script>
 </body>
