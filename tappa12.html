@@ -201,7 +201,7 @@ Le antiche mura di Ostuni, erette per proteggere la città, custodiscono un varc
 <button type="button" class="choice-btn" value="lecce">Lecce</button>
 <button type="button" class="choice-btn" value="bari">Bari</button>
 </div>
-<p id="penalty1">Risposta sbagliata! Riprova tra <span id="countdown1">15</span> secondi.</p>
+<p id="penalty1">Risposta sbagliata! Riprova tra <span id="countdown1">30</span> secondi.</p>
 <p id="status1"></p>
 <button type="submit" id="submitBtn1" disabled>Verifica Risposta</button>
 </form>
@@ -240,100 +240,102 @@ const countdown1 = document.getElementById('countdown1');
 const finalForm = document.getElementById('finalForm');
 const finalStatus = document.getElementById('finalStatus');
 unlockBtn.disabled = true;
+
 codiceAccesso.addEventListener('input', () => {
-unlockBtn.disabled = codiceAccesso.value.trim() === '';
+  unlockBtn.disabled = codiceAccesso.value.trim() === '';
 });
 unlockBtn.addEventListener('click', e => {
-e.preventDefault();
-const codice = codiceAccesso.value.trim().toLowerCase();
-if (codice === 'fede') {
-introCode.style.display = 'none';
-step12.style.display = 'block';
-choiceBtnsEnigma1.forEach(b => b.disabled = false);
-} else {
-introStatus.textContent = 'Codice non valido! Riprova.';
-codiceAccesso.value = '';
-unlockBtn.disabled = true;
-setTimeout(() => introStatus.textContent = '', 3000);
-}
+  e.preventDefault();
+  const codice = codiceAccesso.value.trim().toLowerCase();
+  if (codice === 'fede') {
+    introCode.style.display = 'none';
+    step12.style.display = 'block';
+    choiceBtnsEnigma1.forEach(b => b.disabled = false);
+  } else {
+    introStatus.textContent = 'Codice non valido! Riprova.';
+    codiceAccesso.value = '';
+    unlockBtn.disabled = true;
+    setTimeout(() => introStatus.textContent = '', 3000);
+  }
 });
 choiceBtnsEnigma1.forEach(btn => {
-btn.addEventListener('click', () => {
-choiceBtnsEnigma1.forEach(b => b.classList.remove('selected'));
-btn.classList.add('selected');
-submitBtn1.disabled = false;
-status1.textContent = '';
+  btn.addEventListener('click', () => {
+    choiceBtnsEnigma1.forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    submitBtn1.disabled = false;
+    status1.textContent = '';
+  });
 });
-});
+
+// Penalità ora di 30 secondi per ogni risposta sbagliata
 function startPenalty(penaltyElem, submitBtn, choiceBtns, countdownElem) {
-let sec = 15;
-penaltyElem.style.display = 'block';
-submitBtn.disabled = true;
-choiceBtns.forEach(b => b.disabled = true);
-countdownElem.textContent = sec;
-const interval = setInterval(() => {
-sec--;
-countdownElem.textContent = sec;
-if (sec <= 0) {
-clearInterval(interval);
-penaltyElem.style.display = 'none';
-submitBtn.disabled = false;
-choiceBtns.forEach(b => b.disabled = false);
-choiceBtns.forEach(b => b.classList.remove('selected'));
-}
-}, 1000);
+  let sec = 30;
+  penaltyElem.style.display = 'block';
+  submitBtn.disabled = true;
+  choiceBtns.forEach(b => b.disabled = true);
+  countdownElem.textContent = sec;
+  const interval = setInterval(() => {
+    sec--;
+    countdownElem.textContent = sec;
+    if (sec <= 0) {
+      clearInterval(interval);
+      penaltyElem.style.display = 'none';
+      submitBtn.disabled = false;
+      choiceBtns.forEach(b => b.disabled = false);
+      choiceBtns.forEach(b => b.classList.remove('selected'));
+    }
+  }, 1000);
 }
 enigma1Form.addEventListener('submit', e => {
-e.preventDefault();
-const correctAnswer1 = 'brindisi';
-const selected = enigma1Form.querySelector('.choice-btn.selected');
-if (!selected) {
-status1.textContent = 'ERRORE: seleziona una risposta.';
-status1.style.color = '#d32f2f';
-return;
-}
-if (selected.value.toLowerCase() !== correctAnswer1) {
-startPenalty(penalty1, submitBtn1, choiceBtnsEnigma1, countdown1);
-status1.textContent = '';
-return;
-}
-status1.textContent = 'Risposta corretta! Il narratore errante farà il suo ingresso per la prova finale.';
-status1.style.color = 'var(--color-primary)';
-secondEnigmaSection.style.display = 'block';
-finalCodeSection.style.display = 'block';
-submitBtn1.disabled = true;
-choiceBtnsEnigma1.forEach(b => b.disabled = true);
+  e.preventDefault();
+  const correctAnswer1 = 'brindisi';
+  const selected = enigma1Form.querySelector('.choice-btn.selected');
+  if (!selected) {
+    status1.textContent = 'ERRORE: seleziona una risposta.';
+    status1.style.color = '#d32f2f';
+    return;
+  }
+  if (selected.value.toLowerCase() !== correctAnswer1) {
+    startPenalty(penalty1, submitBtn1, choiceBtnsEnigma1, countdown1);
+    status1.textContent = '';
+    return;
+  }
+  status1.textContent = 'Risposta corretta! Il narratore errante farà il suo ingresso per la prova finale.';
+  status1.style.color = 'var(--color-primary)';
+  secondEnigmaSection.style.display = 'block';
+  finalCodeSection.style.display = 'block';
+  submitBtn1.disabled = true;
+  choiceBtnsEnigma1.forEach(b => b.disabled = true);
 });
 finalForm.addEventListener('submit', e => {
-e.preventDefault();
-const team = document.getElementById('teamName').value.trim();
-const code = document.getElementById('secretCode').value.trim().toLowerCase();
-if (!team || !code) {
-finalStatus.textContent = 'Compila entrambi i campi!';
-finalStatus.style.color = 'red';
-return;
-}
-if (code !== 'vittoria') {
-finalStatus.textContent = 'Codice errato. Riprova.';
-finalStatus.style.color = 'red';
-return;
-}
-finalStatus.textContent = 'Codice corretto! Registrazione completata.';
-finalStatus.style.color = 'green';
-finalForm.submit(); // invio dati Google Form
-finalForm.querySelector('button').disabled = true;
-// NON viene fatto alcun redirect
+  e.preventDefault();
+  const team = document.getElementById('teamName').value.trim();
+  const code = document.getElementById('secretCode').value.trim().toLowerCase();
+  if (!team || !code) {
+    finalStatus.textContent = 'Compila entrambi i campi!';
+    finalStatus.style.color = 'red';
+    return;
+  }
+  if (code !== 'vittoria') {
+    finalStatus.textContent = 'Codice errato. Riprova.';
+    finalStatus.style.color = 'red';
+    return;
+  }
+  finalStatus.textContent = 'Codice corretto! Registrazione completata.';
+  finalStatus.style.color = 'green';
+  finalForm.submit(); // invio dati Google Form
+  finalForm.querySelector('button').disabled = true;
 });
 window.addEventListener('DOMContentLoaded', () => {
-let squadra = new URLSearchParams(window.location.search).get('squadra');
-if (!squadra) squadra = localStorage.getItem('nomeSquadra');
-if (squadra) {
-const teamName = document.getElementById('teamName');
-const nameInput = document.getElementById('nomeSquadraInput');
-if(teamName) teamName.value = decodeURIComponent(squadra);
-if(nameInput) nameInput.value = decodeURIComponent(squadra);
-localStorage.setItem('nomeSquadra', decodeURIComponent(squadra));
-}
+  let squadra = new URLSearchParams(window.location.search).get('squadra');
+  if (!squadra) squadra = localStorage.getItem('nomeSquadra');
+  if (squadra) {
+    const teamName = document.getElementById('teamName');
+    const nameInput = document.getElementById('nomeSquadraInput');
+    if(teamName) teamName.value = decodeURIComponent(squadra);
+    if(nameInput) nameInput.value = decodeURIComponent(squadra);
+    localStorage.setItem('nomeSquadra', decodeURIComponent(squadra));
+  }
 });
 </script>
 <iframe name="hiddenIframe" style="display:none;"></iframe>
