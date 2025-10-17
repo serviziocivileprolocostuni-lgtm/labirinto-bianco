@@ -28,20 +28,21 @@
     border: 8px solid #bca44b;
     border-radius: 20px;
     background: #fffde7;
-    padding: 38px 42px 44px;
+    padding: 38px 42px 52px;
     text-align: center;
     box-shadow: 0 0 16px #bca44baa;
     margin-bottom: 25px;
+    position: relative;
   }
-  .loghi {
+  .loghi-labels {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
+    font-size: 1.12rem;
+    font-weight: 600;
     margin-bottom: 18px;
-    align-items: center;
-  }
-  .loghi img {
-    max-height: 50px;
-    max-width: 140px;
+    color: #bca44b;
+    letter-spacing: 0.01em;
   }
   h1 {
     color: #bca44b;
@@ -68,6 +69,23 @@
     line-height: 1.4;
     color: #195E40;
     margin-top: 7px;
+    margin-bottom: 36px;
+  }
+  .firma-labirinto {
+    margin-top: 24px;
+    font-size: 1.23rem;
+    color: #0C4B40;
+    letter-spacing: 0.12em;
+    font-weight: 600;
+    text-align: center;
+  }
+  .datafirma {
+    position: absolute;
+    bottom: 24px;
+    right: 42px;
+    font-size: 1.08rem;
+    color: #195E40;
+    font-style: italic;
   }
   button {
     display: block;
@@ -94,9 +112,9 @@
     ​Avete colto l’anima nascosta della ‘Città Bianca’, vi siete persi e ritrovati nei suoi vicoli, e questo, credeteci, è il successo più grande. Congratulazioni a tutti per aver raggiunto la meta!
   </div>
   <div class="certificato">
-    <div class="loghi">
-      <img src="data:image/jpeg;base64,[BASE64_LOGO_PUGLIA]" alt="Regione Puglia" />
-      <img src="data:image/jpeg;base64,[BASE64_LOGO_PROLOCO]" alt="Pro Loco Ostuni APS" />
+    <div class="loghi-labels">
+      <span>Regione Puglia</span>
+      <span>Pro Loco di Ostuni APS</span>
     </div>
     <h1>Attestato di Partecipazione</h1>
     <div class="sottotitolo">Questo riconoscimento è dedicato alla squadra</div>
@@ -106,50 +124,75 @@
       tra le vie magiche e misteriose del Labirinto Bianco di Ostuni.<br />
       Un viaggio di scoperta, cultura e meraviglia che rimarrà per sempre nel cuore.
     </div>
+    <div class="firma-labirinto">Il Labirinto Bianco 2025</div>
+    <div class="datafirma" id="dataHtml"></div>
   </div>
   <button id="downloadPDF">Scarica attestato PDF</button>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
+    function dataOggiIT() {
+      const d = new Date();
+      return d.toLocaleDateString('it-IT', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+    document.getElementById('dataHtml').textContent = dataOggiIT();
+
     function getParam(name) {
       return new URLSearchParams(window.location.search).get(name);
     }
     const teamName = getParam('squadra') || '[Nome Squadra]';
     document.getElementById('nomeSquadraDisplay').textContent = teamName;
 
-    document.getElementById('downloadPDF').addEventListener('click', function() {
+    document.getElementById('downloadPDF').addEventListener('click', async function() {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF('p', 'mm', 'a4');
-      const LOGO_PUGLIA = 'data:image/jpeg;base64,[BASE64_LOGO_PUGLIA]';
-      const LOGO_PROLOCO = 'data:image/jpeg;base64,[BASE64_LOGO_PROLOCO]';
+      const dataAttuale = dataOggiIT();
 
-      doc.addImage(LOGO_PUGLIA, 'JPEG', 15, 12, 33, 20);
-      doc.addImage(LOGO_PROLOCO, 'JPEG', 162, 12, 33, 33);
+      // Titoli in alto
+      doc.setFont('times', 'bold');
+      doc.setFontSize(13);
+      doc.setTextColor(188, 164, 75);
+      doc.text('Regione Puglia', 16, 19, {align:'left'});
+      doc.text('Pro Loco di Ostuni APS', 198, 19, {align:'right'});
 
+      // Titolo e corpo centrale
       doc.setFont('times', 'bold');
       doc.setFontSize(28);
-      doc.setTextColor('#bca44b');
+      doc.setTextColor(188, 164, 75);
       doc.text('Attestato di Partecipazione', 105, 55, {align:'center'});
 
       doc.setFont('times', 'normal');
       doc.setFontSize(17);
-      doc.setTextColor('#195E40');
+      doc.setTextColor(25, 94, 64);
       doc.text('Questo riconoscimento è dedicato alla squadra', 105, 72, {align:'center'});
 
       doc.setFont('times', 'bolditalic');
       doc.setFontSize(22);
-      doc.setTextColor('#b37800');
+      doc.setTextColor(179, 120, 0);
       doc.text(teamName, 105, 93, {align:'center'});
 
       doc.setFont('times', 'italic');
       doc.setFontSize(15);
-      doc.setTextColor('#195E40');
+      doc.setTextColor(25, 94, 64);
       doc.text('che ha saputo perdere sé stessa per ritrovarsi', 105, 110, {align:'center'});
       doc.text('tra le vie magiche e misteriose del Labirinto Bianco di Ostuni.', 105, 120, {align:'center'});
       doc.text('Un viaggio di scoperta, cultura e meraviglia che rimarrà per sempre nel cuore.', 105, 135, {align:'center'});
 
+      // Bordo dorato
       doc.setDrawColor(188, 164, 75);
       doc.setLineWidth(2.8);
       doc.rect(8, 8, 194, 281, 'S');
+
+      // In basso al centro: firma
+      doc.setFont('times', 'bold');
+      doc.setFontSize(14);
+      doc.setTextColor(12, 75, 64);
+      doc.text('Il Labirinto Bianco 2025', 105, 260, {align:'center'});
+
+      // Data in basso a destra
+      doc.setFont('times', 'italic');
+      doc.setFontSize(12);
+      doc.setTextColor(25, 94, 64);
+      doc.text(dataAttuale, 198, 275, {align:'right'});
 
       doc.save('attestato-labirinto.pdf');
     });
