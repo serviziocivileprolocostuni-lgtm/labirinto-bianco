@@ -1,82 +1,158 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <title>Classifica</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      background: #fffcef;
-      font-family: 'Playfair Display', serif;
-      color: #195E40;
-      margin: 0;
-      padding: 20px;
-      box-sizing: border-box;
-      text-align: center;
-    }
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: #0C4B40;
-    }
-    .iframe-container {
-      position: relative;
-      width: 100%;
-      padding-bottom: 70%;
-      height: 0;
-      overflow: hidden;
-      border: 2px solid #bca55a;
-      border-radius: 12px;
-    }
-    .iframe-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-    a {
-      display: inline-block;
-      margin-top: 1.5rem;
-      font-size: 1.1rem;
-      font-weight: bold;
-      color: #fff;
-      background-color: #0C4B40;
-      padding: 0.8rem 1.5rem;
-      border-radius: 10px;
-      text-decoration: none;
-      transition: background 0.3s;
-    }
-    a:hover {
-      background-color: #195E40;
-    }
-    @media (min-width: 768px) {
-      h1 {
-        font-size: 2.5rem;
-      }
-      .iframe-container {
-        padding-bottom: 60%;
-      }
-    }
-    @media (min-width: 1200px) {
-      .iframe-container {
-        padding-bottom: 50%;
-      }
-    }
-  </style>
+<meta charset="UTF-8" />
+<title>Classifica - Attestato</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  body {
+    font-family: 'Playfair Display', serif;
+    background: #f8f5eb;
+    color: #0C4B40;
+    max-width: 720px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+  .intro-text {
+    background: #fffde7;
+    border: 3px solid #bca44b;
+    border-radius: 18px;
+    padding: 24px 30px;
+    font-style: italic;
+    font-size: 1.3rem;
+    margin-bottom: 42px;
+    box-shadow: 0 0 12px #bca44b88;
+    text-align: center;
+  }
+  .certificato {
+    border: 8px solid #bca44b;
+    border-radius: 20px;
+    background: #fffde7;
+    padding: 38px 42px 44px;
+    text-align: center;
+    box-shadow: 0 0 16px #bca44baa;
+    margin-bottom: 25px;
+  }
+  .loghi {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    align-items: center;
+  }
+  .loghi img {
+    max-height: 50px;
+    max-width: 140px;
+  }
+  h1 {
+    color: #bca44b;
+    font-size: 2.8rem;
+    font-weight: bold;
+    margin: 20px 0 12px;
+  }
+  .sottotitolo {
+    font-size: 1.3rem;
+    color: #195E40;
+    margin-bottom: 25px;
+  }
+  .nome-squadra {
+    font-size: 2.2rem;
+    font-style: italic;
+    font-weight: bold;
+    color: #b37800;
+    margin: 15px 0 12px;
+    text-shadow: 0 2px 7px #fff6;
+  }
+  .testo {
+    font-size: 1.3rem;
+    font-style: italic;
+    line-height: 1.4;
+    color: #195E40;
+    margin-top: 7px;
+  }
+  button {
+    display: block;
+    padding: 14px 36px;
+    font-size: 1.2rem;
+    background: #bca44b;
+    color: #0C4B40;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 0 auto 40px;
+  }
+  button:hover {
+    background: #a8903a;
+  }
+</style>
 </head>
 <body>
-
-  <h1>Classifica</h1>
-
-  <div class="iframe-container">
-    <iframe 
-      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSfi1Jr0wHKlblqJGz2xDyZO67H1DPOQBFNLDgXhcLBgDw4MUAP75dCpLUo1wT2C2RhfjUnB2sqts0D/pubhtml?gid=1114325577&single=true&widget=true&headers=false">
-    </iframe>
+  <div class="intro-text">
+    Amici esploratori,<br>
+    Non cercate classifiche finali, né nomi sul gradino più alto del podio. La vera ricompensa di questa avventura non è un trofeo, ma l’esperienza stessa.<br>
+    ​Il tesoro non è un oggetto da conquistare, ma il completamento del percorso che vi ha condotti nel cuore segreto della città: aver scoperto e attraversato il Labirinto Bianco di Ostuni.<br>
+    ​Avete colto l’anima nascosta della ‘Città Bianca’, vi siete persi e ritrovati nei suoi vicoli, e questo, credeteci, è il successo più grande. Congratulazioni a tutti per aver raggiunto la meta!
   </div>
+  <div class="certificato">
+    <div class="loghi">
+      <img src="data:image/jpeg;base64,[BASE64_LOGO_PUGLIA]" alt="Regione Puglia" />
+      <img src="data:image/jpeg;base64,[BASE64_LOGO_PROLOCO]" alt="Pro Loco Ostuni APS" />
+    </div>
+    <h1>Attestato di Partecipazione</h1>
+    <div class="sottotitolo">Questo riconoscimento è dedicato alla squadra</div>
+    <div class="nome-squadra" id="nomeSquadraDisplay">[Nome Squadra]</div>
+    <div class="testo">
+      che ha saputo perdere sé stessa per ritrovarsi<br />
+      tra le vie magiche e misteriose del Labirinto Bianco di Ostuni.<br />
+      Un viaggio di scoperta, cultura e meraviglia che rimarrà per sempre nel cuore.
+    </div>
+  </div>
+  <button id="downloadPDF">Scarica attestato PDF</button>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script>
+    function getParam(name) {
+      return new URLSearchParams(window.location.search).get(name);
+    }
+    const teamName = getParam('squadra') || '[Nome Squadra]';
+    document.getElementById('nomeSquadraDisplay').textContent = teamName;
 
-  <a href="index.html">⬅ Torna alla pagina principale</a>
+    document.getElementById('downloadPDF').addEventListener('click', function() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF('p', 'mm', 'a4');
+      const LOGO_PUGLIA = 'data:image/jpeg;base64,[BASE64_LOGO_PUGLIA]';
+      const LOGO_PROLOCO = 'data:image/jpeg;base64,[BASE64_LOGO_PROLOCO]';
 
+      doc.addImage(LOGO_PUGLIA, 'JPEG', 15, 12, 33, 20);
+      doc.addImage(LOGO_PROLOCO, 'JPEG', 162, 12, 33, 33);
+
+      doc.setFont('times', 'bold');
+      doc.setFontSize(28);
+      doc.setTextColor('#bca44b');
+      doc.text('Attestato di Partecipazione', 105, 55, {align:'center'});
+
+      doc.setFont('times', 'normal');
+      doc.setFontSize(17);
+      doc.setTextColor('#195E40');
+      doc.text('Questo riconoscimento è dedicato alla squadra', 105, 72, {align:'center'});
+
+      doc.setFont('times', 'bolditalic');
+      doc.setFontSize(22);
+      doc.setTextColor('#b37800');
+      doc.text(teamName, 105, 93, {align:'center'});
+
+      doc.setFont('times', 'italic');
+      doc.setFontSize(15);
+      doc.setTextColor('#195E40');
+      doc.text('che ha saputo perdere sé stessa per ritrovarsi', 105, 110, {align:'center'});
+      doc.text('tra le vie magiche e misteriose del Labirinto Bianco di Ostuni.', 105, 120, {align:'center'});
+      doc.text('Un viaggio di scoperta, cultura e meraviglia che rimarrà per sempre nel cuore.', 105, 135, {align:'center'});
+
+      doc.setDrawColor(188, 164, 75);
+      doc.setLineWidth(2.8);
+      doc.rect(8, 8, 194, 281, 'S');
+
+      doc.save('attestato-labirinto.pdf');
+    });
+  </script>
 </body>
 </html>
