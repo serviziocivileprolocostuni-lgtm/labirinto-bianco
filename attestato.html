@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<title>Attestato di Partecipazione</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+  body {
+    font-family: 'Playfair Display', serif;
+    background: #fdf6e3;
+    color: #0C4B40;
+    padding: 50px;
+    text-align: center;
+  }
+  .certificato {
+    border: 8px solid #bca44b;
+    padding: 50px;
+    max-width: 650px;
+    margin: auto;
+    box-shadow: 0 0 15px rgba(188, 164, 75, 0.7);
+    background: #fffde7;
+  }
+  .logo-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin-bottom: 30px;
+  }
+  .logo-row img {
+    height: 75px;
+    object-fit: contain;
+    filter: drop-shadow(0px 2px 7px #bca44b40);
+  }
+  h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    color: #bca44b;
+  }
+  .nome-squadra {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin: 25px 0;
+    color: #b37800;
+    text-shadow: 0 0 5px #bca44b;
+    font-style: italic;
+  }
+  p {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    font-style: italic;
+    margin-bottom: 25px;
+    color: #195E40;
+  }
+  button {
+    margin-top: 40px;
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    background: #bca44b;
+    color: #0C4B40;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 700;
+  }
+  button:hover {
+    background: #a8903a;
+  }
+</style>
+</head>
+<body>
+  <div class="certificato">
+    <div class="logo-row">
+      <img src="LOGO-TONDO.jpg" alt="Pro Loco Ostuni"/>
+      <img src="regione-puglia.jpg" alt="Regione Puglia"/>
+    </div>
+    <h1>Attestato di Partecipazione</h1>
+    <p>Questo riconoscimento è dedicato alla squadra</p>
+    <div class="nome-squadra" id="nomeSquadra">[Nome Squadra]</div>
+    <p>che ha saputo perdere sé stessa per ritrovarsi<br>
+    tra le vie magiche e misteriose del Labirinto Bianco di Ostuni.</p>
+    <p>Un viaggio di scoperta, cultura e meraviglia che rimarrà per sempre nel cuore.</p>
+  </div>
+
+  <button id="downloadBtn">Scarica questo attestato in PDF</button>
+
+  <script>
+    const { jsPDF } = window.jspdf;
+    const urlParams = new URLSearchParams(window.location.search);
+    const squadra = urlParams.get('team') || '[Nome Squadra]';
+    document.getElementById('nomeSquadra').textContent = decodeURIComponent(squadra);
+
+    // Stringhe base64 immagini pronte (estratte dai tuoi loghi jpeg)
+    const LOGO_TONDO_BASE64 = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAAAAAAAD/4QAuRXhpZgAATU0AKgAAAAgAAkAAAAMAAAABAAAAAEABAAEAAAABAAAAAAAAAAD/2wBDAAoHBwkHBgoJCAkLCwoMDxkQDw4ODx4WFxIZJCAmJSMgIyIoLTkwKCo2KyIjMkQyNjs9QEBAJjBGS0U+Sjk/QD3/2wBDAQsLCw8NDx0QEB09KSMpPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT3/wAARCAHaAdoDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD2WiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACkoyPWqdzqdtbEhpQXH8K8n8qidSMFeTs ..."; // Troncato
+    const REGIONE_PUGLIA_BASE64 = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAoHBwkHBgoICAgLCgoVDxkQEBwSExYYGB0aGCEbHxsbHR0bGx4ZJSclJCYlHR0kJCcnKCNbMjIyPSw0MEBIPzM0NDc6PjwwODI7Oj/2wBDAQoKCgoMDxkODA8ODwoUFhYRFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUV/3QAEAAfABQBBAREA/8QAHAABAAEFAQEAAAAAAAAAAAAAAAYHBuyQIDBEF/8QAOBABAAEDAwIEBAUDAgYDAAAAAQIDEQQFEiExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD2WiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACkoyPWqdzqdtbEhpQXH8K8n8qidSMFeTs ..."; // Troncato
+
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      const doc = new jsPDF();
+
+      doc.addImage(LOGO_TONDO_BASE64, 'JPEG', 45, 15, 32, 32);
+      doc.addImage(REGIONE_PUGLIA_BASE64, 'JPEG', 128, 15, 32, 32);
+
+      doc.setFont('times', 'bold');
+      doc.setFontSize(28);
+      doc.setTextColor('#bca44b');
+      doc.text('Attestato di Partecipazione', 105, 55, null, null, 'center');
+
+      doc.setFont('times', 'normal');
+      doc.setFontSize(18);
+      doc.setTextColor('#0C4B40');
+      doc.text('Questo riconoscimento è dedicato alla squadra', 105, 75, null, null, 'center');
+
+      doc.setFontSize(24);
+      doc.setFont('times', 'bolditalic');
+      doc.setTextColor('#b37800');
+      doc.text(decodeURIComponent(squadra), 105, 95, null, null, 'center');
+
+      doc.setFont('times', 'italic');
+      doc.setFontSize(16);
+      doc.setTextColor('#0C4B40');
+      doc.text('che ha saputo perdere sé stessa per ritrovarsi', 105, 113, null, null, 'center');
+      doc.text('tra le vie magiche e misteriose del Labirinto Bianco di Ostuni.', 105, 121, null, null, 'center');
+      doc.text('Un viaggio di scoperta, cultura e meraviglia che rimarrà per sempre nel cuore.', 105, 135, null, null, 'center');
+
+      doc.save(`attestato_${squadra}.pdf`);
+    });
+  </script>
+</body>
+</html>
