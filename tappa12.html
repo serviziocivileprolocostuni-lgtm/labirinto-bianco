@@ -2,9 +2,10 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8" />
-<title>Tappa 12: Enigma</title>
+<title>Tappa 12: Enigmi e Attestato</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root {
   --color-primary: #0C4B40;
@@ -18,13 +19,10 @@ body {
   font-family: 'Quicksand', Arial, sans-serif;
   color: var(--color-text);
   min-height: 100vh;
-  background-image: url('img/your-background.jpg');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
   padding: 25px 0;
   margin: 0;
 }
@@ -39,48 +37,19 @@ body {
   padding: 36px 30px 40px 30px;
   text-align: center;
 }
-h1 {
+h1, h2 {
   font-family: 'Playfair Display', serif;
-  font-size: 2.6rem;
   color: var(--color-primary);
+}
+h1 {
+  font-size: 2.6rem;
   margin-bottom: 20px;
   border-bottom: 2.5px solid var(--color-accent);
   padding-bottom: 7px;
 }
-.reference-section {
-  text-align: left;
-  font-family: 'Quicksand', Arial, sans-serif;
-  font-size: 1.1rem;
-  color: var(--color-text);
-  line-height: 1.5;
-  white-space: pre-line;
-  margin-bottom: 30px;
-}
-label {
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  font-size: 1.1rem;
-  color: var(--color-accent);
-  display: block;
-  margin-bottom: 10px;
-}
-input[type="password"], input[type="text"] {
-  width: 100%;
-  font-family: inherit;
-  font-size: 1.1rem;
-  padding: 14px 16px;
-  border-radius: 12px;
-  border: 2px solid var(--color-accent);
-  margin-bottom: 20px;
-  box-sizing: border-box;
-  background: #fffde7;
-  color: var(--color-primary);
-  letter-spacing: 0.5px;
-}
-input[type="password"]:focus, input[type="text"]:focus {
-  border-color: var(--color-primary);
-  background: #fdf6cd;
-  outline: none;
+h2 {
+  font-size: 1.9rem;
+  margin-bottom: 15px;
 }
 button {
   width: 100%;
@@ -96,17 +65,47 @@ button {
   letter-spacing: 1px;
   box-shadow: 0 3px 12px #bca44b77;
   transition: background-color 0.3s;
-  margin-top: 4px;
   margin-bottom: 20px;
-}
-button:hover:not(:disabled) {
-  background-color: #165c4f;
 }
 button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
-.choices { display: flex; justify-content: center; margin-bottom: 30px; flex-wrap: wrap; gap: 12px; }
+input[type="password"], input[type="text"] {
+  width: 100%;
+  font-family: inherit;
+  font-size: 1.1rem;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 2px solid var(--color-accent);
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  background: #fffde7;
+  color: var(--color-primary);
+  letter-spacing: 0.5px;
+}
+#penaltyStart, #penalty1, #penalty2, #penaltyCode {
+  display: none;
+  font-weight: 700;
+  margin-bottom: 18px;
+  min-height: 1.5em;
+  color: #d32f2f;
+  text-align: center;
+}
+#statusStart, #status1, #status2, #statusCode, #finalStatus {
+  color: var(--color-primary);
+  font-weight: 700;
+  min-height: 1.5em;
+  margin-bottom: 18px;
+  text-align: center;
+}
+.choices {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
 .choice-btn {
   font-family: 'Playfair Display', serif;
   font-weight: 700;
@@ -119,163 +118,307 @@ button:disabled {
   cursor: pointer;
   box-shadow: 0 2px 10px #bca44b27;
   transition: background-color 0.3s, color 0.3s;
-  min-width: 180px;
+  min-width: 130px;
 }
 .choice-btn.selected {
   background-color: var(--color-primary);
   color: white;
   box-shadow: 0 0 18px var(--color-accent);
 }
-#penalty1 {
+#finalInvitation {
   display: none;
-  color: #d32f2f;
-  font-weight: 700;
-  margin-bottom: 12px;
+  margin-top: 30px;
+  font-family: 'Quicksand', Arial, sans-serif;
+  font-size: 1.1rem;
+  color: var(--color-text);
 }
-#status1 {
+#finalInvitation button {
+  margin-top: 12px;
+  padding: 12px 25px;
+  background: var(--color-accent);
   color: var(--color-primary);
   font-weight: 700;
-  min-height: 1.5em;
-  margin-bottom: 10px;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 0 3px 12px #bca44b77;
 }
-#secondEnigmaSection, #finalCodeSection { display: none; }
+#finalInvitation button:hover {
+  background-color: #b39544;
+}
+#finalSection {
+  display: none;
+  margin-top: 30px;
+  border: 2px solid var(--color-primary);
+  padding: 20px;
+  border-radius: 15px;
+  background: #fffbea;
+  font-family: 'Quicksand', Arial, sans-serif;
+  color: var(--color-text);
+  font-size: 1.1rem;
+}
 </style>
 </head>
 <body>
 <div class="container">
-  <div id="introCode" class="intro-section">
-    <h1>Tappa 12: Enigma </h1>
-    <label for="codiceAccesso">Inserisci qui il codice segreto ottenuto alla fine della tappa precedente:</label>
-    <input type="password" id="codiceAccesso" placeholder="Inserisci codice..." autocomplete="off" />
-    <button id="unlockBtn" disabled>Sblocca</button>
-    <div id="introStatus"></div>
+<h1>Tappa 12: Inserisci il codice dell'ultima tappa</h1>
+
+<p>Inserisci il codice segreto ricevuto al termine della tappa 11 per accedere agli enigmi finali.</p>
+
+<input type="password" id="startCodeInput" placeholder="Inserisci codice tappa 11" autocomplete="off" />
+
+<button id="startSubmitBtn" disabled>Conferma codice</button>
+
+<p id="penaltyStart">Codice errato! Riprova tra <span id="startCountdown">15</span> secondi.</p>
+<p id="statusStart"></p>
+
+<form id="enigma1Form" autocomplete="off" style="display:none; margin-top:25px;">
+  <h2>Enigma 1:</h2>
+  <p>La Porta San Demetrio proteggeva l’accesso alla città verso quale importante località?</p>
+  <div class="choices">
+    <button type="button" class="choice-btn" value="brindisi">Brindisi</button>
+    <button type="button" class="choice-btn" value="lecce">Lecce</button>
+    <button type="button" class="choice-btn" value="bari">Bari</button>
   </div>
-  <div id="step12" style="display:none;">
-    <div class="reference-section">
-      Le antiche mura di Ostuni, erette per proteggere la città, custodiscono un varco nascosto, simbolo del passaggio dalla storia al presente. Questa porta, poco conosciuta e ben celata, rappresenta l’accesso all’ultima sfida per chi ha seguito il cammino con attenzione.
-    </div>
-    <form id="enigma1Form" autocomplete="off">
-      <p><strong>Enigma 1:</strong> La Porta San Demetrio proteggeva l’accesso alla città verso quale importante località?</p>
-      <div class="choices">
-        <button type="button" class="choice-btn" value="brindisi">Brindisi</button>
-        <button type="button" class="choice-btn" value="lecce">Lecce</button>
-        <button type="button" class="choice-btn" value="bari">Bari</button>
-      </div>
-      <p id="penalty1">Risposta sbagliata! Riprova tra <span id="countdown1">30</span> secondi.</p>
-      <p id="status1"></p>
-      <button type="submit" id="submitBtn1" disabled>Verifica Risposta</button>
-    </form>
-    <div id="secondEnigmaSection">
-      <p><strong>Enigma 2 (prova fisica):</strong> Il narratore errante farà il suo ingresso, vi chiederà una prova finale e vi consegnerà il codice della vittoria.</p>
-    </div>
-    <div id="finalCodeSection" style="margin-top:30px; padding:20px; border:2px solid var(--color-primary); border-radius:15px; background:#fffbea;">
-      <h2>Chiusura caccia al tesoro</h2>
-      <p>Inserisci il codice segreto finale per completare la caccia e registrare la tua squadra.</p>
-      <form id="finalForm" autocomplete="off">
-        <input type="text" id="teamName" placeholder="Nome squadra" required />
-        <input type="text" id="secretCode" placeholder="Codice segreto" required />
-        <button type="submit">Invia codice e completa</button>
-      </form>
-      <div id="finalStatus"></div>
-    </div>
-  </div>
+  <p id="penalty1">Risposta sbagliata! Riprova tra <span id="countdown1">30</span> secondi.</p>
+  <p id="status1"></p>
+  <button type="submit" id="submit1Btn" disabled>Verifica Risposta</button>
+</form>
+
+<form id="enigma2Form" autocomplete="off" style="display:none; margin-top:25px;">
+  <h2>Indovinello finale (a tema caccia al tesoro):</h2>
+  <p>
+    Nel cuore del gioco, nascosto in bella vista,<br />
+    Non si può toccare ma si deve trovare,<br />
+    Non è un oggetto, né un posto da visitare,<br />
+    Eppure senza di lui la caccia finirebbe in fretta.<br />
+    Cos'è?
+  </p>
+  <input type="text" id="enigma2Answer" placeholder="Risposta..." />
+  <p id="penalty2">Risposta sbagliata! Riprova tra <span id="countdown2">40</span> secondi.</p>
+  <p id="status2"></p>
+  <button type="submit" id="submit2Btn" disabled>Verifica Risposta</button>
+</form>
+
+<div id="finalInvitation" style="display:none; margin-top:30px; font-family:'Quicksand', Arial, sans-serif; font-size:1.1rem; color:var(--color-text);">
+  <p><strong>Complimenti! Hai risolto gli enigmi!</strong></p>
+  <p>Ora recati nella piazza principale di Ostuni dove incontrerai il narratore errante.</p>
+  <button id="meetNarratorBtn">Incontra il narratore errante</button>
 </div>
+
+<form id="finalForm" autocomplete="off" style="display:none; margin-top:30px;">
+  <h2>Inserisci i dati per generare l'attestato</h2>
+  <label for="teamName">Nome squadra</label>
+  <input type="text" id="teamName" placeholder="Inserisci il nome della tua squadra" required />
+  <label for="secretCodeInput">Codice segreto ricevuto dal narratore</label>
+  <input type="password" id="secretCodeInput" placeholder="Inserisci il codice segreto" required />
+  <p id="penaltyCode">Codice errato! Riprova tra <span id="countdownCode">30</span> secondi.</p>
+  <p id="statusCode"></p>
+  <button type="submit" id="submitFinalBtn" disabled>Invia codice e genera attestato</button>
+</form>
+
+<div id="finalSection"></div>
+
+</div>
+
 <script>
-// Sblocco step
-const unlockBtn = document.getElementById('unlockBtn');
-const codiceAccesso = document.getElementById('codiceAccesso');
-const introCode = document.getElementById('introCode');
-const step12 = document.getElementById('step12');
-unlockBtn.disabled = true;
-codiceAccesso.addEventListener('input', () => { unlockBtn.disabled = codiceAccesso.value.trim() === ''; });
-unlockBtn.addEventListener('click', e => {
-  e.preventDefault();
-  if (codiceAccesso.value.trim().toLowerCase() === 'fede') {
-    introCode.style.display = 'none';
-    step12.style.display = 'block';
+const { jsPDF } = window.jspdf;
+
+const LOGO_TONDO_BASE64 = "data:image/jpeg;base64,/9j/4AAQSk..."; // Inserisci tua base64
+const REGIONE_PUGLIA_BASE64 = "data:image/jpeg;base64,/9j/4AAQSk..."; // Inserisci tua base64
+
+const startCodeInput = document.getElementById('startCodeInput');
+const startSubmitBtn = document.getElementById('startSubmitBtn');
+const penaltyStart = document.getElementById('penaltyStart');
+const startCountdown = document.getElementById('startCountdown');
+const statusStart = document.getElementById('statusStart');
+
+const enigma1Form = document.getElementById('enigma1Form');
+const enigma2Form = document.getElementById('enigma2Form');
+const enigma2Answer = document.getElementById('enigma2Answer');
+const penalty1 = document.getElementById('penalty1');
+const countdown1 = document.getElementById('countdown1');
+const status1 = document.getElementById('status1');
+const submit1Btn = document.getElementById('submit1Btn');
+
+const penalty2 = document.getElementById('penalty2');
+const countdown2 = document.getElementById('countdown2');
+const status2 = document.getElementById('status2');
+const submit2Btn = document.getElementById('submit2Btn');
+
+const finalInvitation = document.getElementById('finalInvitation');
+const meetNarratorBtn = document.getElementById('meetNarratorBtn');
+
+const finalForm = document.getElementById('finalForm');
+const teamNameInput = document.getElementById('teamName');
+const secretCodeInput = document.getElementById('secretCodeInput');
+const penaltyCode = document.getElementById('penaltyCode');
+const countdownCode = document.getElementById('countdownCode');
+const statusCode = document.getElementById('statusCode');
+const submitFinalBtn = document.getElementById('submitFinalBtn');
+const finalSection = document.getElementById('finalSection');
+
+let timerStart, timerPenalty1, timerPenalty2, timerPenaltyCode;
+
+startSubmitBtn.disabled = true;
+submit1Btn.disabled = true;
+submit2Btn.disabled = true;
+submitFinalBtn.disabled = true;
+
+startCodeInput.addEventListener('input', () => {
+  startSubmitBtn.disabled = startCodeInput.value.trim() === '';
+  statusStart.textContent = '';
+});
+
+startSubmitBtn.addEventListener('click', () => {
+  const correctStartCode = "FEDE";
+  if (startCodeInput.value.trim().toUpperCase() !== correctStartCode) {
+    showPenalty(penaltyStart, startSubmitBtn, [startCodeInput], startCountdown, 15, 'start');
+    statusStart.textContent = '';
   } else {
-    document.getElementById('introStatus').textContent = 'Codice non valido! Riprova.';
-    codiceAccesso.value = '';
-    unlockBtn.disabled = true;
-    setTimeout(() => document.getElementById('introStatus').textContent = '', 3000);
+    statusStart.textContent = 'Codice corretto! Passa al primo enigma.';
+    startSubmitBtn.disabled = true;
+    startCodeInput.disabled = true;
+    enigma1Form.style.display = 'block';
   }
 });
 
-// Enigma 1 penalità
-const enigma1Form = document.getElementById('enigma1Form');
-const choiceBtns = enigma1Form.querySelectorAll('.choice-btn');
-const submitBtn1 = document.getElementById('submitBtn1');
-const penalty1 = document.getElementById('penalty1');
-const status1 = document.getElementById('status1');
-const countdown1 = document.getElementById('countdown1');
-
-choiceBtns.forEach(btn => {
+const choiceButtons = enigma1Form.querySelectorAll('.choice-btn');
+choiceButtons.forEach(btn => {
   btn.addEventListener('click', () => {
-    choiceBtns.forEach(b => b.classList.remove('selected'));
+    choiceButtons.forEach(b => b.classList.remove('selected'));
     btn.classList.add('selected');
-    submitBtn1.disabled = false;
+    submit1Btn.disabled = false;
     status1.textContent = '';
   });
 });
 
-function startPenalty() {
-  let sec = 30;
-  penalty1.style.display = 'block';
-  submitBtn1.disabled = true;
-  choiceBtns.forEach(b => b.disabled = true);
-  countdown1.textContent = sec;
-  const interval = setInterval(() => {
-    sec--;
-    countdown1.textContent = sec;
-    if (sec <= 0) {
-      clearInterval(interval);
-      penalty1.style.display = 'none';
-      submitBtn1.disabled = false;
-      choiceBtns.forEach(b => b.disabled = false);
-      choiceBtns.forEach(b => b.classList.remove('selected'));
-    }
-  }, 1000);
-}
-
 enigma1Form.addEventListener('submit', e => {
   e.preventDefault();
-  const correct = 'brindisi';
+  const correctAnswer1 = "brindisi";
   const selected = enigma1Form.querySelector('.choice-btn.selected');
   if (!selected) {
-    status1.textContent = 'Seleziona una risposta!';
+    status1.textContent = 'Seleziona una risposta.';
     status1.style.color = '#d32f2f';
     return;
   }
-  if (selected.value !== correct) {
-    startPenalty();
+  if (selected.value.toLowerCase() !== correctAnswer1) {
+    showPenalty(penalty1, submit1Btn, Array.from(choiceButtons), countdown1, 30, 'enigma1');
     status1.textContent = '';
     return;
   }
-  status1.textContent = 'Risposta corretta! Il narratore errante farà il suo ingresso per la prova finale.';
-  status1.style.color = 'var(--color-primary)';
-  document.getElementById('secondEnigmaSection').style.display = 'block';
-  document.getElementById('finalCodeSection').style.display = 'block';
-  submitBtn1.disabled = true;
-  choiceBtns.forEach(b => b.disabled = true);
+  status1.textContent = 'Risposta corretta! Ora risolvi l\'indovinello.';
+  enigma2Form.style.display = 'block';
+  submit1Btn.disabled = true;
+  choiceButtons.forEach(b => b.disabled = true);
 });
 
-// Form finale: redirect con nome squadra all’attestato
-document.getElementById('finalForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const team = document.getElementById('teamName').value.trim();
-  const code = document.getElementById('secretCode').value.trim().toLowerCase();
-  if (!team || !code) {
-    document.getElementById('finalStatus').textContent = 'Compila entrambi i campi!';
-    document.getElementById('finalStatus').style.color = 'red';
-    return;
-  }
-  if (code !== 'vittoria') {
-    document.getElementById('finalStatus').textContent = 'Codice errato. Riprova.';
-    document.getElementById('finalStatus').style.color = 'red';
-    return;
-  }
-  window.location.href = 'classifica.html?squadra=' + encodeURIComponent(team);
+enigma2Answer.addEventListener('input', () => {
+  submit2Btn.disabled = enigma2Answer.value.trim() === '';
 });
+
+enigma2Form.addEventListener('submit', e => {
+  e.preventDefault();
+  const correctAnswer2 = "indizio";
+  if (enigma2Answer.value.trim().toLowerCase() !== correctAnswer2) {
+    showPenalty(penalty2, submit2Btn, [enigma2Answer], countdown2, 40, 'enigma2');
+    status2.textContent = '';
+    return;
+  }
+  status2.textContent = 'Indovinello risolto! Ora recati in piazza per incontrare il narratore errante.';
+  finalInvitation.style.display = 'block';
+  submit2Btn.disabled = true;
+  enigma2Answer.disabled = true;
+});
+
+meetNarratorBtn.addEventListener('click', () => {
+  finalInvitation.style.display = 'none';
+  finalForm.style.display = 'block';
+});
+
+teamNameInput.addEventListener('input', checkFinalForm);
+secretCodeInput.addEventListener('input', checkFinalForm);
+
+function checkFinalForm() {
+  submitFinalBtn.disabled = !(teamNameInput.value.trim() && secretCodeInput.value.trim());
+}
+
+function showPenalty(penaltyElem, submitBtn, inputs, countdownElem, duration, context) {
+  penaltyElem.style.display = "block";
+  submitBtn.disabled = true;
+  inputs.forEach(input => input.disabled = true);
+  let seconds = duration;
+  countdownElem.textContent = seconds;
+  let timerId = setInterval(() => {
+    seconds--;
+    countdownElem.textContent = seconds;
+    if (seconds <= 0) {
+      clearInterval(timerId);
+      penaltyElem.style.display = "none";
+      submitBtn.disabled = false;
+      inputs.forEach(input => input.disabled = false);
+      if (context === 'enigma1') {
+        choiceButtons.forEach(btn => btn.classList.remove('selected'));
+      } else if (context === 'enigma2') {
+        enigma2Answer.value = '';
+      } else if (context === 'start') {
+        startCodeInput.value = '';
+      } else if (context === 'finalCode') {
+        secretCodeInput.value = '';
+      }
+    }
+  }, 1000);
+
+  if (context === 'start') timerStart = timerId;
+  else if (context === 'enigma1') timerPenalty1 = timerId;
+  else if (context === 'enigma2') timerPenalty2 = timerId;
+  else if (context === 'finalCode') timerPenaltyCode = timerId;
+}
+
+finalForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const correctFinalCode = "vittoria";
+  if (secretCodeInput.value.trim().toLowerCase() !== correctFinalCode) {
+    showPenalty(penaltyCode, submitFinalBtn, [teamNameInput, secretCodeInput], countdownCode, 30, 'finalCode');
+    statusCode.textContent = '';
+    return;
+  }
+  statusCode.textContent = 'Codice corretto! Generazione attestato in corso...';
+  submitFinalBtn.disabled = true;
+  generateAttestato(teamNameInput.value.trim());
+});
+
+function generateAttestato(teamName) {
+  const doc = new jsPDF();
+
+  // Usa qui le tue immagini base64
+  doc.addImage(LOGO_TONDO_BASE64, 'JPEG', 45, 15, 32, 32);
+  doc.addImage(REGIONE_PUGLIA_BASE64, 'JPEG', 128, 15, 32, 32);
+
+  doc.setFont('times', 'bold');
+  doc.setFontSize(28);
+  doc.setTextColor('#bca44b');
+  doc.text('Attestato di Partecipazione', 105, 55, null, null, 'center');
+
+  doc.setFont('times', 'normal');
+  doc.setFontSize(18);
+  doc.setTextColor('#0C4B40');
+  doc.text('Questo riconoscimento è dedicato alla squadra', 105, 75, null, null, 'center');
+
+  doc.setFontSize(24);
+  doc.setFont('times', 'bolditalic');
+  doc.setTextColor('#b37800');
+  doc.text(teamName, 105, 95, null, null, 'center');
+
+  doc.setFont('times', 'italic');
+  doc.setFontSize(16);
+  doc.setTextColor('#0C4B40');
+  doc.text('che ha saputo perdere sé stessa per ritrovarsi', 105, 113, null, null, 'center');
+  doc.text('tra le vie magiche e misteriose del Labirinto Bianco di Ostuni.', 105, 121, null, null, 'center');
+  doc.text('Un viaggio di scoperta, cultura e meraviglia che rimarrà per sempre nel cuore.', 105, 135, null, null, 'center');
+
+  doc.save(`attestato_${teamName.replace(/\s+/g, '_')}.pdf`);
+}
 </script>
 </body>
 </html>
